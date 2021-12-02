@@ -1,4 +1,6 @@
 import React from "react";
+import "./responsive.css";
+
 import "./app.css";
 import { Routes, Route } from "react-router-dom";
 import "antd/dist/antd.css";
