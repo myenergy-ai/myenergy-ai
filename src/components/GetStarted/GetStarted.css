@@ -1,0 +1,77 @@
+.get-started {
+  width: 100%;
+  height: 80%;
+  margin-top: 8rem;
+}
+
+.get-started-main {
+  width: 100%;
+  height: 80%;
+}
+
+.get-started-image {
+  object-fit: contain;
+  width: 45%;
+}
+
+.get-started-left {
+  width: 30%;
+  height: 90%;
+}
+
+.get-started-left-heading > h1 {
+  font-weight: bolder;
+  color: var(--colorBlue);
+  font-size: 3rem;
+}
+
+.get-started-left-heading > p {
+  position: relative;
+  left: 4rem;
+  color: grey;
+  font-size: 1.2rem;
+}
+.get-started-button-box {
+  width: 100%;
+  height: 10%;
+}
+
+.get-started-button {
+  height: 3.5rem;
+  width: 10%;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.get-started-bottom {
+  width: 150%;
+  height: 10%;
+  font-size: 1.2rem !important;
+}
+
+.get-started-bottom-steps {
+  width: 100%;
+}
+
+.get-started-bottom-step {
+  flex: 1;
+  height: 5rem;
+}
+.get-started-bottom-steps-btn {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  margin-right: 2rem;
+  background: navy;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.get-started-bottom-step > p {
+  margin-top: 15px;
+  font-size: 1.2rem;
+}

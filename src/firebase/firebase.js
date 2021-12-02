@@ -1,15 +1,13 @@
 import { intializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDwdhDjiuh6eMH4fBmxczaPs38DGNPlQaw",
-  authDomain: "myenergy-ai-prod.firebaseapp.com",
-  projectId: "myenergy-ai-prod",
-  storageBucket: "myenergy-ai-prod.appspot.com",
-  messagingSenderId: "991456346299",
-  appId: "1:991456346299:web:c69d48ff7d46a913f5299e",
-  measurementId: "G-Y5GXJP7NTG",
+  apiKey: "AIzaSyCUkHKquqH4Y_oynHTdtECTFm97xTNmy8Y",
+  authDomain: "myenergy-ai.firebaseapp.com",
+  projectId: "myenergy-ai",
+  storageBucket: "myenergy-ai.appspot.com",
+  messagingSenderId: "523493172739",
+  appId: "1:523493172739:web:d19efcc9b4001ab1209036",
+  measurementId: "G-CR55F2SY1W",
 };
 
 const app = initializeApp(firebaseConfig);
-
-export default app;

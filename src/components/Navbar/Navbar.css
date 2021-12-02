@@ -1,0 +1,19 @@
+.navbar {
+  width: 100%;
+  height: 8vh;
+}
+
+.navbar-main {
+  width: 95%;
+}
+.navbar-logo {
+  object-fit: contain;
+  width: 8rem;
+  border-radius: 0.5rem;
+}
+
+.navbar-back-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--space) !important;
+}
