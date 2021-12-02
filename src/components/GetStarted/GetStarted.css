@@ -75,3 +75,27 @@
   margin-top: 15px;
   font-size: 1.2rem;
 }
+
+@media only screen and (max-width: 992px) {
+  .get-started-left {
+    width: 100%;
+  }
+  .get-started-button {
+    margin-top: 2rem;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .get-started-bottom-step > p {
+    margin-top: 14px;
+    font-size: 0.8rem;
+  }
+  .get-started-bottom-steps-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 1rem;
+  }
+  .get-started-button {
+    width: 150px;
+    height: 50px;
+  }
+}
