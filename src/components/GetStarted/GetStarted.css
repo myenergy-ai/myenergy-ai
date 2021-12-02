@@ -15,7 +15,7 @@
 }
 
 .get-started-left {
-  /* width: 100%; */
+  width: 30%;
   height: 90%;
 }
 
@@ -74,6 +74,15 @@
 .get-started-bottom-step > p {
   margin-top: 15px;
   font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 576px) {
+  .get-started-left-heading > p {
+    font-size: 1rem;
+  }
+  .get-started-left-heading > h1 {
+    font-size: 2.5rem;
+  }
 }
 
 @media only screen and (max-width: 992px) {
