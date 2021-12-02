@@ -1,5 +1,5 @@
 const App = () => {
-  return <h1>ci cd for production variant is working</h1>;
+  return <h1>Production</h1>;
 };
 
 export default App;
