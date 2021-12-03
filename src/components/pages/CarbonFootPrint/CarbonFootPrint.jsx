@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./CarbonFootPrint.css";
 import { Button, Steps } from "antd";
 import Navbar from "../../Navbar/Navbar";
