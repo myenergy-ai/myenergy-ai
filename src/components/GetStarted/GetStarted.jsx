@@ -11,37 +11,49 @@ const GetStarted = () => {
   return (
     <div className="get-started ">
       <div className="get-started-main flex  justify-between align-items-top">
-        <div className="get-started-left flex justify-between flex-column ">
+        <div className="get-started-left flex  justify-between">
           <div className="get-started-left-heading">
             <h1>Hi there!</h1>
             <p>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat
             </p>
           </div>
-          <div className="get-started-bottom flex  justify-center align-center flex-column">
-            <div className="get-started-bottom-steps flex justify-between flex-wrap">
-              <div className="get-started-bottom-step flex  align-center">
-                <button className="get-started-bottom-steps-btn">1</button>
-                <p>Upload</p>
-              </div>
-              <div className="get-started-bottom-step flex  align-center">
-                <button className="get-started-bottom-steps-btn">2</button>
-                <p>Adjust Cost</p>
-              </div>
-            </div>
-            <div className="get-started-bottom-steps flex justify-between flex-wrap">
-              <div className="get-started-bottom-step flex  align-center">
-                <button className="get-started-bottom-steps-btn">3</button>
-                <p>Define Routines</p>
-              </div>
-              <div className="get-started-bottom-step flex  align-center">
-                <button className="get-started-bottom-steps-btn">4</button>
-                <p>Download Data</p>
-              </div>
-            </div>
+          <img className="get-started-image" src={map} alt="map" />
+        </div>
+      </div>
+      <div className="user-steps-info flex justify-center flex-column align-center">
+        <div className="user-steps-container flex align-center justify-center">
+          <div className="user-step flex">
+            <Button className="steps-info-btn" type="primary" shape="circle">
+              1
+            </Button>
+
+            <p>Upload</p>
+          </div>
+          <div className="user-step flex">
+            <Button className="steps-info-btn" type="primary" shape="circle">
+              2
+            </Button>
+
+            <p>Adjust Cost</p>
           </div>
         </div>
-        <img className="get-started-image" src={map} alt="map" />
+        <div className="user-steps-container flex align-center justify-center">
+          <div className="user-step flex">
+            <Button className="steps-info-btn" type="primary" shape="circle">
+              1
+            </Button>
+
+            <p>Define Routines</p>
+          </div>
+          <div className="user-step flex">
+            <Button className="steps-info-btn" type="primary" shape="circle">
+              2
+            </Button>
+
+            <p>Download Data</p>
+          </div>
+        </div>
       </div>
       <div className="get-started-button-box flex justify-center">
         <Button

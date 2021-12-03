@@ -1,6 +1,6 @@
 .home-page {
   width: 100vw;
-  height: 92vh;
+  height: fit-content;
 }
 
 .home-page-main {

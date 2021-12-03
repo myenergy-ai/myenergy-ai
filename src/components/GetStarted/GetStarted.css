@@ -1,12 +1,12 @@
 .get-started {
   width: 100%;
-  height: 80%;
-  margin-top: 8rem;
+  height: fit-content;
+  margin-top: 6rem;
 }
 
 .get-started-main {
   width: 100%;
-  height: 80%;
+  height: fit-content;
 }
 
 .get-started-image {
@@ -15,8 +15,7 @@
 }
 
 .get-started-left {
-  width: 30%;
-  height: 90%;
+  width: 100%;
 }
 
 .get-started-left-heading > h1 {
@@ -27,8 +26,9 @@
 
 .get-started-left-heading > p {
   position: relative;
-  left: 4rem;
+  left: 3rem;
   color: grey;
+  width: 90%;
   font-size: 1.2rem;
 }
 .get-started-button-box {
@@ -37,7 +37,7 @@
 }
 
 .get-started-button {
-  height: 3.5rem;
+  height: 60px;
   width: 150px;
   border-radius: 4px;
   font-size: 16px;
@@ -45,66 +45,87 @@
   border: none;
   cursor: pointer;
 }
-.get-started-bottom {
-  width: 150%;
-  height: 10%;
-  font-size: 1.2rem !important;
-}
 
-.get-started-bottom-steps {
-  width: 100%;
+.user-steps-info {
+  width: 50%;
+  height: 25vh;
+  position: relative;
+  top: -10rem;
+  margin-bottom: -10rem;
 }
-
-.get-started-bottom-step {
-  flex: 1;
-  height: 5rem;
+.user-steps-container {
+  width: 90%;
+  height: 50%;
 }
-.get-started-bottom-steps-btn {
-  height: 50px;
+.user-step {
+  width: 50%;
+  height: 100%;
+}
+.steps-info-btn {
   width: 50px;
-  border-radius: 50%;
-  border: none;
-  outline: none;
+  height: 50px;
   margin-right: 2rem;
-  background: navy;
-  color: #fff;
+}
+
+.user-step > p {
+  margin-top: 0.5rem;
   font-size: 1.2rem;
 }
 
-.get-started-bottom-step > p {
-  margin-top: 15px;
-  font-size: 1.2rem;
-}
-
-@media only screen and (max-width: 576px) {
-  .get-started-left-heading > p {
-    font-size: 1rem;
-  }
-  .get-started-left-heading > h1 {
-    font-size: 2.5rem;
+@media only screen and (max-width: 1200px) {
+  .user-steps-info {
+    top: -8rem;
   }
 }
 
 @media only screen and (max-width: 992px) {
-  .get-started-left {
-    width: 100%;
+  .get-started-bottom-steps-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
   }
-  .get-started-button {
-    margin-top: 2rem;
+
+  .get-started-button-box {
+    width: 100%;
+    height: fit-content;
+    margin-top: 12rem;
+  }
+  .get-started-left {
+    flex-direction: column;
+    width: 100vw;
+  }
+  .get-started-image {
+    width: 60vw;
+    margin: 0 auto;
+    object-fit: cover;
+    margin-bottom: 6rem;
+  }
+  .user-steps-info {
+    width: 100vw;
+    height: fit-content;
+  }
+  .user-steps-container {
+    flex-direction: column;
+  }
+  .user-steps-info {
+    top: 0rem;
+    flex-direction: row;
   }
 }
-@media only screen and (max-width: 1200px) {
-  .get-started-bottom-step > p {
-    margin-top: 14px;
-    font-size: 0.8rem;
+
+@media only screen and (max-width: 768px) {
+  .user-steps-info {
+    flex-direction: column;
   }
-  .get-started-bottom-steps-btn {
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-right: 1rem;
+  .user-step {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-  .get-started-button {
-    width: 150px;
-    height: 50px;
+  .user-step > p {
+    margin-left: -2rem;
   }
+}
+
+@media only screen and (max-width: 576px) {
 }
