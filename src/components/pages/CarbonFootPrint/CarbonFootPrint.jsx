@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CarbonFootPrint.css";
 import { Button, Steps } from "antd";
 import Navbar from "../../Navbar/Navbar";
@@ -6,7 +6,6 @@ import Navbar from "../../Navbar/Navbar";
 const CarbonFootPrint = ({ handleToogle }) => {
   const { Step } = Steps;
   const [current, setCurrent] = useState(0);
-
   const next = () => {
     if (current >= 0 && current < 3) setCurrent(current + 1);
   };
@@ -20,7 +19,7 @@ const CarbonFootPrint = ({ handleToogle }) => {
       <div className="home-page flex justify-center ">
         <div className="steps flex">
           <div className="steps-left">
-            <div className="user-steps-box flex justify-center align-center">
+            <div className="user-steps-box  flex justify-center align-center">
               <Steps
                 current={current}
                 className="user-steps flex justify-center"
