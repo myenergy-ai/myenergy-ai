@@ -31,6 +31,10 @@
   width: fit-content;
   height: 20rem;
 }
+.test-input {
+  width: 20%;
+  height: 2rem;
+}
 
 @media only screen and (max-width: 1200px) {
   .steps {

@@ -1,0 +1,22 @@
+.error-modal-top-heading {
+  height: 6rem;
+  background: #fff;
+  border-bottom: 1px solid whitesmoke;
+  margin-bottom: 1rem;
+}
+.error-modal-top-heading > * {
+  color: tomato;
+}
+
+.error-modal-warning-icon {
+  font-size: 2rem;
+}
+
+.error-items-icon {
+  color: tomato;
+}
+
+.error-items > p {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
