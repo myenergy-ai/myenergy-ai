@@ -59,7 +59,7 @@ const GetStarted = () => {
         <Button
           onClick={() => navigate(ROUTES.CARBON_FOOT_PRINT)}
           type="primary"
-          className="get-started-button flex flex-wrap"
+          className="get-started-button flex justify-center align-center flex-wrap"
         >
           Get Started
         </Button>
