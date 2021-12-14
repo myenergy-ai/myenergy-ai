@@ -12,6 +12,10 @@
 @media only screen and (max-width: 1024px) {
   .carbon-foot-print {
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
+  }
+
+  .carbon-foot-print-main {
+    flex: 1;
   }
 }
