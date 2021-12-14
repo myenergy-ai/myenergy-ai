@@ -1,9 +1,15 @@
-import { createStore } from "redux";
-import rootReducer from "./root-reducer";
+import { configureStore } from "@reduxjs/toolkit";
+import appReducer from "./reducers/appSlice";
+import { taskMiddleware } from "react-palm/tasks";
+import keplerReducer from "./reducers/keplerGlSlice";
 
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const store = configureStore({
+  reducer: {
+    app: appReducer,
+    kepler: keplerReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(taskMiddleware),
+});
 
 export default store;

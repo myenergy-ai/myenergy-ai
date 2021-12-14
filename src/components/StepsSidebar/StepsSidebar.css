@@ -1,0 +1,61 @@
+.steps-sidebar {
+  flex: 0.175;
+  padding: 0 1rem;
+}
+
+.user-steps-box {
+  height: 30rem;
+}
+
+.user-steps {
+  width: fit-content;
+  height: 20rem;
+}
+
+.ant-steps-item {
+  width: fit-content;
+  padding-left: 1rem !important;
+}
+
+.ant-steps-item-title {
+  font-size: 1rem;
+  padding-right: 1rem;
+}
+
+.ant-steps-item-icon {
+  font-size: 1rem;
+}
+
+.ant-steps-item-tail {
+  left: 2rem !important;
+}
+
+@media only screen and (max-width: 1024px) {
+  .steps-sidebar {
+    margin: 1rem 0;
+  }
+
+  .user-steps-box {
+    height: fit-content;
+  }
+
+  .ant-steps {
+    height: fit-content;
+    width: 100%;
+    margin: 0 1rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .ant-steps-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .ant-steps-item-title {
+    font-size: 0.75rem;
+  }
+}

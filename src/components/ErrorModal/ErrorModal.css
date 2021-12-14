@@ -4,6 +4,11 @@
   border-bottom: 1px solid whitesmoke;
   margin-bottom: 1rem;
 }
+
+.error-modal-top-heading > h2 {
+  font-size: 1.5rem;
+}
+
 .error-modal-top-heading > * {
   color: tomato;
 }
@@ -19,4 +24,5 @@
 .error-items > p {
   margin-top: 1rem;
   margin-left: 1rem;
+  font-size: 1rem;
 }

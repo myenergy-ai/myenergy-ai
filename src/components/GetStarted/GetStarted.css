@@ -1,131 +1,90 @@
 .get-started {
-  width: 100%;
-  height: fit-content;
-  margin-top: 6rem;
+  margin: 3rem auto 0 auto;
 }
 
-.get-started-main {
-  width: 100%;
-  height: fit-content;
-}
-
-.get-started-image {
-  object-fit: contain;
-  width: 45%;
-}
-
-.get-started-left {
-  width: 100%;
-}
-
-.get-started-left-heading > h1 {
+.get-started-main > h1 {
   font-weight: bolder;
   color: var(--colorBlue);
   font-size: 3rem;
 }
 
-.get-started-left-heading > p {
-  position: relative;
-  left: 3rem;
+.get-started-main > p {
+  margin-left: 3rem;
   color: grey;
-  width: 90%;
   font-size: 1.2rem;
-}
-.get-started-button-box {
-  width: 100%;
-  height: 10%;
-}
-
-.get-started-button {
-  height: 60px;
-  width: 150px;
-  border-radius: 4px;
-  font-size: 16px;
-  color: #fff;
-  border: none;
-  cursor: pointer;
 }
 
 .user-steps-info {
-  width: 50%;
-  height: 25vh;
-  position: relative;
-  top: -10rem;
-  margin-bottom: -10rem;
+  align-items: flex-start;
+  margin-left: 3rem;
 }
+
 .user-steps-container {
-  width: 90%;
-  height: 50%;
-}
-.user-step {
-  width: 50%;
-  height: 100%;
-}
-.steps-info-btn {
-  width: 50px;
-  height: 50px;
   margin-right: 2rem;
+  flex-direction: column;
+}
+
+.user-step {
+  margin-bottom: 1rem;
+  align-items: baseline;
 }
 
 .user-step > p {
-  margin-top: 0.5rem;
+  margin-left: 0.25rem;
   font-size: 1.2rem;
 }
 
-@media only screen and (max-width: 1200px) {
-  .user-steps-info {
-    top: -8rem;
-  }
+.get-started-button-box {
+  margin-left: auto;
+  width: fit-content;
 }
 
-@media only screen and (max-width: 992px) {
-  .get-started-bottom-steps-btn {
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
-  }
+.get-started-button {
+  border-radius: 4px;
+  height: fit-content;
+  width: fit-content;
+  padding: 0.8rem 1.2rem;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
 
-  .get-started-button-box {
-    width: 100%;
-    height: fit-content;
-    margin-top: 12rem;
-  }
-  .get-started-left {
-    flex-direction: column;
-    width: 100vw;
-  }
-  .get-started-image {
-    width: 60vw;
-    margin: 0 auto;
-    object-fit: cover;
-    margin-bottom: 6rem;
-  }
-  .user-steps-info {
-    width: 100vw;
-    height: fit-content;
-  }
-  .user-steps-container {
-    flex-direction: column;
-  }
-  .user-steps-info {
-    top: 0rem;
-    flex-direction: row;
-  }
+.get-started-image {
+  width: 40vw;
+  object-fit: contain;
 }
 
 @media only screen and (max-width: 768px) {
-  .user-steps-info {
+  html {
+    font-size: 13px;
+  }
+
+  .get-started {
+    margin: 1.75rem auto 0 auto;
     flex-direction: column;
   }
-  .user-step {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .user-step > p {
-    margin-left: -2rem;
+
+  .get-started-image {
+    margin: auto;
+    width: 35vw;
   }
 }
 
 @media only screen and (max-width: 576px) {
+  html {
+    font-size: 11px;
+  }
+
+  .get-started-main > p {
+    margin-left: 0rem;
+  }
+
+  .user-steps-info {
+    margin-left: 0rem;
+  }
+
+  .get-started-image {
+    width: 50vw;
+  }
 }
