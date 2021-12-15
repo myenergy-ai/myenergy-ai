@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+/**
+ * States for maintainig the steps and error messages
+ */
 const initialState = {
   currentStep: 0,
   error: "",
   isModalVisible: false,
 };
 
+/**
+ * Reducers for changing the data
+ */
 export const appSlice = createSlice({
   name: "app",
   initialState,
@@ -25,6 +31,9 @@ export const appSlice = createSlice({
 export const { setCurrentStep, setError, setModalVisibility } =
   appSlice.actions;
 
+/**
+ * Selectors for acessing data in the components
+ */
 export const selectCurrentStep = (state) => state.app.currentStep;
 export const selectError = (state) => state.app.error;
 export const selectModalVisisbility = (state) => state.app.isModalVisible;

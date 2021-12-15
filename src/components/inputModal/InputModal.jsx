@@ -2,50 +2,111 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Button, Upload } from "antd";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCurrentStep } from "../../redux/reducers/appSlice";
+import { setCurrentStep, setError } from "../../redux/reducers/appSlice";
+import { setLocationData } from "../../redux/reducers/dataSlice";
 import "./InputModal.css";
 
 const InputModal = () => {
   const dispatch = useDispatch();
 
+  /**
+   * State to maintain all the files uploaded by the user
+   */
   const [files, setFiles] = useState([]);
   const [processing, setProcessing] = useState(false);
 
+  /**
+   * Function to handle file upload
+   */
   const handleChange = (info) => {
     const newFiles = [...info.fileList];
     setFiles(newFiles);
   };
 
-  const handleContentOfFile = (file) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      if (file.name.endsWith(".csv")) {
-        console.log(e.target.result);
-      } else {
-        console.log(e.target.result);
-      }
-    };
-    reader.readAsText(file);
-
+  /**
+   * This function stops the files from getting uploaded to the action url
+   */
+  const stopFromUploading = () => {
     return false;
   };
 
+  /**
+   * Setting up the upload component to accept only json and csv files
+   */
   const props = {
     onChange: handleChange,
     multiple: true,
-    action: "//jsonplaceholder.typicode.com/posts/",
     accept: ".json, .csv",
-    beforeUpload: handleContentOfFile,
+    beforeUpload: stopFromUploading,
     fileList: files,
   };
 
+  /**
+   * function for scanning the data and storing it to redux store
+   */
+  let locationData = [];
   const handleFileScanOrCancel = () => {
+    /**
+     * For cancelling processing
+     */
+    if (processing) {
+      cleanUpData();
+      return;
+    }
     setProcessing(true);
-    setTimeout(() => {
-      setProcessing(false);
-      setFiles([]);
-      dispatch(setCurrentStep(1));
-    }, 5000);
+
+    /**
+     * For each file we iterate over all the elements and select only required fields
+     */
+    try {
+      files.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          /**
+           * Filtering out only travel data and rejecting other data
+           */
+          const fileData = JSON.parse(e.target.result).timelineObjects.filter(
+            (file) => file.activitySegment
+          );
+
+          /**
+           * For each item collect only required fields
+           */
+          const newData = fileData.map((item) => ({
+            startLatitude: item.activitySegment.startLocation.latitudeE7,
+            startLongitude: item.activitySegment.startLocation.longitudeE7,
+            endLatitude: item.activitySegment.endLocation.latitudeE7,
+            endLongitude: item.activitySegment.endLocation.longitudeE7,
+            startTimestamp: item.activitySegment.duration.startTimestampMs,
+            endTimestamp: item.activitySegment.duration.endTimestampMs,
+          }));
+          locationData.push(newData);
+
+          /**
+           * Checking if this is the last fie if so push the data to redux store and move to next step
+           */
+          if (index === files.length - 1) {
+            dispatch(setLocationData(locationData));
+            dispatch(setCurrentStep(1));
+            cleanUpData();
+          }
+        };
+        reader.readAsText(file.originFileObj);
+      });
+    } catch (error) {
+      dispatch(setError(error.message));
+      dispatch(setLocationData(null));
+      cleanUpData();
+    }
+  };
+
+  /**
+   * Cleanup data
+   */
+  const cleanUpData = () => {
+    setProcessing(false);
+    setFiles([]);
+    locationData = [];
   };
 
   return (
