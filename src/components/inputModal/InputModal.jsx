@@ -79,6 +79,10 @@ const InputModal = () => {
             endLongitude: item.activitySegment.endLocation.longitudeE7,
             startTimestamp: item.activitySegment.duration.startTimestampMs,
             endTimestamp: item.activitySegment.duration.endTimestampMs,
+            distance: item.activitySegment.distance,
+            activityType: item.activitySegment.activityType,
+            activityConfidence: item.activitySegment.confidence,
+            activityProbability: item.activitySegment.activities[0].probability,
           }));
           locationData.push(newData);
 

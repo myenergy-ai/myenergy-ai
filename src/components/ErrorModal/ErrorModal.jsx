@@ -2,13 +2,27 @@ import React from "react";
 import { Modal } from "antd";
 import { Link } from "react-router-dom";
 import { WarningOutlined, CheckSquareOutlined } from "@ant-design/icons";
-
 import "./ErrorModal.css";
+import { useSelector } from "react-redux";
+import {
+  selectError,
+  setCurrentStep,
+  setError,
+} from "../../redux/reducers/appSlice";
+import { useDispatch } from "react-redux";
 
-const ErrorModal = ({ modalState, handleStateChange }) => {
+const ErrorModal = () => {
+  const error = useSelector(selectError);
+  const dispatch = useDispatch();
+
+  const handleStateChange = () => {
+    dispatch(setError(""));
+    dispatch(setCurrentStep(0));
+  };
+
   return (
     <Modal
-      visible={modalState}
+      visible={error !== ""}
       onOk={handleStateChange}
       onCancel={handleStateChange}
       cancelButtonProps={{ type: "default" }}
@@ -18,7 +32,7 @@ const ErrorModal = ({ modalState, handleStateChange }) => {
       <div className="error-modal-top flex justify-center align-center">
         <div className="error-modal-top-heading flex justify-center align-center flex-column">
           <WarningOutlined className="error-modal-warning-icon" />
-          <h2>There was an error processing your request</h2>
+          <h2>{error}</h2>
         </div>
       </div>
       <strong>
