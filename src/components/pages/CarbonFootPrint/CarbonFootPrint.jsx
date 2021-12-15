@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./CarbonFootPrint.css";
 import { Button, Steps } from "antd";
 import ErrorModal from "../../ErrorModal/ErrorModal";
+import CarbonCost from "../../CarbonCost/CarbonCost";
 
 const CarbonFootPrint = ({ handleToogle }) => {
   const { Step } = Steps;
@@ -34,6 +35,11 @@ const CarbonFootPrint = ({ handleToogle }) => {
     showHideModal();
   };
 
+  const handleStepChange = (e) => {
+    console.log(e);
+    setCurrent(e);
+  };
+
   return (
     <>
       <ErrorModal
@@ -48,7 +54,7 @@ const CarbonFootPrint = ({ handleToogle }) => {
                 current={current}
                 className="user-steps flex justify-center"
                 direction={width <= 1200 ? "horizontal" : "vertical"}
-                onChange={(e) => setCurrent(e)}
+                onChange={handleStepChange}
                 status={error}
               >
                 <Step title="Upload" />
@@ -58,8 +64,9 @@ const CarbonFootPrint = ({ handleToogle }) => {
               </Steps>
             </div>
           </div>
-          <div className="steps-right flex justify-evenly align-center">
-            <Button onClick={next} type="primary">
+          <div className="steps-right ">
+            {/* flex justify-evenly align-center */}
+            {/* <Button onClick={next} type="primary">
               Next
             </Button>
             <Button onClick={prev} type="primary">
@@ -67,7 +74,8 @@ const CarbonFootPrint = ({ handleToogle }) => {
             </Button>
             <Button onClick={handleError} type="primary">
               Error
-            </Button>
+            </Button> */}
+            <CarbonCost onCancel={() => prev()} onUpdate={() => next()} />
           </div>
         </div>
       </div>

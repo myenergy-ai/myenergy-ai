@@ -41,14 +41,14 @@ const GetStarted = () => {
         <div className="user-steps-container flex align-center justify-center">
           <div className="user-step flex">
             <Button className="steps-info-btn" type="primary" shape="circle">
-              1
+              3
             </Button>
 
             <p>Define Routines</p>
           </div>
           <div className="user-step flex">
             <Button className="steps-info-btn" type="primary" shape="circle">
-              2
+              4
             </Button>
 
             <p>Download Data</p>
