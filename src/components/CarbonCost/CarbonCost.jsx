@@ -1,27 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Table, Button } from "antd";
 import "./CarbonCost.css";
 import {
   EditableCell,
   EditableRow,
 } from "./EditableComponents/EditableComponents";
-
-import { initialCarbonCosts, headers } from "./initialState";
+import {
+  updateTravelMode,
+  addNewTravelMode,
+  resetCarbonCosts,
+} from "../../redux/reducers/carbonCostSlice";
 
 const CarbonCost = (props) => {
-  const [carbonCosts, setCarbonCosts] = useState(initialCarbonCosts);
+  const dispatch = useDispatch();
+  const carbonCosts = useSelector((state) => state.carbonCost.carbonCosts);
 
-  console.log(carbonCosts);
-
-  const handleSave = (row) => {
-    row.carbonCost = Number(row.carbonCost);
-    const newData = [...carbonCosts];
-    const index = newData.findIndex((item) => row.key === item.key);
-    const item = newData[index];
-    newData.splice(index, 1, { ...item, ...row });
-    setCarbonCosts(newData);
-  };
-
+  // components to make row and cell editable
   const components = {
     body: {
       row: EditableRow,
@@ -29,33 +24,54 @@ const CarbonCost = (props) => {
     },
   };
 
-  const columns = headers.map((header) => ({
-    ...header,
+  // Update cell value
+  const handleUpdate = (row) => {
+    dispatch(updateTravelMode(row));
+  };
+
+  // Add new travel mode
+  const handleAddNewTravelMode = () => {
+    dispatch(addNewTravelMode());
+  };
+
+  // Reset values to default
+  const handleReset = () => {
+    dispatch(resetCarbonCosts());
+  };
+
+  // default column config
+  const columnConfig = [
+    {
+      title: "Travel Mode",
+      dataIndex: "travelMode",
+      key: "travelMode",
+      width: "50%",
+      editable: true,
+    },
+    {
+      title: "Carbon Cost: kg/person/km",
+      dataIndex: "carbonCost",
+      key: "carbonCost",
+      align: "center",
+      editable: true,
+    },
+  ];
+
+  // column config that are being passed to EditableCell component
+  const columns = columnConfig.map((column) => ({
+    ...column,
     onCell: (record) => ({
       record,
-      editable: header.editable,
-      dataIndex: header.dataIndex,
-      title: header.title,
-      handleSave,
+      editable: column.editable,
+      dataIndex: column.dataIndex,
+      title: column.title,
+      handleSave: handleUpdate,
     }),
   }));
 
-  const handleAddNewTravelMode = () => {
-    const currKey = carbonCosts.length + 1;
-    const newTravelMode = {
-      key: currKey,
-      travelMode: "New Travel Mode",
-      carbonCost: 0,
-    };
-    setCarbonCosts((currCarbonCosts) => [...currCarbonCosts, newTravelMode]);
-  };
-
-  const handleReset = () => {
-    setCarbonCosts(initialCarbonCosts);
-  }
-
   return (
     <div className="carbon-cost-container">
+      {/* top-div start */}
       <div className="carbon-cost-top">
         <h2 className="carbon-cost-heading">Adjust Carbon Cost</h2>
         <p className="carbon-cost-info">
@@ -66,6 +82,9 @@ const CarbonCost = (props) => {
           figures!
         </p>
       </div>
+      {/* top-div end */}
+
+      {/* table-div start */}
       <div className="carbon-cost-table">
         <Table
           size="small"
@@ -76,14 +95,24 @@ const CarbonCost = (props) => {
           pagination={false}
         />
       </div>
+      {/* table-div end */}
+
+      {/* actions-div start */}
       <div className="carbon-cost-actions">
         <Button type="primary" onClick={handleAddNewTravelMode}>
           Add new travel mode
         </Button>
-        <Button type="primary" onClick={handleReset}>Reset to default</Button>
-        <Button type="primary" onClick={props.onCancel}>Cancel</Button>
-        <Button type="primary" onClick={props.onUpdate}>Update costs</Button>
+        <Button type="primary" onClick={handleReset}>
+          Reset to default
+        </Button>
+        <Button type="primary" onClick={props.onCancel}>
+          Cancel
+        </Button>
+        <Button type="primary" onClick={props.onUpdate}>
+          Update costs
+        </Button>
       </div>
+      {/* actions-div end */}
     </div>
   );
 };

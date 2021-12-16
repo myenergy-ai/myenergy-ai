@@ -26,6 +26,7 @@
 .carbon-cost-table input {
   background-color: inherit;
   border: none;
+  text-align: center;
 }
 
 .carbon-cost-table table th {

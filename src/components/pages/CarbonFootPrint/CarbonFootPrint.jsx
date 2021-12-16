@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./CarbonFootPrint.css";
-import { Button, Steps } from "antd";
+import { Steps } from "antd";
 import ErrorModal from "../../ErrorModal/ErrorModal";
 import CarbonCost from "../../CarbonCost/CarbonCost";
 
@@ -29,11 +29,11 @@ const CarbonFootPrint = ({ handleToogle }) => {
     if (current >= 1) setCurrent(current - 1);
   };
 
-  const handleError = () => {
-    setCurrent(0);
-    setError("error");
-    showHideModal();
-  };
+  // const handleError = () => {
+  //   setCurrent(0);
+  //   setError("error");
+  //   showHideModal();
+  // };
 
   const handleStepChange = (e) => {
     console.log(e);
@@ -64,8 +64,7 @@ const CarbonFootPrint = ({ handleToogle }) => {
               </Steps>
             </div>
           </div>
-          <div className="steps-right ">
-            {/* flex justify-evenly align-center */}
+          <div className="steps-right">
             {/* <Button onClick={next} type="primary">
               Next
             </Button>
