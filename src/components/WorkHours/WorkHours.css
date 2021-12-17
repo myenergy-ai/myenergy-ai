@@ -1,4 +1,4 @@
-.carbon-cost-container {
+.work-hours-container {
   background-color: #e7e7e7;
   width: 80%;
   margin: 2rem auto;
@@ -7,46 +7,51 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-.carbon-cost-heading {
+.work-hours-heading {
   text-align: center;
   font-size: 1.5rem;
 }
 
-.carbon-cost-info {
+.work-hours-info {
   margin: 0;
+  padding-block: 0.3rem;
   line-height: 1.5rem;
   font-size: 1rem;
 }
 
-.carbon-cost-table {
+.time-format {
+  text-align: center;
+}
+
+.work-hours-table {
   margin-block: 2rem;
   margin-inline: auto;
 }
 
-.carbon-cost-table input {
+.work-hours-table input {
   background-color: inherit;
   border: none;
   text-align: center;
 }
 
-.carbon-cost-table table th {
+.work-hours-table table th {
   font-weight: 600;
   background: #1890ff !important;
   color: #fff;
 }
 
-.carbon-cost-actions {
+.work-hours-actions {
   display: flex;
   justify-content: flex-end;
 }
 
-.carbon-cost-actions button {
+.work-hours-actions button {
   display: block;
   margin-left: 0.5rem;
 }
 
 @media (max-width: 768px) {
-  .carbon-cost-container {
+  .work-hours-container {
     width: 90%;
   }
 }
