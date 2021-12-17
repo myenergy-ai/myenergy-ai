@@ -103,7 +103,7 @@ const InputModal = () => {
             locationData = locationData.filter((data) => data.distance);
             dispatch(setLocationData(locationData));
             cleanUpData();
-            dispatch(setCurrentStep(3));
+            dispatch(setCurrentStep(1));
           }
         };
         reader.readAsText(file.originFileObj);

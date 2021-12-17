@@ -11,8 +11,10 @@ import {
   addNewTravelMode,
   resetCarbonCosts,
 } from "../../redux/reducers/carbonCostSlice";
+import { setCurrentStep } from "../../redux/reducers/appSlice";
+import { setLocationData } from "../../redux/reducers/dataSlice";
 
-const CarbonCost = (props) => {
+const CarbonCost = () => {
   const dispatch = useDispatch();
   const carbonCosts = useSelector((state) => state.carbonCost.carbonCosts);
 
@@ -69,6 +71,18 @@ const CarbonCost = (props) => {
     }),
   }));
 
+  // Remove the data of the client and reset to initial step.
+  const onCancel = () => {
+    dispatch(resetCarbonCosts());
+    dispatch(setLocationData(null));
+    dispatch(setCurrentStep(0));
+  };
+
+  // Move to the next step
+  const onUpdate = () => {
+    dispatch(setCurrentStep(3));
+  };
+
   return (
     <div className="carbon-cost-container">
       {/* top-div start */}
@@ -105,11 +119,11 @@ const CarbonCost = (props) => {
         <Button type="primary" onClick={handleReset}>
           Reset to default
         </Button>
-        <Button type="primary" onClick={props.onCancel}>
+        <Button type="primary" onClick={onCancel}>
           Cancel
         </Button>
-        <Button type="primary" onClick={props.onUpdate}>
-          Update costs
+        <Button type="primary" onClick={onUpdate}>
+          Next
         </Button>
       </div>
       {/* actions-div end */}

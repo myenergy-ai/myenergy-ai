@@ -38,15 +38,23 @@
 .carbon-cost-actions {
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .carbon-cost-actions button {
   display: block;
   margin-left: 0.5rem;
+  font-size: 0.65rem;
 }
 
 @media (max-width: 768px) {
   .carbon-cost-container {
     width: 90%;
+  }
+  .carbon-cost-actions {
+    justify-content: space-between;
+  }
+  .carbon-cost-actions button {
+    margin-top: 0.3rem;
   }
 }
