@@ -5,6 +5,7 @@ import keplerReducer from "./reducers/keplerGlSlice";
 import dataSlice from "./reducers/dataSlice";
 import carbonCostReducer from "./reducers/carbonCostSlice";
 
+
 const store = configureStore({
   /**
    * Configuring reducers

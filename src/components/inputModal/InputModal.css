@@ -1,0 +1,17 @@
+.input-modal {
+  box-shadow: 0px 0px 7px rgb(0, 0, 0, 1);
+  border-radius: 0.25rem;
+  background-color: var(--color-gray-white);
+  padding: 3rem 4rem;
+}
+
+.input-modal > span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.input-modal > p {
+  color: #ff4d4f;
+}
