@@ -59,7 +59,7 @@ const InputModal = () => {
      * For each file we iterate over all the elements and select only required fields
      */
     try {
-      files.forEach((file, index) => {
+      files.map((file, index) => {
         const reader = new FileReader();
         reader.onload = (e) => {
           /**
@@ -72,35 +72,46 @@ const InputModal = () => {
           /**
            * For each item collect only required fields
            */
-          const newData = fileData.map((item) => ({
-            startLatitude: item.activitySegment.startLocation.latitudeE7,
-            startLongitude: item.activitySegment.startLocation.longitudeE7,
-            endLatitude: item.activitySegment.endLocation.latitudeE7,
-            endLongitude: item.activitySegment.endLocation.longitudeE7,
-            startTimestamp: item.activitySegment.duration.startTimestampMs,
-            endTimestamp: item.activitySegment.duration.endTimestampMs,
-            distance: item.activitySegment.distance,
-            activityType: item.activitySegment.activityType,
-            activityConfidence: item.activitySegment.confidence,
-            activityProbability: item.activitySegment.activities[0].probability,
-          }));
-          locationData.push(newData);
+          fileData.map((item) => {
+            locationData.push({
+              key: locationData.length + 1,
+              startLatitude:
+                item.activitySegment.startLocation.latitudeE7 / 10000000,
+              startLongitude:
+                item.activitySegment.startLocation.longitudeE7 / 10000000,
+              endLatitude:
+                item.activitySegment.endLocation.latitudeE7 / 10000000,
+              endLongitude:
+                item.activitySegment.endLocation.longitudeE7 / 10000000,
+              startTimestamp: item.activitySegment.duration.startTimestampMs,
+              endTimestamp: item.activitySegment.duration.endTimestampMs,
+              distance: item.activitySegment.distance,
+              activityType: item.activitySegment.activityType,
+              activityConfidence: item.activitySegment.confidence,
+              activityProbability:
+                item.activitySegment.activities[0].probability,
+              carbonCost: 10.0,
+            });
+            return item;
+          });
+          // locationData.push(newData);
 
           /**
            * Checking if this is the last fie if so push the data to redux store and move to next step
            */
           if (index === files.length - 1) {
             dispatch(setLocationData(locationData));
-            dispatch(setCurrentStep(1));
             cleanUpData();
+            dispatch(setCurrentStep(3));
           }
         };
         reader.readAsText(file.originFileObj);
+        return file;
       });
     } catch (error) {
+      cleanUpData();
       dispatch(setError(error.message));
       dispatch(setLocationData(null));
-      cleanUpData();
     }
   };
 

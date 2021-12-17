@@ -12,8 +12,8 @@
   border-radius: 0.5rem;
 }
 
-.navbar-back-icon {
-  font-size: 1.5rem;
+.navbar-help {
+  font-size: 1.65rem;
+  margin: auto 0px;
   cursor: pointer;
-  color: var(--space) !important;
 }
