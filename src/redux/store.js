@@ -3,6 +3,8 @@ import appReducer from "./reducers/appSlice";
 import { taskMiddleware } from "react-palm/tasks";
 import keplerReducer from "./reducers/keplerGlSlice";
 import dataSlice from "./reducers/dataSlice";
+import carbonCostReducer from "./reducers/carbonCostSlice";
+
 
 const store = configureStore({
   /**
@@ -12,6 +14,7 @@ const store = configureStore({
     app: appReducer,
     data: dataSlice,
     kepler: keplerReducer,
+    carbonCost: carbonCostReducer,
   },
 
   /**
