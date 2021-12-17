@@ -7,6 +7,7 @@ import {
   EditableRow,
 } from "../EditableComponents/EditableComponents";
 import { resetWorkingHours, updateWorkingTime } from "../../redux/reducers/workingHoursSlice";
+import { setCurrentStep } from "../../redux/reducers/appSlice";
 
 const WorkHours = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,16 @@ const WorkHours = () => {
   const handleSave = (row) => {
     dispatch(updateWorkingTime(row));
   };
+
+  // on cancel go to previous step
+  const handleCancel = () => {
+    dispatch(setCurrentStep(1));
+  };
+
+  // on update go to next step
+  const handleUpdateWorkHours = () => {
+    dispatch(setCurrentStep(3));
+  }
 
   const columnConfig = [
     {
@@ -110,8 +121,8 @@ const WorkHours = () => {
       {/* actions-div start */}
       <div className="work-hours-actions">
         <Button type="primary" onClick={handleReset}>Reset to default</Button>
-        <Button type="primary">Cancel</Button>
-        <Button type="primary">Update work hours</Button>
+        <Button type="primary" onClick={handleCancel}>Cancel</Button>
+        <Button type="primary" onClick={handleUpdateWorkHours}>Update work hours</Button>
       </div>
       {/* actions-div end */}
     </div>

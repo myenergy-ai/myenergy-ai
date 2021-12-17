@@ -42,12 +42,12 @@ const CarbonCost = () => {
 
   // On cancel move to previous step
   const handleCancel = () => {
-    dispatch(setCurrentStep(1));
+    dispatch(setCurrentStep(0));
   };
 
   // On update move to next step
   const handleUpdateCosts = () => {
-    dispatch(setCurrentStep(3));
+    dispatch(setCurrentStep(2));
   };
 
   // default column config
