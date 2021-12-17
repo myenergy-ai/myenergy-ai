@@ -7,17 +7,17 @@ import CarbonCost from "../../CarbonCost/CarbonCost";
 
 const CarbonFootPrint = () => {
   const [current, setCurrent] = useState(0);
-  const [error, setError] = useState("");
+  //const [error, setError] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showHideModal = () => setIsModalVisible(!isModalVisible);
 
   const next = () => {
-    setError("");
+    //setError("");
     if (current >= 0 && current <= 3) setCurrent(current + 1);
   };
   const prev = () => {
-    setError("");
+    //setError("");
     if (current >= 1) setCurrent(current - 1);
   };
 
@@ -27,10 +27,10 @@ const CarbonFootPrint = () => {
   //   showHideModal();
   // };
 
-  const handleStepChange = (e) => {
-    console.log(e);
-    setCurrent(e);
-  };
+//   const handleStepChange = (e) => {
+//     console.log(e);
+//     setCurrent(e);
+//   };
   
   return (
     <>
