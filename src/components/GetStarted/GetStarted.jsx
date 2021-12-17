@@ -40,7 +40,7 @@ const GetStarted = () => {
                 2
               </Button>
 
-              <p>Adjust Cost Cost</p>
+              <p>Adjust Cost</p>
             </div>
             <div className="user-step flex">
               <Button className="steps-info-btn" type="primary" shape="circle">

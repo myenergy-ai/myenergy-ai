@@ -1,4 +1,5 @@
 import "./CarbonFootPrint.css";
+
 import ErrorModal from "../../ErrorModal/ErrorModal";
 import StepsSidebar from "../../StepsSidebar/StepsSidebar";
 import { useDispatch } from "react-redux";
@@ -8,16 +9,15 @@ import {
 } from "../../../redux/reducers/appSlice";
 import { useSelector } from "react-redux";
 import InputModal from "../../inputModal/InputModal";
+import CarbonCost from "../../CarbonCost/CarbonCost";
 
 const CarbonFootPrint = () => {
   const dispatch = useDispatch();
 
   const isModalVisible = useSelector(selectModalVisisbility);
-
   const showHideModal = () => {
     dispatch(setModalVisibility(!isModalVisible));
   };
-
   return (
     <>
       <ErrorModal
