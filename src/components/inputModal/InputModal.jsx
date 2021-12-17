@@ -100,6 +100,7 @@ const InputModal = () => {
            * Checking if this is the last fie if so push the data to redux store and move to next step
            */
           if (index === files.length - 1) {
+            locationData = locationData.filter((data) => data.distance);
             dispatch(setLocationData(locationData));
             cleanUpData();
             dispatch(setCurrentStep(3));
