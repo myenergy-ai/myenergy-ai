@@ -28,6 +28,7 @@ const CarbonFootPrint = () => {
         <StepsSidebar />
         <div className="carbon-foot-print-main flex justify-evenly align-center">
           <InputModal />
+          <CarbonCost onCancel={() => prev()} onUpdate={() => next()} />
         </div>
       </div>
     </>
