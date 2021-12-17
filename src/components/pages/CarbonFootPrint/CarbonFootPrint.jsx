@@ -1,26 +1,17 @@
+import { useState } from "react";
 import "./CarbonFootPrint.css";
-
-import ErrorModal from "../../ErrorModal/ErrorModal";
 import StepsSidebar from "../../StepsSidebar/StepsSidebar";
-import { useSelector } from "react-redux";
 import InputModal from "../../inputModal/InputModal";
+import ErrorModal from "../../ErrorModal/ErrorModal";
 import CarbonCost from "../../CarbonCost/CarbonCost";
 
 const CarbonFootPrint = () => {
   const [current, setCurrent] = useState(0);
-  const [width, setWidth] = useState(window.innerWidth);
   const [error, setError] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showHideModal = () => setIsModalVisible(!isModalVisible);
-  const updateWidth = () => {
-    setWidth(window.innerWidth);
-  };
 
-  useEffect(() => {
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
-  });
   const next = () => {
     setError("");
     if (current >= 0 && current <= 3) setCurrent(current + 1);
