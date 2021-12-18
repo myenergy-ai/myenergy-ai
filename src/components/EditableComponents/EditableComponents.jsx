@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { Input, Form } from "antd";
+import "./EditableComponents.css";
+
 const EditableContext = React.createContext(null);
 
 export const EditableRow = ({ index, ...props }) => {
@@ -20,6 +22,7 @@ export const EditableCell = ({
   dataIndex,
   record,
   handleSave,
+  required,
   ...restProps
 }) => {
   const [editing, setEditing] = useState(false);
@@ -36,6 +39,7 @@ export const EditableCell = ({
     form.setFieldsValue({
       [dataIndex]: record[dataIndex],
     });
+    console.log(editing);
   };
 
   const save = async () => {
@@ -59,7 +63,7 @@ export const EditableCell = ({
         name={dataIndex}
         rules={[
           {
-            required: true,
+            required,
             message: `${title} is required.`,
           },
         ]}
@@ -69,9 +73,9 @@ export const EditableCell = ({
     ) : (
       <div
         className="editable-cell-value-wrap"
-        style={{
-          paddingRight: 24,
-        }}
+        // style={{
+        //   paddingRight: 24,
+        // }}
         onClick={toggleEdit}
       >
         {children}

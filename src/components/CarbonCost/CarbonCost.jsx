@@ -5,7 +5,7 @@ import "./CarbonCost.css";
 import {
   EditableCell,
   EditableRow,
-} from "./EditableComponents/EditableComponents";
+} from "../EditableComponents/EditableComponents";
 import {
   updateTravelMode,
   addNewTravelMode,
@@ -27,7 +27,7 @@ const CarbonCost = () => {
   };
 
   // Update cell value
-  const handleUpdate = (row) => {
+  const handleSave = (row) => {
     dispatch(updateTravelMode(row));
   };
 
@@ -41,6 +41,16 @@ const CarbonCost = () => {
     dispatch(resetCarbonCosts());
   };
 
+  // On cancel move to previous step
+  const handleCancel = () => {
+    dispatch(setCurrentStep(0));
+  };
+
+  // On update move to next step
+  const handleUpdateCosts = () => {
+    dispatch(setCurrentStep(2));
+  };
+
   // default column config
   const columnConfig = [
     {
@@ -49,6 +59,7 @@ const CarbonCost = () => {
       key: "travelMode",
       width: "50%",
       editable: true,
+      required: true,
     },
     {
       title: "Carbon Cost: kg/person/km",
@@ -56,10 +67,11 @@ const CarbonCost = () => {
       key: "carbonCost",
       align: "center",
       editable: true,
+      required: true,
     },
   ];
 
-  // column config that are being passed to EditableCell component
+  // column config that are being passed to EditableCell component as props
   const columns = columnConfig.map((column) => ({
     ...column,
     onCell: (record) => ({
@@ -67,7 +79,7 @@ const CarbonCost = () => {
       editable: column.editable,
       dataIndex: column.dataIndex,
       title: column.title,
-      handleSave: handleUpdate,
+      handleSave: handleSave,
     }),
   }));
 
