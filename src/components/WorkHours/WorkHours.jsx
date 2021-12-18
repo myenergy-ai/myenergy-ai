@@ -6,11 +6,13 @@ import {
   EditableCell,
   EditableRow,
 } from "../EditableComponents/EditableComponents";
+import { resetCarbonCosts } from "../../redux/reducers/carbonCostSlice";
 import {
   resetWorkingHours,
   updateWorkingTime,
 } from "../../redux/reducers/workingHoursSlice";
 import { setCurrentStep } from "../../redux/reducers/appSlice";
+import { setLocationData } from "../../redux/reducers/dataSlice";
 
 const WorkHours = () => {
   const dispatch = useDispatch();
@@ -36,7 +38,9 @@ const WorkHours = () => {
 
   // on cancel go to previous step
   const handleCancel = () => {
-    dispatch(setCurrentStep(1));
+    dispatch(resetCarbonCosts());
+    dispatch(setLocationData(null));
+    dispatch(setCurrentStep(0));
   };
 
   // on update go to next step

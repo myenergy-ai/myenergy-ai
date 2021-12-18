@@ -56,10 +56,9 @@ export const carbonCostSlice = createSlice({
   name: "carbonCost",
   initialState,
   reducers: {
-
     // To add new travel mode:
     // generate key from length
-    // set initial values to 
+    // set initial values to
     // travelMode and carbonCost
     addNewTravelMode: (state) => {
       const key = state.carbonCosts.length + 1;
@@ -82,21 +81,29 @@ export const carbonCostSlice = createSlice({
         carbonCost: Number(carbonCost),
       };
       const updatedCarbonCosts = [...state.carbonCosts];
-      const existingCostIndex = updatedCarbonCosts.findIndex((item) => updatedData.key === item.key);
+      const existingCostIndex = updatedCarbonCosts.findIndex(
+        (item) => updatedData.key === item.key
+      );
       const existingCost = updatedCarbonCosts[existingCostIndex];
-      updatedCarbonCosts.splice(existingCostIndex, 1, { ...existingCost, ...updatedData });
+      updatedCarbonCosts.splice(existingCostIndex, 1, {
+        ...existingCost,
+        ...updatedData,
+      });
       state.carbonCosts = updatedCarbonCosts;
     },
 
     // set current state to initial state
     resetCarbonCosts: (state) => {
       state.carbonCosts = initialState.carbonCosts;
-    }
+    },
   },
 });
 
 // export all the actions
-export const { addNewTravelMode, updateTravelMode, resetCarbonCosts } = carbonCostSlice.actions;
+export const { addNewTravelMode, updateTravelMode, resetCarbonCosts } =
+  carbonCostSlice.actions;
+
+export const selectCarbonCost = (state) => state.carbonCost.carbonCosts;
 
 // default export the reducer
 export default carbonCostSlice.reducer;

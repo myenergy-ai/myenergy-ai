@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectLocationData } from "../../redux/reducers/dataSlice";
 import { useDispatch } from "react-redux";
 import { setCurrentStep } from "../../redux/reducers/appSlice";
+import { selectCarbonCost } from "../../redux/reducers/carbonCostSlice";
 
 const FinalResult = () => {
   const dispatch = useDispatch();
@@ -111,54 +112,7 @@ const FinalResult = () => {
   /**
    * Just dummy data remove it once the carbon cost is setted up and uncomment the below line
    */
-  const carbonCostData = [
-    {
-      key: 1,
-      travelMode: "Plane",
-      carbonCost: 0.187,
-    },
-    {
-      key: 2,
-      travelMode: "Bus",
-      carbonCost: 0.105,
-    },
-    {
-      key: 3,
-      travelMode: "Ferry",
-      carbonCost: 0.019,
-    },
-    {
-      key: 4,
-      travelMode: "Other Passenger Vehicle",
-      carbonCost: 0.181,
-    },
-    {
-      key: 5,
-      travelMode: "Subway/Underground/Metro",
-      carbonCost: 0.041,
-    },
-    {
-      key: 6,
-      travelMode: "Train",
-      carbonCost: 0.041,
-    },
-    {
-      key: 7,
-      travelMode: "Tram",
-      carbonCost: 0.041,
-    },
-    {
-      key: 8,
-      travelMode: "Car",
-      carbonCost: 0.182,
-    },
-    {
-      key: 9,
-      travelMode: "Motorcycle",
-      carbonCost: 0.103,
-    },
-  ];
-  // const carbonCostData = useSelector(selectCarbonCost);
+  const carbonCostData = useSelector(selectCarbonCost);
 
   /**
    * Getting the location data from redux store
@@ -236,6 +190,10 @@ const FinalResult = () => {
     document.body.removeChild(link);
   };
 
+  const moveToMap = () => {
+    dispatch(setCurrentStep(4));
+  };
+
   return (
     <div className="final-result">
       <div className="final-result-container">
@@ -274,7 +232,9 @@ const FinalResult = () => {
             pagination={{ position: ["none", "none"] }}
           />
           <div className="final-result-total-carbon-buttons flex justify-end">
-            <button className="ant-btn ant-btn-primary">Map Results</button>
+            <button className="ant-btn ant-btn-primary" onClick={moveToMap}>
+              Map Results
+            </button>
             <button className="ant-btn ant-btn-primary" onClick={downloadFile}>
               Just download results as CSV
             </button>
