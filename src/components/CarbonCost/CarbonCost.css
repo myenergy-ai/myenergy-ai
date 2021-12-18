@@ -1,6 +1,6 @@
 .carbon-cost-container {
   background-color: #e7e7e7;
-  width: 80%;
+  width: 90%;
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 12px;
@@ -49,7 +49,7 @@
 
 @media (max-width: 768px) {
   .carbon-cost-container {
-    width: 90%;
+    width: 95%;
   }
   .carbon-cost-actions {
     justify-content: space-between;

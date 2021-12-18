@@ -41,16 +41,6 @@ const CarbonCost = () => {
     dispatch(resetCarbonCosts());
   };
 
-  // On cancel move to previous step
-  const handleCancel = () => {
-    dispatch(setCurrentStep(0));
-  };
-
-  // On update move to next step
-  const handleUpdateCosts = () => {
-    dispatch(setCurrentStep(2));
-  };
-
   // default column config
   const columnConfig = [
     {
@@ -92,7 +82,7 @@ const CarbonCost = () => {
 
   // Move to the next step
   const onUpdate = () => {
-    dispatch(setCurrentStep(3));
+    dispatch(setCurrentStep(2));
   };
 
   return (
@@ -119,6 +109,7 @@ const CarbonCost = () => {
           columns={columns}
           dataSource={carbonCosts}
           pagination={false}
+          scroll={{ y: 200 }}
         />
       </div>
       {/* table-div end */}
@@ -135,7 +126,7 @@ const CarbonCost = () => {
           Cancel
         </Button>
         <Button type="primary" onClick={onUpdate}>
-          Next
+          Save & Next
         </Button>
       </div>
       {/* actions-div end */}

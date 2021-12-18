@@ -1,21 +1,25 @@
 .work-hours-container {
   background-color: #e7e7e7;
-  width: 80%;
-  margin: 2rem auto;
-  padding: 2rem;
+  width: 90%;
+  margin: 1rem auto;
+  padding: 1rem;
   border-radius: 12px;
+  height: 90%;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  overflow-y: scroll;
+}
+
+.work-hours-container::-webkit-scrollbar {
+  display: none;
 }
 
 .work-hours-heading {
   text-align: center;
-  font-size: 1.5rem;
 }
 
 .work-hours-info {
   margin: 0;
   padding-block: 0.3rem;
-  line-height: 1.5rem;
   font-size: 1rem;
 }
 
@@ -43,15 +47,27 @@
 .work-hours-actions {
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .work-hours-actions button {
   display: block;
   margin-left: 0.5rem;
+  font-size: 0.65rem;
+}
+
+.work-hours-top p {
+  font-size: 0.7rem;
 }
 
 @media (max-width: 768px) {
   .work-hours-container {
-    width: 90%;
+    width: 95%;
+  }
+  /* .work-hours-actions {
+    justify-content: space-between;
+  } */
+  .work-hours-actions button {
+    margin-top: 0.3rem;
   }
 }

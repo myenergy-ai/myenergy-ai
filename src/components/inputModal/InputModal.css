@@ -1,6 +1,6 @@
 .input-modal {
   box-shadow: 0px 0px 7px rgb(0, 0, 0, 1);
-  border-radius: 0.25rem;
+  border-radius: 12px;
   background-color: var(--color-gray-white);
   padding: 3rem 4rem;
 }
@@ -19,4 +19,8 @@
 .ant-upload-list {
   max-height: 40vh;
   overflow-y: scroll;
+}
+
+.ant-upload-list::-webkit-scrollbar {
+  display: none;
 }
