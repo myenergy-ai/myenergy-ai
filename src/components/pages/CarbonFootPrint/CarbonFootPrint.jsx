@@ -1,5 +1,4 @@
 import StepsSidebar from "../../StepsSidebar/StepsSidebar";
-import InputModal from "../../InputModal/InputModal";
 import { useSelector } from "react-redux";
 import { selectCurrentStep } from "../../../redux/reducers/appSlice";
 import FinalResult from "../../FinalResult/FinalResult";
@@ -7,6 +6,7 @@ import "./CarbonFootPrint.css";
 import ErrorModal from "../../ErrorModal/ErrorModal";
 import CarbonCost from "../../CarbonCost/CarbonCost";
 import WorkHours from "../../WorkHours/WorkHours";
+import InputModal from "../../inputModal/InputModal";
 
 const CarbonFootPrint = () => {
   const currentStep = useSelector(selectCurrentStep);
