@@ -9,6 +9,7 @@ import {
 } from "../../redux/reducers/dataSlice";
 import { setError } from "../../redux/reducers/appSlice";
 import "./MapResult.css";
+import config from "../../configuration/mapConfig.json";
 
 const MapResult = () => {
   const data = useSelector(selectLocationData);
@@ -16,7 +17,10 @@ const MapResult = () => {
 
   useEffect(() => {
     try {
-      const sampleTripData = {
+      /**
+       * Data format for the kepler.gl
+       */
+      const carbonCostData = {
         fields: [
           { name: "key", type: "int" },
           { name: "startLatitude", type: "float" },
@@ -33,6 +37,10 @@ const MapResult = () => {
         ],
         rows: data.map((row) => Object.values(row)),
       };
+
+      /**
+       * Adding data to kepler.gl map.
+       */
       dispatch(
         addDataToMap({
           datasets: {
@@ -40,13 +48,12 @@ const MapResult = () => {
               label: "Carbon Cost",
               id: "carbon-cost",
             },
-            data: sampleTripData,
+            data: carbonCostData,
           },
           option: {
             centerMap: true,
-            readOnly: true,
           },
-          config: {},
+          config: config,
         })
       );
     } catch (error) {
