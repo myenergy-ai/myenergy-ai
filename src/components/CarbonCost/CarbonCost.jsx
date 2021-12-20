@@ -5,14 +5,16 @@ import "./CarbonCost.css";
 import {
   EditableCell,
   EditableRow,
-} from "./EditableComponents/EditableComponents";
+} from "../EditableComponents/EditableComponents";
 import {
   updateTravelMode,
   addNewTravelMode,
   resetCarbonCosts,
 } from "../../redux/reducers/carbonCostSlice";
+import { setCurrentStep } from "../../redux/reducers/appSlice";
+import { setLocationData } from "../../redux/reducers/dataSlice";
 
-const CarbonCost = (props) => {
+const CarbonCost = () => {
   const dispatch = useDispatch();
   const carbonCosts = useSelector((state) => state.carbonCost.carbonCosts);
 
@@ -25,7 +27,7 @@ const CarbonCost = (props) => {
   };
 
   // Update cell value
-  const handleUpdate = (row) => {
+  const handleSave = (row) => {
     dispatch(updateTravelMode(row));
   };
 
@@ -47,6 +49,7 @@ const CarbonCost = (props) => {
       key: "travelMode",
       width: "50%",
       editable: true,
+      required: true,
     },
     {
       title: "Carbon Cost: kg/person/km",
@@ -54,10 +57,11 @@ const CarbonCost = (props) => {
       key: "carbonCost",
       align: "center",
       editable: true,
+      required: true,
     },
   ];
 
-  // column config that are being passed to EditableCell component
+  // column config that are being passed to EditableCell component as props
   const columns = columnConfig.map((column) => ({
     ...column,
     onCell: (record) => ({
@@ -65,9 +69,21 @@ const CarbonCost = (props) => {
       editable: column.editable,
       dataIndex: column.dataIndex,
       title: column.title,
-      handleSave: handleUpdate,
+      handleSave: handleSave,
     }),
   }));
+
+  // Remove the data of the client and reset to initial step.
+  const onCancel = () => {
+    dispatch(resetCarbonCosts());
+    dispatch(setLocationData(null));
+    dispatch(setCurrentStep(0));
+  };
+
+  // Move to the next step
+  const onUpdate = () => {
+    dispatch(setCurrentStep(2));
+  };
 
   return (
     <div className="carbon-cost-container">
@@ -93,6 +109,7 @@ const CarbonCost = (props) => {
           columns={columns}
           dataSource={carbonCosts}
           pagination={false}
+          scroll={{ y: 200 }}
         />
       </div>
       {/* table-div end */}
@@ -105,11 +122,11 @@ const CarbonCost = (props) => {
         <Button type="primary" onClick={handleReset}>
           Reset to default
         </Button>
-        <Button type="primary" onClick={props.onCancel}>
+        <Button type="primary" onClick={onCancel}>
           Cancel
         </Button>
-        <Button type="primary" onClick={props.onUpdate}>
-          Update costs
+        <Button type="primary" onClick={onUpdate}>
+          Save & Next
         </Button>
       </div>
       {/* actions-div end */}

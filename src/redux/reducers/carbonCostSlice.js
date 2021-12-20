@@ -82,9 +82,9 @@ export const carbonCostSlice = createSlice({
         carbonCost: Number(carbonCost),
       };
       const updatedCarbonCosts = [...state.carbonCosts];
-      const index = updatedCarbonCosts.findIndex((item) => updatedData.key === item.key);
-      const item = updatedCarbonCosts[index];
-      updatedCarbonCosts.splice(index, 1, { ...item, ...updatedData });
+      const existingCostIndex = updatedCarbonCosts.findIndex((item) => updatedData.key === item.key);
+      const existingCost = updatedCarbonCosts[existingCostIndex];
+      updatedCarbonCosts.splice(existingCostIndex, 1, { ...existingCost, ...updatedData });
       state.carbonCosts = updatedCarbonCosts;
     },
 
