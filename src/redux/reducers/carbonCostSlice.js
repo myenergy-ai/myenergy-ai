@@ -41,7 +41,7 @@ const initialState = {
     {
       key: 8,
       travelMode: "Car",
-      carbonCost: 0.182,
+      carbonCost: 0.181,
     },
     {
       key: 9,

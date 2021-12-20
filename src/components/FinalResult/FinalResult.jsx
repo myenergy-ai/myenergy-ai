@@ -1,5 +1,5 @@
 import "./FinalResult.css";
-import { Table } from "antd";
+import { Table, Modal } from "antd";
 import { useSelector } from "react-redux";
 import {
   selectLocationData,
@@ -9,10 +9,12 @@ import { useDispatch } from "react-redux";
 import { setCurrentStep } from "../../redux/reducers/appSlice";
 import { selectCarbonCost } from "../../redux/reducers/carbonCostSlice";
 import { selectWorkingHours } from "../../redux/reducers/workingHoursSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const FinalResult = () => {
   const dispatch = useDispatch();
+
+  const [processing, setProcessing] = useState(true);
 
   /**
    * These are the result table columns heading
@@ -206,6 +208,24 @@ const FinalResult = () => {
 
   useEffect(() => {
     /**
+     * As we are setting the state in useEffect it re-renders again which triggers the useEffect.
+     * So to prevent running of the useEffect we apply this condition which makes sure that the useEffect runs only once
+     */
+    if (locationData[0].carbonCost !== 0) return;
+
+    /**
+     * For helping out with getting the carbon cost easily.
+     */
+    const modeOfTransportToKey = {
+      IN_PASSENGER_VEHICLE: [4, 8],
+      MOTORCYCLING: [9],
+      IN_TRAIN: [5, 6, 7],
+      IN_BUS: [2],
+      FLYING: [1],
+      WALKING: [0],
+    };
+
+    /**
      * Filtering out the days in which the user has a holiday.
      */
     const filteredDays = workingHours.filter(
@@ -237,7 +257,7 @@ const FinalResult = () => {
     /**
      * Updating the user data and filtering out entries which are out of work hours or user want ot exclude.
      */
-    const a = locationData.filter((data) => {
+    let a = locationData.filter((data) => {
       /**
        * Entry start day for checking whether it's a holiday or not
        */
@@ -324,63 +344,101 @@ const FinalResult = () => {
         !toExclude
       );
     });
+
+    /**
+     * Updating the cost of the carbon emitted by the user while travelling;
+     */
+    a = a.map((data) => {
+      /**
+       * Calculate the max user has entered amoungst all the related tranport.
+       */
+      let max = 0;
+      modeOfTransportToKey[data.activityType].forEach((key) => {
+        max = Math.max(
+          max,
+          carbonCostData.find((item) => item.key === key)?.carbonCost
+        );
+      });
+
+      /**
+       * Set the data as it was just update the carbonCost.
+       */
+      return {
+        ...data,
+        carbonCost: (data.distance / 1000) * max,
+      };
+    });
     dispatch(setLocationData(a));
-  }, [dispatch]);
+    setProcessing(false);
+  }, [workingHours, locationData, dispatch, carbonCostData]);
 
   return (
-    <div className="final-result">
-      <div className="final-result-container">
-        <div className="final-result-header flex flex-column align-center">
-          <h2>Your Carbon Cost</h2>
-          <p>
-            Work hours set to{" "}
-            {workingHours.map((days) => (
-              <span key={days.key}>
-                {days.day + " " + days.workingTime + ", "}
-              </span>
-            ))}
-            . Click{" "}
-            <button
-              className="ant-btn ant-btn-primary"
-              onClick={moveToPreviousStep}
-            >
-              Set work hours
-            </button>{" "}
-            to change
-          </p>
-        </div>
-        <div className="final-result-carbon-cost">
-          <Table
-            columns={locationColumns}
-            dataSource={locationData}
-            bordered
-            size="middle"
-            scroll={{ x: window.innerWidth * 0.6, y: 200 }}
-          />
-          <h3>
-            Total Carbon Cost for this time period: <span>{totalCost}</span>
-          </h3>
-        </div>
-        <div className="final-result-total-carbon">
-          <h2>This set of results uses the Carbon Costs</h2>
-          <Table
-            columns={costPerModeColumns}
-            dataSource={carbonCostData}
-            bordered
-            size="middle"
-            pagination={{ position: ["none", "none"] }}
-          />
-          <div className="final-result-total-carbon-buttons flex justify-end">
-            <button className="ant-btn ant-btn-primary" onClick={moveToMap}>
-              Map Results
-            </button>
-            <button className="ant-btn ant-btn-primary" onClick={downloadFile}>
-              Just download results as CSV
-            </button>
+    <>
+      <Modal
+        title="Preparing result"
+        centered
+        visible={processing}
+        footer={null}
+      ></Modal>
+      {!processing && (
+        <div className="final-result">
+          <div className="final-result-container">
+            <div className="final-result-header flex flex-column align-center">
+              <h2>Your Carbon Cost</h2>
+              <p>
+                Work hours set to{" "}
+                {workingHours.map((days) => (
+                  <span key={days.key}>
+                    {days.day + " " + days.workingTime + ", "}
+                  </span>
+                ))}
+                . Click{" "}
+                <button
+                  className="ant-btn ant-btn-primary"
+                  onClick={moveToPreviousStep}
+                >
+                  Set work hours
+                </button>{" "}
+                to change
+              </p>
+            </div>
+            <div className="final-result-carbon-cost">
+              <Table
+                columns={locationColumns}
+                dataSource={locationData}
+                bordered
+                size="middle"
+                scroll={{ x: window.innerWidth * 0.6, y: 200 }}
+              />
+              <h3>
+                Total Carbon Cost for this time period: <span>{totalCost}</span>
+              </h3>
+            </div>
+            <div className="final-result-total-carbon">
+              <h2>This set of results uses the Carbon Costs</h2>
+              <Table
+                columns={costPerModeColumns}
+                dataSource={carbonCostData}
+                bordered
+                size="middle"
+                pagination={{ position: ["none", "none"] }}
+              />
+              <div className="final-result-total-carbon-buttons flex justify-end">
+                <button className="ant-btn ant-btn-primary" onClick={moveToMap}>
+                  Map Results
+                </button>
+                <button
+                  className="ant-btn ant-btn-primary"
+                  onClick={downloadFile}
+                >
+                  Just download results as CSV
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
