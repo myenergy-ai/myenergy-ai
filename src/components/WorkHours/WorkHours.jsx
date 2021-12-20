@@ -107,7 +107,7 @@ const WorkHours = () => {
         </p>
         <p className="work-hours-info">
           You can exclude whole data ranges (for instance for holidays) in the
-          final line. Use dd/mm/yyyy format to start and end the included dates.
+          final line. Use yyyy/mm/dd format to start and end the included dates.
         </p>
       </div>
       {/* top-div end */}

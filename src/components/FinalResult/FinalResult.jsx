@@ -1,10 +1,15 @@
 import "./FinalResult.css";
 import { Table } from "antd";
 import { useSelector } from "react-redux";
-import { selectLocationData } from "../../redux/reducers/dataSlice";
+import {
+  selectLocationData,
+  setLocationData,
+} from "../../redux/reducers/dataSlice";
 import { useDispatch } from "react-redux";
 import { setCurrentStep } from "../../redux/reducers/appSlice";
 import { selectCarbonCost } from "../../redux/reducers/carbonCostSlice";
+import { selectWorkingHours } from "../../redux/reducers/workingHoursSlice";
+import { useEffect } from "react";
 
 const FinalResult = () => {
   const dispatch = useDispatch();
@@ -110,14 +115,19 @@ const FinalResult = () => {
   ];
 
   /**
-   * Just dummy data remove it once the carbon cost is setted up and uncomment the below line
+   * Carbon cost of all the transport modes.
    */
   const carbonCostData = useSelector(selectCarbonCost);
 
   /**
+   * Working hours set by the users.
+   */
+  const workingHours = useSelector(selectWorkingHours);
+
+  /**
    * Getting the location data from redux store
    */
-  const locationData = useSelector(selectLocationData);
+  let locationData = useSelector(selectLocationData);
 
   /**
    * Calculating the total carbon cost
@@ -194,13 +204,142 @@ const FinalResult = () => {
     dispatch(setCurrentStep(4));
   };
 
+  useEffect(() => {
+    /**
+     * Filtering out the days in which the user has a holiday.
+     */
+    const filteredDays = workingHours.filter(
+      (workingHour) => workingHour.workingTime !== ""
+    );
+
+    /**
+     * Converting the days as per javascript date object.
+     */
+    const days = filteredDays.map((day) => day.key % 7);
+
+    /**
+     * Getting out hours of work for working days.
+     */
+    let hours = filteredDays.map((day) => ({
+      key: day.key % 7,
+      hour: day.workingTime
+        .split(";")
+        .map((times) => times.split("-").map((time) => parseInt(time))),
+    }));
+
+    /**
+     * Calculating the holidays or the days user want to exclude.
+     */
+    const rangeToExclude = workingHours[7].workingTime
+      .split(";")
+      .map((range) => range.split("-").map((date) => new Date(date).getTime()));
+
+    /**
+     * Updating the user data and filtering out entries which are out of work hours or user want ot exclude.
+     */
+    const a = locationData.filter((data) => {
+      /**
+       * Entry start day for checking whether it's a holiday or not
+       */
+      const startDay = new Date(parseInt(data.startTimestamp)).getDay();
+
+      /**
+       * Entry end day for checking whether it's a holiday or not
+       */
+      const endDay = new Date(parseInt(data.endTimestamp)).getDay();
+
+      /**
+       * Entry travel start time for checking whether it is in the working hours range.
+       */
+      const startTime =
+        new Date(parseInt(data.startTimestamp)).getHours() * 100 +
+        new Date(parseInt(data.startTimestamp)).getMinutes();
+
+      /**
+       * Finding the working hours of the day when the user starts travelling.
+       */
+      const startDayWorkingHours = hours.find((hour) => hour.key === startDay);
+
+      /**
+       * Entry travel end time for checking whether it is in the working hours range.
+       */
+      const endTime =
+        new Date(parseInt(data.endTimestamp)).getHours() * 100 +
+        new Date(parseInt(data.endTimestamp)).getMinutes();
+
+      /**
+       * Finding the working hours of the day when the user ends travelling.
+       */
+      const endDayWorkingHours = hours.find((hour) => hour.key === endDay);
+
+      /**
+       * Excluding the date range to be excluded.
+       */
+      let toExclude = false;
+      rangeToExclude.forEach((range) => {
+        if (
+          parseInt(data.startTimestamp) >= range[0] &&
+          parseInt(data.endTimestamp) <= range[1] + 86400000
+        ) {
+          toExclude = true;
+          return;
+        }
+      });
+
+      /**
+       * Checking whether user starts it's travel in working hours.
+       */
+      let isStartInRange = false;
+      startDayWorkingHours?.hour.forEach((hour) => {
+        if (hour[0] < startTime && hour[1] > startTime) {
+          isStartInRange = true;
+          return;
+        }
+      });
+
+      /**
+       * Checking whether user ends it's travel in working hours.
+       */
+      let isEndInRange = false;
+      endDayWorkingHours?.hour.forEach((hour) => {
+        if (hour[0] < endTime && hour[1] > endTime) {
+          isEndInRange = true;
+          return;
+        }
+      });
+
+      return (
+        /**
+         * If in working days
+         */
+        days.includes(startDay) &&
+        days.includes(endDay) &&
+        /**
+         * Either starts or end in working hours.
+         */
+        (isStartInRange || isEndInRange) &&
+        /**
+         * Not in to be excluded range.
+         */
+        !toExclude
+      );
+    });
+    dispatch(setLocationData(a));
+  }, [dispatch]);
+
   return (
     <div className="final-result">
       <div className="final-result-container">
         <div className="final-result-header flex flex-column align-center">
           <h2>Your Carbon Cost</h2>
           <p>
-            Work hours set to Monday - Friday 0700h - 2000h. Click{" "}
+            Work hours set to{" "}
+            {workingHours.map((days) => (
+              <span key={days.key}>
+                {days.day + " " + days.workingTime + ", "}
+              </span>
+            ))}
+            . Click{" "}
             <button
               className="ant-btn ant-btn-primary"
               onClick={moveToPreviousStep}

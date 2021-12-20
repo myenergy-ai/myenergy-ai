@@ -68,5 +68,9 @@ const workingHoursSlice = createSlice({
   },
 });
 
-export const { updateWorkingTime, resetWorkingHours } = workingHoursSlice.actions;
+export const { updateWorkingTime, resetWorkingHours } =
+  workingHoursSlice.actions;
+
+export const selectWorkingHours = (state) => state.workingHours.workingTimes;
+
 export default workingHoursSlice.reducer;
