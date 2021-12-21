@@ -36,6 +36,7 @@ const WorkHours = () => {
 
   // on cancel go to previous step
   const handleCancel = () => {
+    dispatch(resetWorkingHours());
     dispatch(setCurrentStep(1));
   };
 
