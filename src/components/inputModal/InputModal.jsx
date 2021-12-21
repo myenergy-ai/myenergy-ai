@@ -90,7 +90,7 @@ const InputModal = () => {
               activityConfidence: item.activitySegment.confidence,
               activityProbability:
                 item.activitySegment.activities[0].probability,
-              carbonCost: 10.0,
+              carbonCost: 0,
             });
             return item;
           });

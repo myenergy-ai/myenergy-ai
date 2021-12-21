@@ -21,6 +21,7 @@
 .final-result-header > p {
   font-size: 0.65rem;
   padding-bottom: 0.1rem;
+  text-align: center;
 }
 
 .final-result-header > p > .ant-btn {

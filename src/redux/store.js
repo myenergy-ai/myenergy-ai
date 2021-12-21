@@ -6,7 +6,6 @@ import dataSlice from "./reducers/dataSlice";
 import carbonCostReducer from "./reducers/carbonCostSlice";
 import workingHoursSlice from "./reducers/workingHoursSlice";
 
-
 const store = configureStore({
   /**
    * Configuring reducers
@@ -14,7 +13,7 @@ const store = configureStore({
   reducer: {
     app: appReducer,
     data: dataSlice,
-    kepler: keplerReducer,
+    keplerGl: keplerReducer,
     carbonCost: carbonCostReducer,
     workingHours: workingHoursSlice,
   },
@@ -23,7 +22,9 @@ const store = configureStore({
    * Middlewares used by kepler gl
    */
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(taskMiddleware),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(taskMiddleware),
 });
 
 export default store;

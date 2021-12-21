@@ -1,0 +1,31 @@
+{
+  "version": "v1",
+  "config": {
+    "visState": {
+      "layers": [
+        {
+          "id": "carbon-data",
+          "type": "arc",
+          "config": {
+            "dataId": "carbon-cost",
+            "label": "Carbon Cost",
+            "columns": {
+              "lat0": "startLatitude",
+              "lng0": "startLongitude",
+              "lat1": "endLatitude",
+              "lng1": "endLongitude"
+            },
+            "isVisible": true,
+            "hidden": false
+          },
+          "visualChannels": {
+            "colorField": {
+              "name": "carbonCost",
+              "type": "integer"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
