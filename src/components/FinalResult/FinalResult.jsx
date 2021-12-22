@@ -355,6 +355,7 @@ const FinalResult = () => {
        */
       let max = 0;
       modeOfTransportToKey[data.activityType].forEach((key) => {
+        if (key === 0) return;
         max = Math.max(
           max,
           carbonCostData.find((item) => item.key === key)?.carbonCost
