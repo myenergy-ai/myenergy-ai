@@ -34,6 +34,7 @@ const CarbonCost = () => {
   // Add new travel mode
   const handleAddNewTravelMode = () => {
     dispatch(addNewTravelMode());
+    document.getElementsByClassName("ant-table-body")[0].scrollIntoView(false);
   };
 
   // Reset values to default

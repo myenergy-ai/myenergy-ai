@@ -62,6 +62,15 @@ const InputModal = () => {
       files.map((file, index) => {
         const reader = new FileReader();
         reader.onload = (e) => {
+          if (!JSON.parse(e.target.result).hasOwnProperty("timelineObjects")) {
+            cleanUpData();
+            dispatch(
+              setError(
+                "Files not of the format needed. Please upload the correct files."
+              )
+            );
+            return;
+          }
           /**
            * Filtering out only travel data and rejecting other data
            */
