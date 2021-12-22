@@ -88,6 +88,7 @@ const FinalResult = () => {
       dataIndex: "activityProbability",
       key: "actProb",
       width: 100,
+      render: (text) => <p>{text.toFixed(3)}</p>,
     },
     {
       title: "Carbon Cost",
@@ -95,6 +96,7 @@ const FinalResult = () => {
       key: "carbonCost",
       width: 58,
       fixed: "right",
+      render: (text) => <p>{text.toFixed(3)}</p>,
     },
   ];
 
@@ -134,10 +136,9 @@ const FinalResult = () => {
   /**
    * Calculating the total carbon cost
    */
-  const totalCost = locationData.reduce(
-    (prev, curr) => prev + curr.carbonCost,
-    0
-  );
+  const totalCost = locationData
+    .reduce((prev, curr) => prev + curr.carbonCost, 0)
+    .toFixed(3);
 
   /**
    * Function to move to previous step

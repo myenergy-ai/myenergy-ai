@@ -34,12 +34,19 @@ const CarbonCost = () => {
   // Add new travel mode
   const handleAddNewTravelMode = () => {
     dispatch(addNewTravelMode());
-    document.getElementsByClassName("ant-table-body")[0].scrollIntoView(false);
+    const element = document.getElementsByClassName("ant-table-row");
+    element[element.length - 1].scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   // Reset values to default
   const handleReset = () => {
     dispatch(resetCarbonCosts());
+    const element = document.getElementsByClassName("ant-table-row");
+    element[0].scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   // default column config

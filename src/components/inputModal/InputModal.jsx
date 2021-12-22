@@ -36,7 +36,7 @@ const InputModal = () => {
   const props = {
     onChange: handleChange,
     multiple: true,
-    accept: ".json, .csv",
+    accept: ".json",
     beforeUpload: stopFromUploading,
     fileList: files,
   };
@@ -60,63 +60,76 @@ const InputModal = () => {
      */
     try {
       files.map((file, index) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          if (!JSON.parse(e.target.result).hasOwnProperty("timelineObjects")) {
-            cleanUpData();
-            dispatch(
-              setError(
-                "Files not of the format needed. Please upload the correct files."
-              )
+        if (file.name.endsWith(".csv")) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            // Task yet to be done.
+          };
+          reader.readAsText(file.originFileObj);
+          return file;
+        } else {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            /**
+             * Checking if the data has the field which is required for the processing.
+             */
+            if (
+              !JSON.parse(e.target.result).hasOwnProperty("timelineObjects")
+            ) {
+              cleanUpData();
+              dispatch(
+                setError(
+                  "Files not of the format needed. Please upload the correct files."
+                )
+              );
+              return;
+            }
+            /**
+             * Filtering out only travel data and rejecting other data
+             */
+            const fileData = JSON.parse(e.target.result).timelineObjects.filter(
+              (file) => file.activitySegment
             );
-            return;
-          }
-          /**
-           * Filtering out only travel data and rejecting other data
-           */
-          const fileData = JSON.parse(e.target.result).timelineObjects.filter(
-            (file) => file.activitySegment
-          );
 
-          /**
-           * For each item collect only required fields
-           */
-          fileData.map((item) => {
-            locationData.push({
-              key: locationData.length + 1,
-              startLatitude:
-                item.activitySegment.startLocation.latitudeE7 / 10000000,
-              startLongitude:
-                item.activitySegment.startLocation.longitudeE7 / 10000000,
-              endLatitude:
-                item.activitySegment.endLocation.latitudeE7 / 10000000,
-              endLongitude:
-                item.activitySegment.endLocation.longitudeE7 / 10000000,
-              startTimestamp: item.activitySegment.duration.startTimestampMs,
-              endTimestamp: item.activitySegment.duration.endTimestampMs,
-              distance: item.activitySegment.distance,
-              activityType: item.activitySegment.activityType,
-              activityConfidence: item.activitySegment.confidence,
-              activityProbability:
-                item.activitySegment.activities[0].probability,
-              carbonCost: 0,
+            /**
+             * For each item collect only required fields
+             */
+            fileData.map((item) => {
+              locationData.push({
+                key: locationData.length + 1,
+                startLatitude:
+                  item.activitySegment.startLocation.latitudeE7 / 10000000,
+                startLongitude:
+                  item.activitySegment.startLocation.longitudeE7 / 10000000,
+                endLatitude:
+                  item.activitySegment.endLocation.latitudeE7 / 10000000,
+                endLongitude:
+                  item.activitySegment.endLocation.longitudeE7 / 10000000,
+                startTimestamp: item.activitySegment.duration.startTimestampMs,
+                endTimestamp: item.activitySegment.duration.endTimestampMs,
+                distance: item.activitySegment.distance,
+                activityType: item.activitySegment.activityType,
+                activityConfidence: item.activitySegment.confidence,
+                activityProbability:
+                  item.activitySegment.activities[0].probability,
+                carbonCost: 0,
+              });
+              return item;
             });
-            return item;
-          });
-          // locationData.push(newData);
 
-          /**
-           * Checking if this is the last fie if so push the data to redux store and move to next step
-           */
-          if (index === files.length - 1) {
-            locationData = locationData.filter((data) => data.distance);
-            dispatch(setLocationData(locationData));
-            cleanUpData();
-            dispatch(setCurrentStep(1));
-          }
-        };
-        reader.readAsText(file.originFileObj);
-        return file;
+            /**
+             * Checking if this is the last fie if so push the data to redux store and move to next step
+             */
+            if (index === files.length - 1) {
+              locationData = locationData.filter((data) => data.distance);
+              dispatch(setLocationData(locationData));
+              cleanUpData();
+              dispatch(setCurrentStep(1));
+            }
+          };
+          reader.readAsText(file.originFileObj);
+          return file;
+        }
       });
     } catch (error) {
       cleanUpData();
