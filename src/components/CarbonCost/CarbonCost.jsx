@@ -58,6 +58,7 @@ const CarbonCost = () => {
       width: "50%",
       editable: true,
       required: true,
+      type: "text",
     },
     {
       title: "Carbon Cost: kg/person/km",
@@ -66,6 +67,7 @@ const CarbonCost = () => {
       align: "center",
       editable: true,
       required: true,
+      type: "number",
     },
   ];
 
@@ -77,6 +79,7 @@ const CarbonCost = () => {
       editable: column.editable,
       dataIndex: column.dataIndex,
       title: column.title,
+      type: column.type,
       handleSave: handleSave,
     }),
   }));

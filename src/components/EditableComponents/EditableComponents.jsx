@@ -22,6 +22,7 @@ export const EditableCell = ({
   dataIndex,
   record,
   handleSave,
+  type,
   required,
   ...restProps
 }) => {
@@ -39,7 +40,6 @@ export const EditableCell = ({
     form.setFieldsValue({
       [dataIndex]: record[dataIndex],
     });
-    console.log(editing);
   };
 
   const save = async () => {
@@ -68,16 +68,17 @@ export const EditableCell = ({
           },
         ]}
       >
-        <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+        <Input
+          ref={inputRef}
+          onPressEnter={save}
+          onBlur={save}
+          type={type}
+          step="0.001"
+          min="0"
+        />
       </Form.Item>
     ) : (
-      <div
-        className="editable-cell-value-wrap"
-        // style={{
-        //   paddingRight: 24,
-        // }}
-        onClick={toggleEdit}
-      >
+      <div className="editable-cell-value-wrap" onClick={toggleEdit}>
         {children}
       </div>
     );

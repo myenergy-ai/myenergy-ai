@@ -2,10 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Button } from "antd";
 import "./WorkHours.css";
-import {
-  EditableCell,
-  EditableRow,
-} from "../EditableComponents/EditableComponents";
+import DateTimeRangePicker from "../DateTimeRangePicker/DateTimeRangePicker";
 import {
   resetWorkingHours,
   updateWorkingTime,
@@ -19,8 +16,7 @@ const WorkHours = () => {
   // components to make row and cell editable
   const components = {
     body: {
-      row: EditableRow,
-      cell: EditableCell,
+      cell: DateTimeRangePicker,
     },
   };
 
@@ -31,6 +27,7 @@ const WorkHours = () => {
 
   // update working times
   const handleSave = (row) => {
+    console.log(row);
     dispatch(updateWorkingTime(row));
   };
 
@@ -58,6 +55,7 @@ const WorkHours = () => {
       key: "workingTimes",
       editable: true,
       required: false,
+      type: "date-time",
     },
   ];
 
@@ -69,6 +67,7 @@ const WorkHours = () => {
       editable: column.editable,
       dataIndex: column.dataIndex,
       title: column.title,
+      type: column.type,
       handleSave,
     }),
   }));
