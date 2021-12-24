@@ -2,8 +2,9 @@ import "./FinalResult.css";
 import { Table, Modal } from "antd";
 import { useSelector } from "react-redux";
 import {
+  selectCarbonCostData,
   selectLocationData,
-  setLocationData,
+  setCarbonCostData,
 } from "../../redux/reducers/dataSlice";
 import { useDispatch } from "react-redux";
 import { setCurrentStep } from "../../redux/reducers/appSlice";
@@ -134,10 +135,15 @@ const FinalResult = () => {
   let locationData = useSelector(selectLocationData);
 
   /**
+   * Getting the location data from redux store
+   */
+  let carbonCostFinalData = useSelector(selectCarbonCostData);
+
+  /**
    * Calculating the total carbon cost
    */
-  const totalCost = locationData
-    .reduce((prev, curr) => prev + curr.carbonCost, 0)
+  const totalCost = carbonCostFinalData
+    ?.reduce((prev, curr) => prev + curr.carbonCost, 0)
     .toFixed(3);
 
   /**
@@ -184,7 +190,7 @@ const FinalResult = () => {
     /**
      * Creating a copy of the data as we need to update the start and end time.
      */
-    const a = JSON.parse(JSON.stringify(locationData));
+    const a = JSON.parse(JSON.stringify(carbonCostFinalData));
     const myData = convertToCsv(a);
     const fileName = "carboncost";
     /**
@@ -208,12 +214,6 @@ const FinalResult = () => {
   };
 
   useEffect(() => {
-    /**
-     * As we are setting the state in useEffect it re-renders again which triggers the useEffect.
-     * So to prevent running of the useEffect we apply this condition which makes sure that the useEffect runs only once
-     */
-    if (locationData[0].carbonCost !== 0) return;
-
     /**
      * For helping out with getting the carbon cost easily.
      */
@@ -243,17 +243,23 @@ const FinalResult = () => {
      */
     let hours = filteredDays.map((day) => ({
       key: day.key % 7,
-      hour: day.workingTime
-        .split(";")
-        .map((times) => times.split("-").map((time) => parseInt(time))),
+      hour: day.workingTime.split(";").map((times) =>
+        times
+          .trim()
+          .split("-")
+          .map((time) => parseInt(time))
+      ),
     }));
 
     /**
      * Calculating the holidays or the days user want to exclude.
      */
-    const rangeToExclude = workingHours[7].workingTime
-      .split(";")
-      .map((range) => range.split("-").map((date) => new Date(date).getTime()));
+    const rangeToExclude = workingHours[7].workingTime.split(";").map((range) =>
+      range
+        .trim()
+        .split("-")
+        .map((date) => new Date(date).getTime())
+    );
 
     /**
      * Updating the user data and filtering out entries which are out of work hours or user want ot exclude.
@@ -370,7 +376,10 @@ const FinalResult = () => {
         carbonCost: (data.distance / 1000) * max,
       };
     });
-    dispatch(setLocationData(a));
+    /**
+     * Checking if the previous data is same as the current one if not dispatching it.
+     */
+    dispatch(setCarbonCostData(a));
     setProcessing(false);
   }, [workingHours, locationData, dispatch, carbonCostData]);
 
@@ -407,7 +416,7 @@ const FinalResult = () => {
             <div className="final-result-carbon-cost">
               <Table
                 columns={locationColumns}
-                dataSource={locationData}
+                dataSource={carbonCostFinalData}
                 bordered
                 size="middle"
                 scroll={{ x: window.innerWidth * 0.6, y: 200 }}

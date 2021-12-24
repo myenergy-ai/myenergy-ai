@@ -5,6 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
  */
 const initialState = {
   locationData: null,
+  carbonCostData: null,
 };
 
 /**
@@ -17,14 +18,18 @@ export const dataSlice = createSlice({
     setLocationData: (state, action) => {
       state.locationData = action.payload;
     },
+    setCarbonCostData: (state, action) => {
+      state.carbonCostData = action.payload;
+    },
   },
 });
 
-export const { setLocationData } = dataSlice.actions;
+export const { setLocationData, setCarbonCostData } = dataSlice.actions;
 
 /**
  * Selectors for acessing data in the components
  */
 export const selectLocationData = (state) => state.data.locationData;
+export const selectCarbonCostData = (state) => state.data.carbonCostData;
 
 export default dataSlice.reducer;

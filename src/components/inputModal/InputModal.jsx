@@ -69,7 +69,7 @@ const InputModal = () => {
             cleanUpData();
             dispatch(
               setError(
-                "Files not of the format needed. Please upload the correct files."
+                "Please select only those files that are named by year followed by month given by Google."
               )
             );
             return;

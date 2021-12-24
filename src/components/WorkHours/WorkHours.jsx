@@ -27,7 +27,6 @@ const WorkHours = () => {
 
   // update working times
   const handleSave = (row) => {
-    console.log(row);
     dispatch(updateWorkingTime(row));
   };
 

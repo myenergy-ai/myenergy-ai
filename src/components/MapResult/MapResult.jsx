@@ -4,15 +4,15 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addDataToMap } from "kepler.gl/actions";
 import {
-  selectLocationData,
-  setLocationData,
+  selectCarbonCostData,
+  setCarbonCostData,
 } from "../../redux/reducers/dataSlice";
 import { setError } from "../../redux/reducers/appSlice";
 import "./MapResult.css";
 import config from "../../configuration/mapConfig.json";
 
 const MapResult = () => {
-  const data = useSelector(selectLocationData);
+  const data = useSelector(selectCarbonCostData);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const MapResult = () => {
       );
     } catch (error) {
       dispatch(setError(error.message));
-      dispatch(setLocationData(null));
+      dispatch(setCarbonCostData(null));
     }
   }, [dispatch, data]);
 
