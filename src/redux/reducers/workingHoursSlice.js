@@ -5,7 +5,7 @@ const initialState = {
     {
       key: 1,
       day: "Monday",
-      workingTime: "0900-1700",
+      workingTime: "0900-1300 ; 1400-1900",
     },
     {
       key: 2,
@@ -40,7 +40,7 @@ const initialState = {
     {
       key: 8,
       day: "Date ranges to exclude",
-      workingTime: "",
+      workingTime: "2021/11/1-2021/11/10 ; 2021/07/20-2021/07/25",
     },
   ],
 };
@@ -68,5 +68,9 @@ const workingHoursSlice = createSlice({
   },
 });
 
-export const { updateWorkingTime, resetWorkingHours } = workingHoursSlice.actions;
+export const { updateWorkingTime, resetWorkingHours } =
+  workingHoursSlice.actions;
+
+export const selectWorkingHours = (state) => state.workingHours.workingTimes;
+
 export default workingHoursSlice.reducer;

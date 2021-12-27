@@ -1,4 +1,4 @@
 .editable-cell-value-wrap {
-  height: 1rem;
+  min-height: 1rem;
   width: inherit;
 }

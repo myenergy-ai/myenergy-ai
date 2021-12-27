@@ -34,11 +34,19 @@ const CarbonCost = () => {
   // Add new travel mode
   const handleAddNewTravelMode = () => {
     dispatch(addNewTravelMode());
+    const element = document.getElementsByClassName("ant-table-row");
+    element[element.length - 1].scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   // Reset values to default
   const handleReset = () => {
     dispatch(resetCarbonCosts());
+    const element = document.getElementsByClassName("ant-table-row");
+    element[0].scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   // default column config
@@ -50,6 +58,7 @@ const CarbonCost = () => {
       width: "50%",
       editable: true,
       required: true,
+      type: "text",
     },
     {
       title: "Carbon Cost: kg/person/km",
@@ -58,6 +67,7 @@ const CarbonCost = () => {
       align: "center",
       editable: true,
       required: true,
+      type: "number",
     },
   ];
 
@@ -69,6 +79,7 @@ const CarbonCost = () => {
       editable: column.editable,
       dataIndex: column.dataIndex,
       title: column.title,
+      type: column.type,
       handleSave: handleSave,
     }),
   }));

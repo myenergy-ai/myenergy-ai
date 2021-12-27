@@ -36,7 +36,7 @@ const InputModal = () => {
   const props = {
     onChange: handleChange,
     multiple: true,
-    accept: ".json, .csv",
+    accept: ".json",
     beforeUpload: stopFromUploading,
     fileList: files,
   };
@@ -62,6 +62,18 @@ const InputModal = () => {
       files.map((file, index) => {
         const reader = new FileReader();
         reader.onload = (e) => {
+          /**
+           * Checking if the data has the field which is required for the processing.
+           */
+          if (!JSON.parse(e.target.result).hasOwnProperty("timelineObjects")) {
+            cleanUpData();
+            dispatch(
+              setError(
+                "Please select only those files that are named by year followed by month given by Google."
+              )
+            );
+            return;
+          }
           /**
            * Filtering out only travel data and rejecting other data
            */
@@ -90,11 +102,10 @@ const InputModal = () => {
               activityConfidence: item.activitySegment.confidence,
               activityProbability:
                 item.activitySegment.activities[0].probability,
-              carbonCost: 10.0,
+              carbonCost: 0,
             });
             return item;
           });
-          // locationData.push(newData);
 
           /**
            * Checking if this is the last fie if so push the data to redux store and move to next step

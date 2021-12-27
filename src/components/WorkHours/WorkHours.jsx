@@ -2,10 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Button } from "antd";
 import "./WorkHours.css";
-import {
-  EditableCell,
-  EditableRow,
-} from "../EditableComponents/EditableComponents";
+import DateTimeRangePicker from "../DateTimeRangePicker/DateTimeRangePicker";
 import {
   resetWorkingHours,
   updateWorkingTime,
@@ -19,8 +16,7 @@ const WorkHours = () => {
   // components to make row and cell editable
   const components = {
     body: {
-      row: EditableRow,
-      cell: EditableCell,
+      cell: DateTimeRangePicker,
     },
   };
 
@@ -36,6 +32,7 @@ const WorkHours = () => {
 
   // on cancel go to previous step
   const handleCancel = () => {
+    dispatch(resetWorkingHours());
     dispatch(setCurrentStep(1));
   };
 
@@ -57,6 +54,7 @@ const WorkHours = () => {
       key: "workingTimes",
       editable: true,
       required: false,
+      type: "date-time",
     },
   ];
 
@@ -68,6 +66,7 @@ const WorkHours = () => {
       editable: column.editable,
       dataIndex: column.dataIndex,
       title: column.title,
+      type: column.type,
       handleSave,
     }),
   }));
@@ -103,7 +102,7 @@ const WorkHours = () => {
         </p>
         <p className="work-hours-info">
           You can exclude whole data ranges (for instance for holidays) in the
-          final line. Use dd/mm/yyyy format to start and end the included dates.
+          final line. Use yyyy/mm/dd format to start and end the included dates.
         </p>
       </div>
       {/* top-div end */}
