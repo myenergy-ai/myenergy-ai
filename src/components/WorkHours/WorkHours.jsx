@@ -8,6 +8,7 @@ import {
   updateWorkingTime,
 } from "../../redux/reducers/workingHoursSlice";
 import { setCurrentStep } from "../../redux/reducers/appSlice";
+import { merge } from "../../lib/mergeRangeArrays";
 
 const WorkHours = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,8 @@ const WorkHours = () => {
 
   // update working times
   const handleSave = (row) => {
-    dispatch(updateWorkingTime(row));
+    const newHours = JSON.parse(JSON.stringify(row));
+    dispatch(updateWorkingTime(merge(newHours)));
   };
 
   // on cancel go to previous step

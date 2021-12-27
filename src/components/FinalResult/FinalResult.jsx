@@ -224,6 +224,7 @@ const FinalResult = () => {
       IN_BUS: [2],
       FLYING: [1],
       WALKING: [0],
+      UNKNOWN_ACTIVITY_TYPE: [0],
     };
 
     /**
@@ -264,7 +265,7 @@ const FinalResult = () => {
     /**
      * Updating the user data and filtering out entries which are out of work hours or user want ot exclude.
      */
-    let a = locationData.filter((data) => {
+    let a = locationData?.filter((data) => {
       /**
        * Entry start day for checking whether it's a holiday or not
        */
@@ -355,12 +356,12 @@ const FinalResult = () => {
     /**
      * Updating the cost of the carbon emitted by the user while travelling;
      */
-    a = a.map((data) => {
+    a = a?.map((data) => {
       /**
        * Calculate the max user has entered amoungst all the related tranport.
        */
       let max = 0;
-      modeOfTransportToKey[data.activityType].forEach((key) => {
+      modeOfTransportToKey[data.activityType]?.forEach((key) => {
         if (key === 0) return;
         max = Math.max(
           max,
@@ -400,7 +401,14 @@ const FinalResult = () => {
                 Work hours set to{" "}
                 {workingHours.map((days) => (
                   <span key={days.key}>
-                    {days.day + " " + days.workingTime + ", "}
+                    {days.day +
+                      " " +
+                      (days.workingTime === ""
+                        ? days.key === 8
+                          ? "None"
+                          : "Holiday"
+                        : days.workingTime) +
+                      ", "}
                   </span>
                 ))}
                 . Click{" "}
