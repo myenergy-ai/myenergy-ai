@@ -427,7 +427,7 @@ const FinalResult = () => {
                 dataSource={carbonCostFinalData}
                 bordered
                 size="middle"
-                scroll={{ x: window.innerWidth * 0.6, y: 200 }}
+                scroll={{ x: window.innerWidth * 0.6, y: 400 }}
               />
               <h3>
                 Total Carbon Cost for this time period: <span>{totalCost}</span>

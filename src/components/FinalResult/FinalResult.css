@@ -1,11 +1,9 @@
 .final-result {
   background-color: var(--color-gray-white);
-  width: 95%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
   overflow-y: scroll;
   padding: 0.2rem 0;
-  border-radius: 12px;
-  box-shadow: 0px 0px 7px rgb(0, 0, 0, 1);
 }
 
 .final-result-container {
@@ -14,21 +12,18 @@
 }
 
 .final-result-header > h2 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 0.1rem;
+  font-size: 1.5rem;
 }
 
 .final-result-header > p {
-  font-size: 0.65rem;
-  padding-bottom: 0.1rem;
+  font-size: 0.8rem;
+  padding-block: 0.5rem;
   text-align: center;
 }
 
 .final-result-header > p > .ant-btn {
-  font-size: 0.55rem;
+  font-size: 0.8rem;
   padding: 0px 7px;
-  height: 1.5rem;
 }
 
 .ant-pagination {
@@ -46,11 +41,10 @@
 }
 
 .final-result-total-carbon > h2 {
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .ant-table-cell {
-  font-size: 0.55rem;
   padding: 0.2rem !important;
 }
 
@@ -64,9 +58,8 @@
 }
 
 .final-result-total-carbon-buttons > .ant-btn {
-  font-size: 0.55rem;
+  font-size: 1rem;
   padding: 0px 7px;
-  height: 1.5rem;
   margin: 0.2rem;
 }
 
