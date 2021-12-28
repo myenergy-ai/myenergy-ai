@@ -32,70 +32,70 @@ const FinalResult = () => {
       title: "Start Latitude",
       dataIndex: "startLatitude",
       key: "sLat",
-      width: 80,
+      width: 110,
     },
     {
       title: "Start Longitude",
       dataIndex: "startLongitude",
       key: "sLong",
-      width: 80,
+      width: 110,
     },
     {
       title: "End Latitude",
       dataIndex: "endLatitude",
       key: "eLat",
-      width: 80,
+      width: 110,
     },
     {
       title: "End Longitude",
       dataIndex: "endLongitude",
       key: "eLong",
-      width: 80,
+      width: 110,
     },
     {
       title: "Start Time",
       dataIndex: "startTimestamp",
       key: "sTime",
-      width: 120,
+      width: 170,
       render: (text) => <p>{new Date(parseInt(text)).toLocaleString()}</p>,
     },
     {
       title: "End Time",
       dataIndex: "endTimestamp",
       key: "eTime",
-      width: 120,
+      width: 170,
       render: (text) => <p>{new Date(parseInt(text)).toLocaleString()}</p>,
     },
     {
       title: "Distance",
       dataIndex: "distance",
       key: "dist",
-      width: 60,
+      width: 70,
     },
     {
       title: "Activity Type",
       dataIndex: "activityType",
       key: "actType",
-      width: 120,
+      width: 170,
     },
     {
       title: "Activity Confidence",
       dataIndex: "activityConfidence",
       key: "actConf",
-      width: 100,
+      width: 140,
     },
     {
       title: "Activity Probability",
       dataIndex: "activityProbability",
       key: "actProb",
-      width: 100,
+      width: 140,
       render: (text) => <p>{text.toFixed(3)}</p>,
     },
     {
       title: "Carbon Cost",
       dataIndex: "carbonCost",
       key: "carbonCost",
-      width: 58,
+      width: 90,
       fixed: "right",
       render: (text) => <p>{text.toFixed(3)}</p>,
     },
@@ -214,19 +214,6 @@ const FinalResult = () => {
   };
 
   useEffect(() => {
-    /**
-     * For helping out with getting the carbon cost easily.
-     */
-    const modeOfTransportToKey = {
-      IN_PASSENGER_VEHICLE: [4, 8],
-      MOTORCYCLING: [9],
-      IN_TRAIN: [5, 6, 7],
-      IN_BUS: [2],
-      FLYING: [1],
-      WALKING: [0],
-      UNKNOWN_ACTIVITY_TYPE: [0],
-    };
-
     /**
      * Filtering out the days in which the user has a holiday.
      */
@@ -358,23 +345,14 @@ const FinalResult = () => {
      */
     a = a?.map((data) => {
       /**
-       * Calculate the max user has entered amoungst all the related tranport.
-       */
-      let max = 0;
-      modeOfTransportToKey[data.activityType]?.forEach((key) => {
-        if (key === 0) return;
-        max = Math.max(
-          max,
-          carbonCostData.find((item) => item.key === key)?.carbonCost
-        );
-      });
-
-      /**
        * Set the data as it was just update the carbonCost.
        */
       return {
         ...data,
-        carbonCost: (data.distance / 1000) * max,
+        carbonCost:
+          (data.distance / 1000) *
+          carbonCostData.find((item) => item.modeName === data.activityType)
+            ?.carbonCost,
       };
     });
     /**

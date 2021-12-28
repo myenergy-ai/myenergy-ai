@@ -1,0 +1,15 @@
+.map-result {
+  position: relative;
+  height: 100%;
+}
+
+.map-result-back-button {
+  width: fit-content;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  color: black;
+  z-index: 100;
+  padding: 0.25rem;
+  background-color: white;
+}

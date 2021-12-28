@@ -7,9 +7,10 @@ import {
   selectCarbonCostData,
   setCarbonCostData,
 } from "../../redux/reducers/dataSlice";
-import { setError } from "../../redux/reducers/appSlice";
+import { setCurrentStep, setError } from "../../redux/reducers/appSlice";
 import "./MapResult.css";
 import config from "../../configuration/mapConfig.json";
+import { Button } from "antd";
 
 const MapResult = () => {
   const data = useSelector(selectCarbonCostData);
@@ -64,6 +65,12 @@ const MapResult = () => {
 
   return (
     <div className="map-result">
+      <Button
+        className="map-result-back-button"
+        onClick={() => dispatch(setCurrentStep(3))}
+      >
+        Go Back
+      </Button>
       <KeplerGl
         id="carbonCost"
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API}

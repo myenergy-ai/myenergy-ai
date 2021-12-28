@@ -8,7 +8,6 @@ import {
 } from "../EditableComponents/EditableComponents";
 import {
   updateTravelMode,
-  addNewTravelMode,
   resetCarbonCosts,
 } from "../../redux/reducers/carbonCostSlice";
 import { setCurrentStep } from "../../redux/reducers/appSlice";
@@ -31,15 +30,6 @@ const CarbonCost = () => {
     dispatch(updateTravelMode(row));
   };
 
-  // Add new travel mode
-  const handleAddNewTravelMode = () => {
-    dispatch(addNewTravelMode());
-    const element = document.getElementsByClassName("ant-table-row");
-    element[element.length - 1].scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-
   // Reset values to default
   const handleReset = () => {
     dispatch(resetCarbonCosts());
@@ -55,7 +45,7 @@ const CarbonCost = () => {
       title: "Travel Mode",
       dataIndex: "travelMode",
       key: "travelMode",
-      width: "50%",
+      align: "center",
       editable: true,
       required: true,
       type: "text",
@@ -64,8 +54,17 @@ const CarbonCost = () => {
       title: "Carbon Cost: kg/person/km",
       dataIndex: "carbonCost",
       key: "carbonCost",
-      align: "center",
       editable: true,
+      align: "center",
+      required: true,
+      type: "number",
+    },
+    {
+      title: "Travel mode provided by Google",
+      dataIndex: "modeName",
+      key: "modeName",
+      align: "center",
+      editable: false,
       required: true,
       type: "number",
     },
@@ -127,9 +126,6 @@ const CarbonCost = () => {
 
       {/* actions-div start */}
       <div className="carbon-cost-actions">
-        <Button type="primary" onClick={handleAddNewTravelMode}>
-          Add new travel mode
-        </Button>
         <Button type="primary" onClick={handleReset}>
           Reset to default
         </Button>

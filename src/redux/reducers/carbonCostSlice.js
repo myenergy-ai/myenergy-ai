@@ -2,53 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // default values of carbon costs
 const initialState = {
-  carbonCosts: [
-    {
-      key: 1,
-      travelMode: "Plane",
-      carbonCost: 0.187,
-    },
-    {
-      key: 2,
-      travelMode: "Bus",
-      carbonCost: 0.105,
-    },
-    {
-      key: 3,
-      travelMode: "Ferry",
-      carbonCost: 0.019,
-    },
-    {
-      key: 4,
-      travelMode: "Other Passenger Vehicle",
-      carbonCost: 0.181,
-    },
-    {
-      key: 5,
-      travelMode: "Subway/Underground/Metro",
-      carbonCost: 0.041,
-    },
-    {
-      key: 6,
-      travelMode: "Train",
-      carbonCost: 0.041,
-    },
-    {
-      key: 7,
-      travelMode: "Tram",
-      carbonCost: 0.041,
-    },
-    {
-      key: 8,
-      travelMode: "Car",
-      carbonCost: 0.181,
-    },
-    {
-      key: 9,
-      travelMode: "Motorcycle",
-      carbonCost: 0.103,
-    },
-  ],
+  carbonCosts: [],
+  initialCarbonData: [],
 };
 
 // Reducer for updating and reseting carbon costs
@@ -57,17 +12,11 @@ export const carbonCostSlice = createSlice({
   initialState,
   reducers: {
     // To add new travel mode:
-    // generate key from length
-    // set initial values to
-    // travelMode and carbonCost
-    addNewTravelMode: (state) => {
-      const key = state.carbonCosts.length + 1;
-      const newTravelMode = {
-        key,
-        travelMode: "New Travel Mode",
-        carbonCost: 0,
-      };
-      state.carbonCosts.push(newTravelMode);
+    // sets the initial travel modes based
+    // based on the input files.
+    addTravelMode: (state, action) => {
+      state.initialCarbonData = action.payload;
+      state.carbonCosts = action.payload;
     },
 
     // To update existing travel mode:
@@ -94,13 +43,13 @@ export const carbonCostSlice = createSlice({
 
     // set current state to initial state
     resetCarbonCosts: (state) => {
-      state.carbonCosts = initialState.carbonCosts;
+      state.carbonCosts = state.initialCarbonData;
     },
   },
 });
 
 // export all the actions
-export const { addNewTravelMode, updateTravelMode, resetCarbonCosts } =
+export const { addTravelMode, updateTravelMode, resetCarbonCosts } =
   carbonCostSlice.actions;
 
 export const selectCarbonCost = (state) => state.carbonCost.carbonCosts;
