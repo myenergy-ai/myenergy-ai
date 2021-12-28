@@ -120,7 +120,7 @@ const CarbonCost = () => {
           columns={columns}
           dataSource={carbonCosts}
           pagination={false}
-          scroll={{ y: 200 }}
+          scroll={{ y: window.innerHeight * 0.4 }}
         />
       </div>
       {/* table-div end */}

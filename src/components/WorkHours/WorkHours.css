@@ -1,11 +1,11 @@
 .work-hours-container {
   background-color: #e7e7e7;
-  width: 90%;
+  width: 95%;
   margin: 1rem auto;
   padding: 1rem;
   border-radius: 12px;
-  height: 90%;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  height: 95%;
+  box-shadow: 0px 0px 7px rgb(0, 0, 0, 1);
   overflow-y: scroll;
 }
 
@@ -58,6 +58,10 @@
 
 .work-hours-top p {
   font-size: 0.7rem;
+}
+
+.ant-table-row {
+  font-size: 0.65rem;
 }
 
 @media (max-width: 768px) {

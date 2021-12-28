@@ -6,7 +6,7 @@
 .carbon-foot-print-main {
   height: 100%;
   flex: 0.825;
-  background: var(--space);
+  /* background: var(--space); */
 }
 
 @media only screen and (max-width: 1024px) {
