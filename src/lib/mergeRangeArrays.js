@@ -1,3 +1,6 @@
+/**
+ * Function to merge date and hour ranges into a single array.
+ */
 export const merge = (string) => {
   if (string.workingTime === "") return string;
   if (string.key === 8) {
@@ -48,6 +51,9 @@ export const merge = (string) => {
   return string;
 };
 
+/**
+ * Helper function for merging of date and hour
+ */
 const combine = (ranges) => {
   let result = [],
     last;

@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Button } from "antd";
 import "./WorkHours.css";
 import DateTimeRangePicker from "../DateTimeRangePicker/DateTimeRangePicker";
 import {
   resetWorkingHours,
+  selectIncludeAllHoursAndDays,
+  selectWorkingHours,
+  setIncludeAllHoursAndDays,
   updateWorkingTime,
 } from "../../redux/reducers/workingHoursSlice";
 import { setCurrentStep } from "../../redux/reducers/appSlice";
 import { merge } from "../../lib/mergeRangeArrays";
+import Checkbox from "antd/lib/checkbox/Checkbox";
+import removeAllWorkingHours from "../../lib/removeAllWorkingHours";
 
 const WorkHours = () => {
   const dispatch = useDispatch();
-  const workingTimes = useSelector((state) => state.workingHours.workingTimes);
+  const workingTimes = useSelector(selectWorkingHours);
 
   // components to make row and cell editable
   const components = {
@@ -24,6 +29,7 @@ const WorkHours = () => {
   // reset values to default
   const handleReset = () => {
     dispatch(resetWorkingHours());
+    setChecked(false);
   };
 
   // update working times
@@ -40,6 +46,7 @@ const WorkHours = () => {
 
   // on update go to next step
   const handleUpdateWorkHours = () => {
+    dispatch(setIncludeAllHoursAndDays(checked));
     dispatch(setCurrentStep(3));
   };
 
@@ -72,6 +79,22 @@ const WorkHours = () => {
       handleSave,
     }),
   }));
+
+  /**
+   * Used to tract whether user wants to add filter of days and hours.
+   */
+  const includeAllHoursAndDays = useSelector(selectIncludeAllHoursAndDays);
+
+  /**
+   * Function to handle change of check box.
+   */
+  const handleRemoveFilter = () => {
+    setChecked(!checked);
+  };
+  /**
+   * This is required as checkbox needs a local useState for tracking the value of the state.
+   */
+  const [checked, setChecked] = useState(includeAllHoursAndDays);
 
   return (
     <div className="work-hours-container">
@@ -117,8 +140,12 @@ const WorkHours = () => {
           components={components}
           pagination={false}
           columns={columns}
-          dataSource={workingTimes}
+          // Show table data only when user has enabled hours and days filter.
+          dataSource={checked ? removeAllWorkingHours : workingTimes}
         />
+        <Checkbox checked={checked} onChange={handleRemoveFilter}>
+          Want to include all the data
+        </Checkbox>
       </div>
       {/* table-div end */}
 

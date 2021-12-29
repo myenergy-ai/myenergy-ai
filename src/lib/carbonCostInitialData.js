@@ -1,3 +1,7 @@
+/**
+ * Initial data used to filter out Modes of transport given by the google take away.
+ */
+
 const data = [
   {
     key: 1,

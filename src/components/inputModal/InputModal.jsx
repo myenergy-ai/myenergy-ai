@@ -90,7 +90,8 @@ const InputModal = () => {
           fileData.map((item) => {
             if (
               item.activitySegment.activityType === "UNKNOWN_ACTIVITY_TYPE" ||
-              item.activitySegment.activityType === "WALKING"
+              item.activitySegment.activityType === "WALKING" ||
+              !item.activitySegment.distance
             )
               return item;
             modeOfTransport.add(item.activitySegment.activityType);

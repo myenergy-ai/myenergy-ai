@@ -5,7 +5,7 @@ const initialState = {
     {
       key: 1,
       day: "Monday",
-      workingTime: "0900-1300 ; 1400-1900",
+      workingTime: "0900-1700",
     },
     {
       key: 2,
@@ -40,15 +40,17 @@ const initialState = {
     {
       key: 8,
       day: "Date ranges to exclude",
-      workingTime: "2021/11/1-2021/11/10 ; 2021/07/20-2021/07/25",
+      workingTime: "",
     },
   ],
+  includeAllHoursAndDays: false,
 };
 
 const workingHoursSlice = createSlice({
   name: "workingHours",
   initialState,
   reducers: {
+    // For updating the working time.
     updateWorkingTime: (state, action) => {
       const updatedWorkingTimes = [...state.workingTimes];
       const updatedData = action.payload;
@@ -62,15 +64,26 @@ const workingHoursSlice = createSlice({
       });
       state.workingTimes = updatedWorkingTimes;
     },
+    // For removing work hours filter and exclude days.
+    setIncludeAllHoursAndDays: (state, action) => {
+      state.includeAllHoursAndDays = action.payload;
+    },
+    // For reseting to default values.
     resetWorkingHours: (state) => {
       state.workingTimes = initialState.workingTimes;
+      state.includeAllHoursAndDays = initialState.includeAllHoursAndDays;
     },
   },
 });
 
-export const { updateWorkingTime, resetWorkingHours } =
-  workingHoursSlice.actions;
+export const {
+  updateWorkingTime,
+  resetWorkingHours,
+  setIncludeAllHoursAndDays,
+} = workingHoursSlice.actions;
 
 export const selectWorkingHours = (state) => state.workingHours.workingTimes;
+export const selectIncludeAllHoursAndDays = (state) =>
+  state.workingHours.includeAllHoursAndDays;
 
 export default workingHoursSlice.reducer;

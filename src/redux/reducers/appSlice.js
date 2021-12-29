@@ -16,12 +16,15 @@ export const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
+    // Setting up steps as user proceeds further.
     setCurrentStep: (state, action) => {
       state.currentStep = action.payload;
     },
+    // Setting error if error occurs.
     setError: (state, action) => {
       state.error = action.payload;
     },
+    // This helps in openig up the help section.
     setHelpModalVisisbility: (state, action) => {
       state.helpModalVisisbility = action.payload;
     },
