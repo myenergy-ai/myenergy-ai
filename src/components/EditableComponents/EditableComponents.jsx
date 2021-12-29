@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { Input, Form } from "antd";
 import "./EditableComponents.css";
+import { useDispatch } from "react-redux";
+import { setError } from "../../redux/reducers/appSlice";
 
 const EditableContext = React.createContext(null);
 
@@ -29,6 +31,7 @@ export const EditableCell = ({
   const [editing, setEditing] = useState(false);
   const inputRef = useRef(null);
   const form = useContext(EditableContext);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (editing) {
       inputRef.current.focus();
@@ -48,7 +51,7 @@ export const EditableCell = ({
       toggleEdit();
       handleSave({ ...record, ...values });
     } catch (errInfo) {
-      console.log("Save failed:", errInfo);
+      dispatch(setError("Save failed:", errInfo));
     }
   };
 

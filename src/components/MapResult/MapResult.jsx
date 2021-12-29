@@ -66,6 +66,7 @@ const MapResult = () => {
   return (
     <div className="map-result">
       <Button
+        ghost
         className="map-result-back-button"
         onClick={() => dispatch(setCurrentStep(3))}
       >

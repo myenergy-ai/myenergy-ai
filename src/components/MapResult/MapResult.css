@@ -6,7 +6,7 @@
 .map-result-back-button {
   width: fit-content;
   position: absolute;
-  bottom: 1rem;
+  bottom: 2.5rem;
   right: 1rem;
   color: black;
   z-index: 100;
