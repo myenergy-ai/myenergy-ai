@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
  */
 const initialState = {
   locationData: null,
-  carbonCostData: null,
+  dataToMap: null,
 };
 
 /**
@@ -15,21 +15,23 @@ export const dataSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
+    // Setting up location data uploaded by the user.
     setLocationData: (state, action) => {
       state.locationData = action.payload;
     },
-    setCarbonCostData: (state, action) => {
-      state.carbonCostData = action.payload;
+    // Setting up data for showing in the map.
+    setDataToMap: (state, action) => {
+      state.dataToMap = action.payload;
     },
   },
 });
 
-export const { setLocationData, setCarbonCostData } = dataSlice.actions;
+export const { setLocationData, setDataToMap } = dataSlice.actions;
 
 /**
  * Selectors for acessing data in the components
  */
 export const selectLocationData = (state) => state.data.locationData;
-export const selectCarbonCostData = (state) => state.data.carbonCostData;
+export const selectDataToMap = (state) => state.data.dataToMap;
 
 export default dataSlice.reducer;

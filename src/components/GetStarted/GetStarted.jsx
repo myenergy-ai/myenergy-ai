@@ -14,7 +14,8 @@ const GetStarted = () => {
         <div className="get-started-main flex  justify-between align-items-top flex-column">
           <h1>Hi there!</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat
+            This is an application made for calculating the carbon emitted while
+            travelling.
           </p>
         </div>
         <div className="user-steps-info flex">

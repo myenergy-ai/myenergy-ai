@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { setCurrentStep, setError } from "../../redux/reducers/appSlice";
 import { setLocationData } from "../../redux/reducers/dataSlice";
 import "./InputModal.css";
+import carbonCostInitialData from "../../lib/carbonCostInitialData";
+import { addTravelMode } from "../../redux/reducers/carbonCostSlice";
 
 const InputModal = () => {
   const dispatch = useDispatch();
@@ -45,6 +47,7 @@ const InputModal = () => {
    * function for scanning the data and storing it to redux store
    */
   let locationData = [];
+  const modeOfTransport = new Set();
   const handleFileScanOrCancel = () => {
     /**
      * For cancelling processing
@@ -85,6 +88,13 @@ const InputModal = () => {
            * For each item collect only required fields
            */
           fileData.map((item) => {
+            if (
+              item.activitySegment.activityType === "UNKNOWN_ACTIVITY_TYPE" ||
+              item.activitySegment.activityType === "WALKING" ||
+              !item.activitySegment.distance
+            )
+              return item;
+            modeOfTransport.add(item.activitySegment.activityType);
             locationData.push({
               key: locationData.length + 1,
               startLatitude:
@@ -111,7 +121,7 @@ const InputModal = () => {
            * Checking if this is the last fie if so push the data to redux store and move to next step
            */
           if (index === files.length - 1) {
-            locationData = locationData.filter((data) => data.distance);
+            sortCarbonCostData();
             dispatch(setLocationData(locationData));
             cleanUpData();
             dispatch(setCurrentStep(1));
@@ -125,6 +135,16 @@ const InputModal = () => {
       dispatch(setError(error.message));
       dispatch(setLocationData(null));
     }
+  };
+
+  /**
+   * Function to filter out carbon cost and show only selected modes of transport.
+   */
+  const sortCarbonCostData = () => {
+    const newCarbonCostData = carbonCostInitialData.filter((mode) =>
+      modeOfTransport.has(mode.modeName)
+    );
+    dispatch(addTravelMode(newCarbonCostData));
   };
 
   /**
