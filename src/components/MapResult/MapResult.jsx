@@ -37,8 +37,6 @@ const MapResult = () => {
           { name: "endTimestamp", type: "time" },
           { name: "distance", type: "int" },
           { name: "activityType", type: "string" },
-          { name: "activityConfidence", type: "string" },
-          { name: "activityProbability", type: "float" },
           { name: "carbonCost", type: "int" },
         ],
         rows: data[mode].map((row) => Object.values(row)),

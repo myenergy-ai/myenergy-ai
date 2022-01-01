@@ -13,7 +13,7 @@ import {
 import { setCurrentStep } from "../../redux/reducers/appSlice";
 import { merge } from "../../lib/mergeRangeArrays";
 import Checkbox from "antd/lib/checkbox/Checkbox";
-import removeAllWorkingHours from "../../lib/removeAllWorkingHours";
+import { noWorkingHours } from "../../lib/workingHoursData";
 
 const WorkHours = () => {
   const dispatch = useDispatch();
@@ -141,7 +141,7 @@ const WorkHours = () => {
           pagination={false}
           columns={columns}
           // Show table data only when user has enabled hours and days filter.
-          dataSource={checked ? removeAllWorkingHours : workingTimes}
+          dataSource={checked ? noWorkingHours : workingTimes}
         />
         <Checkbox checked={checked} onChange={handleRemoveFilter}>
           Want to include all the data

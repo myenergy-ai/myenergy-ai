@@ -98,19 +98,6 @@ const FinalResult = () => {
       width: 170,
     },
     {
-      title: "Activity Confidence",
-      dataIndex: "activityConfidence",
-      key: "actConf",
-      width: 140,
-    },
-    {
-      title: "Activity Probability",
-      dataIndex: "activityProbability",
-      key: "actProb",
-      width: 140,
-      render: (text) => <span>{text.toFixed(3)}</span>,
-    },
-    {
       title: "Carbon Cost",
       dataIndex: "carbonCost",
       key: "carbonCost",
@@ -359,6 +346,8 @@ const FinalResult = () => {
           }
         });
 
+        const hasDistance = data.distance;
+
         return (
           /**
            * If in working days
@@ -372,7 +361,8 @@ const FinalResult = () => {
           /**
            * Not in to be excluded range.
            */
-          !toExclude
+          !toExclude &&
+          hasDistance
         );
       });
     }
@@ -386,10 +376,11 @@ const FinalResult = () => {
          */
         return {
           ...data,
-          carbonCost:
-            (data.distance / 1000) *
-            carbonCostData.find((item) => item.modeName === data.activityType)
-              ?.carbonCost,
+          carbonCost: data.distance
+            ? (data.distance / 1000) *
+              carbonCostData.find((item) => item.modeName === data.activityType)
+                ?.carbonCost
+            : 0,
         };
       }
     );

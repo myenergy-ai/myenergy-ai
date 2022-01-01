@@ -21,7 +21,7 @@ export const merge = (string) => {
             const date = new Date(hour);
             return `${date.getFullYear()}/${
               date.getMonth() < 8
-                ? "0" + date.getMonth() + 1
+                ? "0" + (date.getMonth() + 1)
                 : date.getMonth() + 1
             }/${date.getDate() < 9 ? "0" + date.getDate() : date.getDate()}`;
           })

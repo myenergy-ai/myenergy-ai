@@ -7,6 +7,21 @@ import { setLocationData } from "../../redux/reducers/dataSlice";
 import "./InputModal.css";
 import carbonCostInitialData from "../../lib/carbonCostInitialData";
 import { addTravelMode } from "../../redux/reducers/carbonCostSlice";
+import {
+  DATA_OBJECT_BASE_KEY,
+  DISTANCE_OBJECT_NAME,
+  END_LOCATION_FIELD_NAME,
+  END_LOCATION_OBJECT_NAME,
+  END_TIME_FIELD_NAME,
+  FIELD_THAT_HAS_TRAVEL_DATA,
+  INPUT_FILE_TYPES,
+  LOCATION_LAT_LAN_DIVIDE_FACTOR,
+  MODE_OF_TRANSPORT_OBJECT_NAME,
+  START_LOCATION_FIELD_NAME,
+  START_LOCATION_OBJECT_NAME,
+  START_TIME_FIELD_NAME,
+  TIME_OBJECT_NAME,
+} from "../../constants/fields";
 
 const InputModal = () => {
   const dispatch = useDispatch();
@@ -38,7 +53,7 @@ const InputModal = () => {
   const props = {
     onChange: handleChange,
     multiple: true,
-    accept: ".json",
+    accept: INPUT_FILE_TYPES,
     beforeUpload: stopFromUploading,
     fileList: files,
   };
@@ -68,50 +83,83 @@ const InputModal = () => {
           /**
            * Checking if the data has the field which is required for the processing.
            */
-          if (!JSON.parse(e.target.result).hasOwnProperty("timelineObjects")) {
-            cleanUpData();
-            dispatch(
-              setError(
-                "Please select only those files that are named by year followed by month given by Google."
-              )
+          let arrayObjectField = checkForAavailableFieldsInObject(
+            e.target.result
+          );
+          if (arrayObjectField === "") {
+            setErrorMessage(
+              "Please select only those files that are named by year followed by month given by Google."
             );
             return;
           }
           /**
            * Filtering out only travel data and rejecting other data
            */
-          const fileData = JSON.parse(e.target.result).timelineObjects.filter(
-            (file) => file.activitySegment
-          );
-
+          let objectKeyThatHasTravelData = "";
+          const fileData = JSON.parse(e.target.result)[
+            arrayObjectField
+          ]?.filter((file) => {
+            let hasData = false;
+            FIELD_THAT_HAS_TRAVEL_DATA.forEach((key) => {
+              if (file[key]) {
+                hasData = true;
+                objectKeyThatHasTravelData = key;
+              }
+              return key;
+            });
+            return hasData;
+          });
           /**
            * For each item collect only required fields
            */
-          fileData.map((item) => {
-            if (
-              item.activitySegment.activityType === "UNKNOWN_ACTIVITY_TYPE" ||
-              item.activitySegment.activityType === "WALKING" ||
-              !item.activitySegment.distance
-            )
-              return item;
-            modeOfTransport.add(item.activitySegment.activityType);
+          let dataTypeIndex = -1;
+          START_LOCATION_OBJECT_NAME.map((value, index) => {
+            if (fileData[0][objectKeyThatHasTravelData].hasOwnProperty(value)) {
+              dataTypeIndex = index;
+            }
+            return value;
+          });
+          fileData?.map((item) => {
+            modeOfTransport.add(
+              item[objectKeyThatHasTravelData][
+                MODE_OF_TRANSPORT_OBJECT_NAME[dataTypeIndex]
+              ]
+            );
             locationData.push({
               key: locationData.length + 1,
               startLatitude:
-                item.activitySegment.startLocation.latitudeE7 / 10000000,
+                item[objectKeyThatHasTravelData][
+                  START_LOCATION_OBJECT_NAME[dataTypeIndex]
+                ][START_LOCATION_FIELD_NAME[dataTypeIndex]] /
+                LOCATION_LAT_LAN_DIVIDE_FACTOR,
               startLongitude:
-                item.activitySegment.startLocation.longitudeE7 / 10000000,
+                item[objectKeyThatHasTravelData][
+                  START_LOCATION_OBJECT_NAME[dataTypeIndex]
+                ][END_LOCATION_FIELD_NAME[dataTypeIndex]] /
+                LOCATION_LAT_LAN_DIVIDE_FACTOR,
               endLatitude:
-                item.activitySegment.endLocation.latitudeE7 / 10000000,
+                item[objectKeyThatHasTravelData][
+                  END_LOCATION_OBJECT_NAME[dataTypeIndex]
+                ][START_LOCATION_FIELD_NAME[dataTypeIndex]] /
+                LOCATION_LAT_LAN_DIVIDE_FACTOR,
               endLongitude:
-                item.activitySegment.endLocation.longitudeE7 / 10000000,
-              startTimestamp: item.activitySegment.duration.startTimestampMs,
-              endTimestamp: item.activitySegment.duration.endTimestampMs,
-              distance: item.activitySegment.distance,
-              activityType: item.activitySegment.activityType,
-              activityConfidence: item.activitySegment.confidence,
-              activityProbability:
-                item.activitySegment.activities[0].probability,
+                item[objectKeyThatHasTravelData][
+                  END_LOCATION_OBJECT_NAME[dataTypeIndex]
+                ][END_LOCATION_FIELD_NAME[dataTypeIndex]] /
+                LOCATION_LAT_LAN_DIVIDE_FACTOR,
+              startTimestamp:
+                item[objectKeyThatHasTravelData][
+                  TIME_OBJECT_NAME[dataTypeIndex]
+                ][START_TIME_FIELD_NAME[dataTypeIndex]],
+              endTimestamp:
+                item[objectKeyThatHasTravelData][
+                  TIME_OBJECT_NAME[dataTypeIndex]
+                ][END_TIME_FIELD_NAME[dataTypeIndex]],
+              distance: item[objectKeyThatHasTravelData][DISTANCE_OBJECT_NAME],
+              activityType:
+                item[objectKeyThatHasTravelData][
+                  MODE_OF_TRANSPORT_OBJECT_NAME[dataTypeIndex]
+                ],
               carbonCost: 0,
             });
             return item;
@@ -131,10 +179,25 @@ const InputModal = () => {
         return file;
       });
     } catch (error) {
-      cleanUpData();
-      dispatch(setError(error.message));
-      dispatch(setLocationData(null));
+      setErrorMessage(error.message);
     }
+  };
+
+  const setErrorMessage = (message) => {
+    cleanUpData();
+    dispatch(setError(message));
+  };
+
+  const checkForAavailableFieldsInObject = (data) => {
+    let objectKey = "";
+    const objectData = JSON.parse(data);
+    DATA_OBJECT_BASE_KEY.map((field) => {
+      if (objectData.hasOwnProperty(field)) {
+        objectKey = field;
+      }
+      return field;
+    });
+    return objectKey;
   };
 
   /**
