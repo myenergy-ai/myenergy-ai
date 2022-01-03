@@ -10,21 +10,22 @@ import {
   setError,
 } from "../../redux/reducers/appSlice";
 import { useDispatch } from "react-redux";
+import { LOCATION_DATA_STEP } from "../../constants/stepConstants";
 
 const ErrorModal = () => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
 
-  const handleStateChange = () => {
+  const handleExit = () => {
     dispatch(setError(""));
-    dispatch(setCurrentStep(0));
+    dispatch(setCurrentStep(LOCATION_DATA_STEP));
   };
 
   return (
     <Modal
       visible={error !== ""}
-      onOk={handleStateChange}
-      onCancel={handleStateChange}
+      onOk={handleExit}
+      onCancel={handleExit}
       cancelButtonProps={{ type: "default" }}
       okButtonProps={{ type: "danger" }}
       okText="Yes, proceed"

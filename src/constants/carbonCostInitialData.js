@@ -2,7 +2,7 @@
  * Initial data used to filter out Modes of transport given by the google take away.
  */
 
-const data = [
+const modeOfTransport = [
   {
     key: 1,
     travelMode: "Plane",
@@ -33,6 +33,18 @@ const data = [
     carbonCost: 0.103,
     modeName: "MOTORCYCLING",
   },
+  {
+    key: 5,
+    travelMode: "Walk",
+    carbonCost: 0,
+    modeName: "WALKING",
+  },
+  {
+    key: 5,
+    travelMode: "Unknown",
+    carbonCost: 0,
+    modeName: "UNKNOWN_ACTIVITY_TYPE",
+  },
 ];
 
-export default data;
+export default modeOfTransport;

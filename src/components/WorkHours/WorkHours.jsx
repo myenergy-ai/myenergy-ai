@@ -13,62 +13,44 @@ import {
 import { setCurrentStep } from "../../redux/reducers/appSlice";
 import { merge } from "../../lib/mergeRangeArrays";
 import Checkbox from "antd/lib/checkbox/Checkbox";
-import { noWorkingHours } from "../../lib/workingHoursData";
+import { noWorkingHours } from "../../constants/workingHoursData";
+import { workHoursTableColumns } from "../../constants/tableColumnsInfo";
 
 const WorkHours = () => {
   const dispatch = useDispatch();
+
+  const includeAllHoursAndDays = useSelector(selectIncludeAllHoursAndDays);
   const workingTimes = useSelector(selectWorkingHours);
 
-  // components to make row and cell editable
-  const components = {
+  const [checked, setChecked] = useState(includeAllHoursAndDays);
+
+  const componentForEachCellInTable = {
     body: {
       cell: DateTimeRangePicker,
     },
   };
 
-  // reset values to default
-  const handleReset = () => {
+  const resetDataToDefaultValue = () => {
     dispatch(resetWorkingHours());
     setChecked(false);
   };
 
-  // update working times
-  const handleSave = (row) => {
+  const saveDataAfterUpdatingCellValue = (row) => {
     const newHours = JSON.parse(JSON.stringify(row));
     dispatch(updateWorkingTime(merge(newHours)));
   };
 
-  // on cancel go to previous step
-  const handleCancel = () => {
+  const cancelAndPrevious = () => {
     dispatch(resetWorkingHours());
     dispatch(setCurrentStep(1));
   };
 
-  // on update go to next step
-  const handleUpdateWorkHours = () => {
+  const saveAndNext = () => {
     dispatch(setIncludeAllHoursAndDays(checked));
     dispatch(setCurrentStep(3));
   };
 
-  const columnConfig = [
-    {
-      title: "Day",
-      dataIndex: "day",
-      key: "day",
-      width: "50%",
-    },
-    {
-      title: "Working Times",
-      dataIndex: "workingTime",
-      key: "workingTimes",
-      editable: true,
-      required: false,
-      type: "date-time",
-    },
-  ];
-
-  // column config that are being passed to EditableCell component as props
-  const columns = columnConfig.map((column) => ({
+  const columnsOfTheTable = workHoursTableColumns.map((column) => ({
     ...column,
     onCell: (record) => ({
       record,
@@ -76,29 +58,16 @@ const WorkHours = () => {
       dataIndex: column.dataIndex,
       title: column.title,
       type: column.type,
-      handleSave,
+      handleSave: saveDataAfterUpdatingCellValue,
     }),
   }));
 
-  /**
-   * Used to tract whether user wants to add filter of days and hours.
-   */
-  const includeAllHoursAndDays = useSelector(selectIncludeAllHoursAndDays);
-
-  /**
-   * Function to handle change of check box.
-   */
-  const handleRemoveFilter = () => {
+  const removeAllHoursAndDateRanges = () => {
     setChecked(!checked);
   };
-  /**
-   * This is required as checkbox needs a local useState for tracking the value of the state.
-   */
-  const [checked, setChecked] = useState(includeAllHoursAndDays);
 
   return (
     <div className="work-hours-container">
-      {/* top-div start */}
       <div className="work-hours-top">
         <h2 className="work-hours-heading">Set Work Hours</h2>
         <p className="work-hours-info">
@@ -130,38 +99,30 @@ const WorkHours = () => {
           final line. Use yyyy/mm/dd format to start and end the included dates.
         </p>
       </div>
-      {/* top-div end */}
-
-      {/* table-div start */}
       <div className="work-hours-table">
         <Table
           bordered
           size="small"
-          components={components}
+          components={componentForEachCellInTable}
           pagination={false}
-          columns={columns}
-          // Show table data only when user has enabled hours and days filter.
+          columns={columnsOfTheTable}
           dataSource={checked ? noWorkingHours : workingTimes}
         />
-        <Checkbox checked={checked} onChange={handleRemoveFilter}>
+        <Checkbox checked={checked} onChange={removeAllHoursAndDateRanges}>
           Want to include all the data
         </Checkbox>
       </div>
-      {/* table-div end */}
-
-      {/* actions-div start */}
       <div className="work-hours-actions">
-        <Button type="primary" onClick={handleReset}>
+        <Button type="primary" onClick={resetDataToDefaultValue}>
           Reset to default
         </Button>
-        <Button type="primary" onClick={handleCancel}>
+        <Button type="primary" onClick={cancelAndPrevious}>
           Cancel
         </Button>
-        <Button type="primary" onClick={handleUpdateWorkHours}>
+        <Button type="primary" onClick={saveAndNext}>
           Save & Next
         </Button>
       </div>
-      {/* actions-div end */}
     </div>
   );
 };

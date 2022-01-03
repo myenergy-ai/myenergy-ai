@@ -10,15 +10,14 @@ import "./StepsSidebar.css";
 import { useEffect, useState } from "react";
 
 const StepsSidebar = () => {
+  const dispatch = useDispatch();
+
   const [width, setWidth] = useState(window.innerWidth);
 
   const { Step } = Steps;
 
   const current = useSelector(selectCurrentStep);
-
   const error = useSelector(selectError);
-
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     dispatch(setCurrentStep(e));

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {initialWorkingHours} from "../../lib/workingHoursData"
+import { initialWorkingHours } from "../../constants/workingHoursData";
 
 const initialState = {
   workingTimes: initialWorkingHours,

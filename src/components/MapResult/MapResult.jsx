@@ -8,99 +8,44 @@ import { setCurrentStep, setError } from "../../redux/reducers/appSlice";
 import "./MapResult.css";
 import { Button } from "antd";
 import { selectCarbonCost } from "../../redux/reducers/carbonCostSlice";
+import { FINAL_RESULT_STEP } from "../../constants/stepConstants";
+import { mapResultDataFields } from "../../constants/tableColumnsInfo";
+import {
+  createDataSetBasedOnModeOfTransport,
+  createLayersBasedOnModeOfTransport,
+} from "../../lib/createLayers";
 
 const MapResult = () => {
-  /**
-   * Data for showing on the map.
-   */
-  const data = useSelector(selectDataToMap);
-
-  /**
-   * used to get the name of the mode of transport user has entered.
-   */
-  const carbonCost = useSelector(selectCarbonCost);
   const dispatch = useDispatch();
+
+  const data = useSelector(selectDataToMap);
+  const carbonCost = useSelector(selectCarbonCost);
 
   useEffect(() => {
     try {
-      /**
-       * Data format for the kepler.gl
-       */
       const carbonCostData = Object.keys(data).map((mode) => ({
-        fields: [
-          { name: "key", type: "int" },
-          { name: "startLatitude", type: "float" },
-          { name: "startLongitude", type: "float" },
-          { name: "endLatitude", type: "float" },
-          { name: "endLongitude", type: "float" },
-          { name: "startTimestamp", type: "time" },
-          { name: "endTimestamp", type: "time" },
-          { name: "distance", type: "int" },
-          { name: "activityType", type: "string" },
-          { name: "carbonCost", type: "int" },
-        ],
+        fields: mapResultDataFields,
         rows: data[mode].map((row) => Object.values(row)),
       }));
 
-      /**
-       * Adding different layers to the map as per the mode of transports.
-       */
-      const layers = Object.keys(data).map((mode) => ({
-        id: mode,
-        type: "arc",
-        config: {
-          dataId: mode,
-          label: carbonCost.find(
-            (modeOfTransport) => modeOfTransport.modeName === mode
-          ).travelMode,
-          columns: {
-            lat0: "startLatitude",
-            lng0: "startLongitude",
-            lat1: "endLatitude",
-            lng1: "endLongitude",
-          },
-          isVisible: true,
-          hidden: false,
-        },
-        visualChannels: {
-          colorField: {
-            name: "carbonCost",
-            type: "integer",
-          },
-        },
-      }));
-
-      const config = {
-        version: "v1",
-        config: {
-          visState: {
-            layers: layers,
-          },
-        },
-      };
-
-      /**
-       * Sorting the data as per the mode of transport.
-       */
-      const dataSet = Object.keys(data).map((mode, index) => ({
-        info: {
-          label: carbonCost.find(
-            (modeOfTransport) => modeOfTransport.modeName === mode
-          ).travelMode,
-          id: mode,
-        },
-        data: carbonCostData[index],
-      }));
-      /**
-       * Adding data to kepler.gl map.
-       */
       dispatch(
         addDataToMap({
-          datasets: dataSet,
+          datasets: createDataSetBasedOnModeOfTransport(
+            data,
+            carbonCostData,
+            carbonCost
+          ),
           option: {
             centerMap: true,
           },
-          config: config,
+          config: {
+            version: "v1",
+            config: {
+              visState: {
+                layers: createLayersBasedOnModeOfTransport(data, carbonCost),
+              },
+            },
+          },
         })
       );
     } catch (error) {
@@ -116,7 +61,7 @@ const MapResult = () => {
         className="map-result-back-button"
         onClick={() => {
           dispatch(setDataToMap(null));
-          dispatch(setCurrentStep(3));
+          dispatch(setCurrentStep(FINAL_RESULT_STEP));
         }}
       >
         Go Back
