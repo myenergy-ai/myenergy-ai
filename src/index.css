@@ -9,8 +9,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Lato", sans-serif;
+  font-family: 'Noto Sans', sans-serif;
 }
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -20,6 +21,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  text-transform: capitalize;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700 !important;
+}
+
+h2 {
+  font-size: 1.7rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+p {
+  font-size: 0.9rem;
+}
+
 
 .flex {
   display: flex;

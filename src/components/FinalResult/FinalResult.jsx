@@ -240,7 +240,7 @@ const FinalResult = () => {
               </h3>
             </div>
             <div className="final-result-total-carbon">
-              <h2>This set of results uses the Carbon Costs</h2>
+              <h3>This set of results uses the Carbon Costs</h3>
               <Table
                 columns={costPerModeTableColumns}
                 dataSource={carbonCostData}
@@ -251,7 +251,7 @@ const FinalResult = () => {
               <div className="final-result-total-carbon-buttons flex justify-end">
                 {carbonCostFinalData.length > 1 && (
                   <Button type="primary" onClick={moveToMap}>
-                    Map Results
+                    Visualize Results
                   </Button>
                 )}
                 {carbonCostFinalData.length > 1 && (
@@ -261,7 +261,7 @@ const FinalResult = () => {
                       downloadFile(carbonCostFinalData);
                     }}
                   >
-                    Just download results as CSV
+                    Download as CSV
                   </Button>
                 )}
               </div>

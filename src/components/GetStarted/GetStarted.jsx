@@ -40,10 +40,10 @@ const GetStarted = () => {
       <div className="get-started flex justify-between">
         <div className="get-started-content">
           <div className="get-started-main flex  justify-between align-items-top flex-column">
-            <h1>Hi there!</h1>
+            <h1>Analyze your personal energy data</h1>
             <p>
-              This is an application made for calculating the carbon emitted
-              while travelling.
+              Myenergy.ai is an opensource tool that democratizes the analysis
+              of personal energy data through 4 simple steps.
             </p>
           </div>
           <div className="user-steps-info flex">
