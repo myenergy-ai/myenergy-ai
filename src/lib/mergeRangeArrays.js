@@ -40,7 +40,7 @@ export const merge = (string) => {
 
     string.workingTime = result
       .map((range) =>
-        range.map((hour) => (hour < 1000 ? `0${hour}` : hour)).join("-")
+        range.map((hour) => hour.toString().padStart(4, "0")).join("-")
       )
       .join(" ; ");
   }

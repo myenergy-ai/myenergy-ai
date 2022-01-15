@@ -40,7 +40,7 @@ const FinalResult = () => {
 
   const totalCost = carbonCostFinalData
     ?.reduce((prev, curr) => prev + curr.carbonCost, 0)
-    .toFixed(3);
+    .toFixed(2);
 
   const moveToPreviousStep = () => {
     dispatch(setDataToMap(null));
@@ -237,7 +237,7 @@ const FinalResult = () => {
               />
               <h3>
                 Total Carbon Footprint for this time period:{" "}
-                <span>{totalCost}</span>
+                <span>{totalCost}kg</span>
               </h3>
             </div>
             <div className="final-result-total-carbon">

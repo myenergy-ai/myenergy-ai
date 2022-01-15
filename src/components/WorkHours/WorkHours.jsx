@@ -72,33 +72,18 @@ const WorkHours = () => {
     <div className="work-hours-container">
       <div className="work-hours-top">
         <h2 className="work-hours-heading">Set Work Hours</h2>
+
         <p className="work-hours-info">
-          All travels outside these hours will be excluded
-        </p>
-        <p className="work-hours-info">
-          For maximum flexibility, and to allow the exclusion of lunch and other
-          breaks, the times are set in this format:
-        </p>
-        <p className="work-hours-info time-format">
-          <b>
-            Morning Start - Morning End ; Afternoon Start - Afternoon End; etc.
-          </b>
-        </p>
-        <p className="work-hours-info">
-          Semicolons can be used to separate work periods. All times are in 24h
-          format.
-        </p>
-        <p className="work-hours-info">
-          Leave days blank if the whole day should be excluded.
-        </p>
-        <p className="work-hours-info">
-          0000 is the start of the day, 2259 is the end. The system will
-          automatically round any remaining seconds downwards to the nearest
-          minute.
-        </p>
-        <p className="work-hours-info">
-          You can exclude whole data ranges (for instance for holidays) in the
-          final line. Use yyyy/mm/dd format to start and end the included dates.
+          Work hours is used to set the hours for which you want to include the
+          travel data. For each day of the week you can customize the hours. You
+          can add a new and update or remove the existing hours. If you wish to
+          exclude the whole day remove all the ranges from that day. For
+          removing a range of dates from your travel data update the Date ranges
+          to exclude by setting the start and end dates. To include all the
+          travel data check the box at bottom which says Want to include all the
+          data. <br />
+          Note: The dates or hours range would be merged if you select
+          overlapping ranges.
         </p>
       </div>
       <div className="work-hours-table">
