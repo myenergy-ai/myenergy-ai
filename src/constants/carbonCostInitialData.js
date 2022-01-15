@@ -33,18 +33,6 @@ const modeOfTransport = [
     carbonCost: 0.103,
     modeName: "MOTORCYCLING",
   },
-  {
-    key: 5,
-    travelMode: "Walk",
-    carbonCost: 0,
-    modeName: "WALKING",
-  },
-  {
-    key: 5,
-    travelMode: "Unknown",
-    carbonCost: 0,
-    modeName: "UNKNOWN_ACTIVITY_TYPE",
-  },
 ];
 
 export default modeOfTransport;

@@ -1,26 +1,41 @@
-import { UploadOutlined } from "@ant-design/icons";
-import { Button, Upload } from "antd";
+import {
+  InboxOutlined,
+  GoogleOutlined,
+  AppleOutlined,
+} from "@ant-design/icons";
+import { Button, message, Popover } from "antd";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCurrentStep, setError } from "../../redux/reducers/appSlice";
+import {
+  setCurrentStep,
+  setError,
+  setHelpModalVisisbility,
+} from "../../redux/reducers/appSlice";
 import { setLocationData } from "../../redux/reducers/dataSlice";
 import "./InputModal.css";
 import carbonCostInitialData from "../../constants/carbonCostInitialData";
 import { addTravelMode } from "../../redux/reducers/carbonCostSlice";
 import handleDataParsing from "../../lib/handleReadingFiles";
+import Dragger from "antd/lib/upload/Dragger";
+import waze from "../../assets/waze.svg";
 
 const InputModal = () => {
   const dispatch = useDispatch();
 
   let locationData = [];
   const modeOfTransport = new Set();
+  const notIncludingModesOfTransport = new Set();
 
   const [files, setFiles] = useState([]);
   const [processing, setProcessing] = useState(false);
 
   const addOrRemoveFileFromProcessing = (info) => {
-    const newFiles = [...info.fileList];
-    setFiles(newFiles);
+    const uniqueFiles = info.fileList.filter(
+      (value, index, self) =>
+        index ===
+        self.findIndex((t) => t.name === value.name && t.size === value.size)
+    );
+    setFiles(uniqueFiles);
   };
 
   const props = {
@@ -49,14 +64,23 @@ const InputModal = () => {
             e.target.result,
             setErrorMessage,
             modeOfTransport,
-            locationData
+            locationData,
+            notIncludingModesOfTransport
           );
 
           if (index === files.length - 1) {
-            sortCarbonCostDataBasedOnModeOfTransportInDataFiles();
-            dispatch(setLocationData(locationData));
-            cleanUpData();
-            dispatch(setCurrentStep(1));
+            if (locationData.length > 1) {
+              if (notIncludingModesOfTransport.size > 0) {
+                warning();
+              }
+              sortCarbonCostDataBasedOnModeOfTransportInDataFiles();
+              dispatch(setLocationData(locationData));
+              cleanUpData();
+              dispatch(setCurrentStep(1));
+            } else {
+              error();
+              cleanUpData();
+            }
           }
         };
         reader.readAsText(file.originFileObj);
@@ -85,15 +109,37 @@ const InputModal = () => {
     locationData = [];
   };
 
+  const error = () => {
+    setErrorMessage(
+      "No valid data found. Please check the format of the data or upload google takeaway data which are of 2019 and onwards."
+    );
+  };
+
+  const warning = () => {
+    message.warning(
+      `We only support 'FLYING IN_BUS IN_TRAIN IN_PASSENGER_VEHICLE MOTORCYCLING' travel modes. So your travel datas including '${new Array(
+        ...notIncludingModesOfTransport
+      ).join(" ")}' as travel modes are skipped.`
+    );
+  };
+
+  const comingSoon = <p>Coming Soon...</p>;
+
   return (
     <div className="input-modal flex flex-column align-center">
-      <h2>{!processing ? "Upload file" : "Processing result..."}</h2>
+      <h2>{!processing ? "Upload travel history" : "Processing result..."}</h2>
       {!processing && (
-        <Upload {...props} fileList={files}>
-          <Button type="primary" icon={<UploadOutlined />}>
-            Upload
-          </Button>
-        </Upload>
+        <Dragger {...props} fileList={files}>
+          <p className="ant-upload-drag-icon">
+            <InboxOutlined />
+          </p>
+          <p className="ant-upload-text">
+            Click or drag file to this area to upload
+          </p>
+          <p className="ant-upload-hint">
+            Support for a single or bulk upload.
+          </p>
+        </Dragger>
       )}
       <Button
         disabled={files.length < 1}
@@ -102,6 +148,18 @@ const InputModal = () => {
       >
         {!processing ? "Next" : "Cancel"}
       </Button>
+      <div className="flex supported-platforms">
+        <p>Supported platforms:</p>
+        <GoogleOutlined
+          onClick={() => dispatch(setHelpModalVisisbility(true))}
+        />
+        <Popover content={comingSoon}>
+          <AppleOutlined />
+        </Popover>
+        <Popover content={comingSoon}>
+          <img className="waze-icon" src={waze} alt="" />
+        </Popover>
+      </div>
     </div>
   );
 };

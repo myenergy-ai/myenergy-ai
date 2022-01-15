@@ -14,6 +14,7 @@ import { setCurrentStep } from "../../redux/reducers/appSlice";
 import { merge } from "../../lib/mergeRangeArrays";
 import Checkbox from "antd/lib/checkbox/Checkbox";
 import { noWorkingHours } from "../../constants/workingHoursData";
+import { setLocationData } from "../../redux/reducers/dataSlice";
 import { workHoursTableColumns } from "../../constants/tableColumnsInfo";
 
 const WorkHours = () => {
@@ -42,6 +43,7 @@ const WorkHours = () => {
 
   const cancelAndPrevious = () => {
     dispatch(resetWorkingHours());
+    dispatch(setLocationData(null));
     dispatch(setCurrentStep(1));
   };
 

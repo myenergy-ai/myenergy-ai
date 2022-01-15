@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import logo from "../../assets/logo5.jpeg";
 import { useNavigate } from "react-router";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { QuestionCircleOutlined, GithubOutlined } from "@ant-design/icons";
 import Help from "../Help/Help";
 import { useDispatch } from "react-redux";
 import { setHelpModalVisisbility } from "../../redux/reducers/appSlice";
@@ -25,10 +25,19 @@ const Navbar = () => {
             className="navbar-logo"
             alt="logo"
           />
-          <QuestionCircleOutlined
-            className="navbar-help flex"
-            onClick={handleOpenHelp}
-          />
+          <div>
+            <QuestionCircleOutlined
+              className="navbar-help flex"
+              onClick={handleOpenHelp}
+            />
+            <a
+              href="https://github.com/myenergy-ai/myenergy-ai"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <GithubOutlined className="navbar-github flex" />
+            </a>
+          </div>
         </div>
       </nav>
     </>

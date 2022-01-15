@@ -61,6 +61,7 @@ export const finalResultCarbonCostTableColumns = [
     dataIndex: "distance",
     key: "dist",
     width: 70,
+    render: (text) => <span>{text.toFixed(3)}</span>,
   },
   {
     title: "Activity Type",

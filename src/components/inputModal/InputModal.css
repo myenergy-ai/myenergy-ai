@@ -1,6 +1,6 @@
 .input-modal {
   background-color: var(--color-gray-white);
-  padding: 3rem 4rem;
+  padding: 3rem 2rem;
   width: 100%;
   height: 100%;
   display: flex;
@@ -12,18 +12,55 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 1rem;
+  width: 100%;
+  height: 90%;
+}
+
+.input-modal > span > .ant-upload-list {
+  overflow-y: scroll;
+  width: 100%;
+  height: 80%;
 }
 
 .input-modal > p {
   color: #ff4d4f;
 }
 
-.ant-upload-list {
-  max-height: 50vh;
-  overflow-y: scroll;
+.input-modal > span > .ant-upload-list::-webkit-scrollbar {
+  height: 0px;
+  width: 8px;
 }
 
-.ant-upload-list::-webkit-scrollbar {
-  display: none;
+.input-modal > span > .ant-upload-list::-webkit-scrollbar-track {
+  border-radius: 0;
+  background: #eeeeee;
+}
+
+.input-modal > span > .ant-upload-list::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: #b0b0b0;
+}
+
+.supported-platforms {
+  position: absolute;
+  bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.supported-platforms > p {
+  margin-bottom: 0 !important;
+  margin-right: 0.7rem;
+  font-weight: bold;
+}
+
+.supported-platforms > span {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.waze-icon {
+  width: 1.25rem;
+  cursor: pointer;
 }

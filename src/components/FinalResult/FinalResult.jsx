@@ -1,5 +1,5 @@
 import "./FinalResult.css";
-import { Table, Modal } from "antd";
+import { Table, Modal, Button } from "antd";
 import { useSelector } from "react-redux";
 import {
   selectLocationData,
@@ -43,6 +43,7 @@ const FinalResult = () => {
     .toFixed(3);
 
   const moveToPreviousStep = () => {
+    dispatch(setDataToMap(null));
     dispatch(setCurrentStep(WORKING_HOURS_STEP));
   };
 
@@ -57,11 +58,19 @@ const FinalResult = () => {
       return updatedLocationDataWithCarbonCost?.map((data) => ({
         ...data,
         carbonCost: data.distance
-          ? (data.distance / 1000) *
+          ? data.distance *
             carbonCostData.find((item) => item.modeName === data.activityType)
               ?.carbonCost
           : 0,
       }));
+    };
+
+    const removeTravelWithNoCarbonEmission = (
+      updatedLocationDataWithCarbonCost
+    ) => {
+      return updatedLocationDataWithCarbonCost.filter(
+        (travelData) => travelData.carbonCost > 0
+      );
     };
 
     let updatedLocationDataWithCarbonCost = locationData;
@@ -140,7 +149,7 @@ const FinalResult = () => {
         });
 
         let isEndTimeInWorkingHourRange = false;
-        endDayOfTravelWorkingHours?.forEach((hour) => {
+        endDayOfTravelWorkingHours?.hour.forEach((hour) => {
           if (hour[0] < endTimeOfTheTravel && hour[1] > endTimeOfTheTravel) {
             isEndTimeInWorkingHourRange = true;
             return;
@@ -157,6 +166,10 @@ const FinalResult = () => {
     }
 
     updatedLocationDataWithCarbonCost = updateCarbonCostForEachObject(
+      updatedLocationDataWithCarbonCost
+    );
+
+    updatedLocationDataWithCarbonCost = removeTravelWithNoCarbonEmission(
       updatedLocationDataWithCarbonCost
     );
 
@@ -236,17 +249,21 @@ const FinalResult = () => {
                 pagination={{ position: ["none", "none"] }}
               />
               <div className="final-result-total-carbon-buttons flex justify-end">
-                <button className="ant-btn ant-btn-primary" onClick={moveToMap}>
-                  Map Results
-                </button>
-                <button
-                  className="ant-btn ant-btn-primary"
-                  onClick={() => {
-                    downloadFile(carbonCostFinalData);
-                  }}
-                >
-                  Just download results as CSV
-                </button>
+                {carbonCostFinalData.length > 1 && (
+                  <Button type="primary" onClick={moveToMap}>
+                    Map Results
+                  </Button>
+                )}
+                {carbonCostFinalData.length > 1 && (
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      downloadFile(carbonCostFinalData);
+                    }}
+                  >
+                    Just download results as CSV
+                  </Button>
+                )}
               </div>
             </div>
           </div>

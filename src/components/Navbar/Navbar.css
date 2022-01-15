@@ -6,6 +6,11 @@
 .navbar-main {
   width: 95%;
 }
+
+.navbar-main > div {
+  margin: auto 0;
+}
+
 .navbar-logo {
   object-fit: contain;
   width: 8rem;
@@ -16,4 +21,11 @@
   font-size: 1.65rem;
   margin: auto 0px;
   cursor: pointer;
+}
+
+.navbar-github {
+  font-size: 1.65rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  color: #262626;
 }

@@ -30,13 +30,15 @@
 }
 
 .user-step > p {
-  margin-left: 0.25rem;
+  margin-left: 0.75rem;
   font-size: 1.2rem;
 }
 
 .get-started-button-box {
-  margin-left: auto;
-  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 3rem;
 }
 
 .get-started-button {
@@ -47,6 +49,16 @@
   color: #fff;
   border: none;
   cursor: pointer;
+  font-size: 1rem;
+}
+
+.data-policy-button {
+  border-radius: 4px;
+  height: fit-content;
+  width: fit-content;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  border: none;
   font-size: 1rem;
 }
 
