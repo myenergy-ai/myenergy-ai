@@ -81,7 +81,7 @@ const GetStarted = () => {
                   2
                 </Button>
 
-                <p>Adjust Cost</p>
+                <p>Adjust Carbon Footprint</p>
               </div>
               <div className="user-step flex">
                 <Button

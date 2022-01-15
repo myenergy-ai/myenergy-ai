@@ -70,7 +70,7 @@ export const finalResultCarbonCostTableColumns = [
     width: 170,
   },
   {
-    title: "Carbon Cost",
+    title: "Carbon Footprint",
     dataIndex: "carbonCost",
     key: "carbonCost",
     width: 100,
@@ -91,7 +91,7 @@ export const finalResultTravelModeTableColumns = [
     width: "60%",
   },
   {
-    title: "Carbon Cost:kg/person/km",
+    title: "Carbon Footpint:kg/person/km",
     dataIndex: "carbonCost",
     key: "carbonCost",
     width: "30%",
@@ -126,7 +126,7 @@ export const carbonCostTableColumns = [
     type: "text",
   },
   {
-    title: "Carbon Cost: kg/person/km",
+    title: "Carbon Footprint: kg/person/km",
     dataIndex: "carbonCost",
     key: "carbonCost",
     editable: true,

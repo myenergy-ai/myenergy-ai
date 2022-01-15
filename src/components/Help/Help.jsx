@@ -83,7 +83,7 @@ const Help = () => {
         <div className="help-steps">
           <p>
             <span>Upload travel data:</span> allows you to upload your travel
-            data for Carbon Cost calculation. It accepts Google location
+            data for Carbon Footprint calculation. It accepts Google location
             history, Waze History and Apple Location history. If it cannot work
             out how to format data it will tell you. You can upload multiple
             files - they will be merged into one large file. The system will
@@ -95,14 +95,14 @@ const Help = () => {
         </div>
         <div className="help-steps">
           <p>
-            <span>Adjust Carbon Cost:</span> allows you to change the Carbon
-            Cost Calculation or reset to default.
+            <span>Adjust Carbon Footprint:</span> allows you to change the
+            Carbon Footprint Calculation or reset to default.
           </p>
         </div>
         <div className="help-steps">
           <p>
             <span>Set Work Hours:</span> allows you to change the work hours for
-            each you want the system to calculate your Carbon Cost.
+            each you want the system to calculate your Carbon Footprint.
           </p>
         </div>
         <div className="help-steps">

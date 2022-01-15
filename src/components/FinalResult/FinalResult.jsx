@@ -200,7 +200,7 @@ const FinalResult = () => {
         <div className="final-result">
           <div className="final-result-container">
             <div className="final-result-header flex flex-column align-center">
-              <h2>Your Carbon Cost</h2>
+              <h2>Your Carbon Footprint</h2>
               <p>
                 {!includeAllHoursAndDays && "Work hours set to "}
                 {includeAllHoursAndDays
@@ -236,11 +236,12 @@ const FinalResult = () => {
                 scroll={{ x: window.innerWidth * 0.6, y: 400 }}
               />
               <h3>
-                Total Carbon Cost for this time period: <span>{totalCost}</span>
+                Total Carbon Footprint for this time period:{" "}
+                <span>{totalCost}</span>
               </h3>
             </div>
             <div className="final-result-total-carbon">
-              <h3>This set of results uses the Carbon Costs</h3>
+              <h3>This set of results uses the Carbon Footprints</h3>
               <Table
                 columns={costPerModeTableColumns}
                 dataSource={carbonCostData}
