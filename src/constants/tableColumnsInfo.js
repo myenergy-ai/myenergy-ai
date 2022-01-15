@@ -38,7 +38,7 @@ export const finalResultCarbonCostTableColumns = [
     title: "Start Time",
     dataIndex: "startTimestamp",
     key: "sTime",
-    width: 190,
+    width: 200,
     render: (text) => (
       <span>{`${new Date(parseInt(text)).toDateString()} ${new Date(
         parseInt(text)
@@ -49,7 +49,7 @@ export const finalResultCarbonCostTableColumns = [
     title: "End Time",
     dataIndex: "endTimestamp",
     key: "eTime",
-    width: 190,
+    width: 200,
     render: (text) => (
       <span>{`${new Date(parseInt(text)).toDateString()} ${new Date(
         parseInt(text)
@@ -73,7 +73,7 @@ export const finalResultCarbonCostTableColumns = [
     title: "Carbon Cost",
     dataIndex: "carbonCost",
     key: "carbonCost",
-    width: 90,
+    width: 100,
     fixed: "right",
     render: (text) => <span>{text.toFixed(3)}</span>,
     sorter: {

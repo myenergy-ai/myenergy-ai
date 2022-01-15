@@ -15,11 +15,12 @@ const Help = () => {
   const isVisible = useSelector(selectHelpModalVisisbility);
   return (
     <Modal
+      className="help"
       visible={isVisible}
       onCancel={handleCloseHelp}
       centered
       width={window.innerWidth * 0.75}
-      footer={[]}
+      footer={null}
     >
       <div className="help-container">
         <h2>Help</h2>

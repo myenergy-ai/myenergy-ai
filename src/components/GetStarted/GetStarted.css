@@ -36,9 +36,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-left: 3rem;
   margin-top: 1rem;
-  width: fit-content;
+  padding-right: 1rem;
 }
 
 .get-started-button {

@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import logo from "../../assets/logo5.jpeg";
+import logo from "../../assets/ai_long logo_green.svg";
 import { useNavigate } from "react-router";
 import { QuestionCircleOutlined, GithubOutlined } from "@ant-design/icons";
 import Help from "../Help/Help";

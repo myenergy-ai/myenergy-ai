@@ -23,6 +23,9 @@
   padding: 0rem 3rem;
 }
 
+.help > .ant-modal-content > .ant-modal-body {
+  padding: 1rem;
+}
 
 @media only screen and (max-width: 768px) {
   .help-steps-sources {
