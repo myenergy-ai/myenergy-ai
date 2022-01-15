@@ -11,18 +11,12 @@
   margin: auto;
 }
 
-.final-result-header > h2 {
-  font-size: 1.5rem;
-}
-
 .final-result-header > p {
-  font-size: 0.8rem;
   padding-block: 0.5rem;
   text-align: center;
 }
 
 .final-result-header > p > .ant-btn {
-  font-size: 0.8rem;
   padding: 0px 7px;
 }
 
@@ -32,7 +26,6 @@
 
 .final-result-carbon-cost > h3 {
   text-align: end;
-  font-size: 0.8rem;
 }
 
 .final-result-carbon-cost > h3 > span {
@@ -40,18 +33,8 @@
   margin-left: 1rem;
 }
 
-.final-result-total-carbon > h2 {
-  font-size: 1rem;
-}
-
 .ant-table-cell {
   padding: 0.2rem !important;
-  font-size: 0.8rem;
-}
-
-.ant-pagination-item-link,
-.ant-pagination-item {
-  font-size: 0.6rem;
 }
 
 .ant-table-tbody > tr > td {
@@ -59,7 +42,6 @@
 }
 
 .final-result-total-carbon-buttons > .ant-btn {
-  font-size: 1rem;
   padding: 0px 7px;
   margin: 0.2rem;
 }

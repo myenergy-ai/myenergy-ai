@@ -158,7 +158,7 @@ const InputModal = () => {
 
   return (
     <div className="input-modal flex flex-column align-center">
-      <h2>{!processing ? "Upload file" : "Processing result..."}</h2>
+      <h2>{!processing ? "Upload Travel Data" : "Processing result..."}</h2>
       {!processing && (
         <Upload {...props} fileList={files}>
           <Button type="primary" icon={<UploadOutlined />}>

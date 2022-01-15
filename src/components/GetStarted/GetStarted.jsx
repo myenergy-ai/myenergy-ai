@@ -9,13 +9,13 @@ const GetStarted = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="get-started flex justify-between">
+    <div className="get-started flex justify-between align-center">
       <div className="get-started-content">
         <div className="get-started-main flex  justify-between align-items-top flex-column">
-          <h1>Hi there!</h1>
+          <h1>Analyze your personal energy data</h1>
           <p>
-            This is an application made for calculating the carbon emitted while
-            travelling.
+            Myenergy.ai is an opensource tool that democratizes the analysis of
+            personal energy data through 4 simple steps.
           </p>
         </div>
         <div className="user-steps-info flex">
@@ -24,15 +24,13 @@ const GetStarted = () => {
               <Button className="steps-info-btn" type="primary" shape="circle">
                 1
               </Button>
-
               <p>Upload Travel Data</p>
             </div>
             <div className="user-step flex">
               <Button className="steps-info-btn" type="primary" shape="circle">
                 3
               </Button>
-
-              <p>Set work hours</p>
+              <p>Set Work Hours</p>
             </div>
           </div>
           <div className="user-steps-container flex flex-column justify-between">
@@ -40,15 +38,13 @@ const GetStarted = () => {
               <Button className="steps-info-btn" type="primary" shape="circle">
                 2
               </Button>
-
-              <p>Adjust Cost</p>
+              <p>Adjust Carbon Costs</p>
             </div>
             <div className="user-step flex">
               <Button className="steps-info-btn" type="primary" shape="circle">
                 4
               </Button>
-
-              <p>Download results</p>
+              <p>Visualize Data</p>
             </div>
           </div>
         </div>

@@ -475,7 +475,7 @@ const FinalResult = () => {
               </h3>
             </div>
             <div className="final-result-total-carbon">
-              <h2>This set of results uses the Carbon Costs</h2>
+              <h3>This set of results uses the Carbon Costs</h3>
               <Table
                 columns={costPerModeColumns}
                 dataSource={carbonCostData}
@@ -485,13 +485,13 @@ const FinalResult = () => {
               />
               <div className="final-result-total-carbon-buttons flex justify-end">
                 <button className="ant-btn ant-btn-primary" onClick={moveToMap}>
-                  Map Results
+                  Visualize Results
                 </button>
                 <button
                   className="ant-btn ant-btn-primary"
                   onClick={downloadFile}
                 >
-                  Just download results as CSV
+                  Download as CSV
                 </button>
               </div>
             </div>

@@ -44,9 +44,9 @@ const StepsSidebar = () => {
           status={error}
         >
           <Step disabled title="Upload Travel Data" />
-          <Step disabled title="Adjust Cost Cost" />
-          <Step disabled title="Set work hours" />
-          <Step disabled title="Download results" />
+          <Step disabled title="Adjust Carbon Costs" />
+          <Step disabled title="Set Work Hours" />
+          <Step disabled title="Visualize Data" />
         </Steps>
       </div>
     </div>

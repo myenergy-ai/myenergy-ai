@@ -1,35 +1,28 @@
-.ant-modal-content {
-  background-color: var(--color-gray-white);
+.ant-modal {
+  max-width: 1440px;
 }
 
-.help-brief,
-.help-steps,
-.help-steps-sources,
-.help-steps > p {
-  font-size: 0.8rem;
+.ant-modal-content {
+  background-color: var(--color-gray-white);
 }
 
 .help-steps-sources {
   margin-left: 4rem;
 }
 
-.help-steps > p > span {
+.help-steps > p > span,
+.help-brief h3 {
   font-weight: 700;
-  font-size: 0.9rem;
 }
 
-.help-steps-sources > p > a {
+.help-steps-sources a {
   text-decoration: underline;
 }
 
 .help-close {
   padding: 0rem 3rem;
-  font-size: 0.8rem;
 }
 
-.help-container > h2 {
-  font-size: 1.45rem;
-}
 
 @media only screen and (max-width: 768px) {
   .help-steps-sources {
