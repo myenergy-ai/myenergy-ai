@@ -33,6 +33,7 @@
 }
 
 .getStarted__buttonBox {
+  gap: 2;
   margin-top: 1rem;
   padding-right: 1rem;
 }
@@ -51,9 +52,10 @@
   border-radius: 4px;
   height: fit-content;
   width: fit-content;
-  padding: 0.8rem 1.2rem;
+  padding: 0.6rem 1.2rem;
   cursor: pointer;
-  border: none;
+  color: #1890ff;
+  border: 2px solid #1890ff;
   font-size: 1rem;
 }
 

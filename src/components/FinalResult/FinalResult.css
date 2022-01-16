@@ -37,6 +37,10 @@
   margin: 0.2rem;
 }
 
+.finalResult__totalCarbonButtons {
+  margin-top: 1rem;
+}
+
 .finalResult::-webkit-scrollbar {
   display: none;
 }
