@@ -72,7 +72,7 @@ const Help = () => {
             </ul>
           </div>
           <p>
-            <strong>Note:</strong> In the downloaded <strong>Takeout</strong>{" "}
+            <strong>Note:</strong> We only support data after <strong>2019</strong>. In the downloaded <strong>Takeout</strong>{" "}
             folder, user needs to go to <strong>Location History</strong>{" "}
             folder, then to <strong>Semantic Location History</strong> folder.
             Now this folder consists of year wise location history of the user.

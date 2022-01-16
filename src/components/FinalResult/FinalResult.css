@@ -40,6 +40,10 @@
   overflow-wrap: initial;
 }
 
+.final-result-total-carbon-buttons {
+  margin-top: 1rem;
+}
+
 .final-result-total-carbon-buttons > .ant-btn {
   padding: 0px 7px;
   margin: 0.2rem;

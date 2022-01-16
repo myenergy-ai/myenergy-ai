@@ -18,14 +18,13 @@
 }
 
 .navbar-help {
-  font-size: 1.65rem;
-  margin: auto 0px;
+  font-size: 2rem;
+  margin: 1rem;
   cursor: pointer;
 }
 
 .navbar-github {
-  font-size: 1.65rem;
-  margin-left: 0.5rem;
+  font-size: 2rem;
   cursor: pointer;
   color: #262626;
 }
