@@ -209,21 +209,24 @@ const DateTimeRangePicker = ({
           {addNewRange ? (
             <Tooltip title="Close Time Range" placement="top">
               <MinusSquareOutlined
-                className="action-icon"
+                className="dateTimeRangePicker__actionIcon"
                 onClick={toggleAddNewRange}
               />
             </Tooltip>
           ) : (
             <Tooltip title="Add Time Range" placement="top">
               <PlusSquareOutlined
-                className="action-icon"
+                className="dateTimeRangePicker__actionIcon"
                 onClick={toggleAddNewRange}
               />
             </Tooltip>
           )}
 
           <Tooltip title="Close Editor" placement="bottom">
-            <CloseSquareOutlined className="action-icon" onClick={onClose} />
+            <CloseSquareOutlined
+              className="dateTimeRangePicker__actionIcon"
+              onClick={onClose}
+            />
           </Tooltip>
         </Col>
       </Row>

@@ -1,25 +1,25 @@
-.ant-modal {
+.help .ant-modal {
   max-width: 1440px;
 }
 
-.ant-modal-content {
+.help .ant-modal-content {
   background-color: var(--color-gray-white);
 }
 
-.help-steps-sources {
+.help__stepsSources {
   margin-left: 4rem;
 }
 
-.help-steps > p > span,
-.help-brief h3 {
+.help__steps > p > span,
+.help__brief h3 {
   font-weight: 700;
 }
 
-.help-steps-sources a {
+.help__steps-sources a {
   text-decoration: underline;
 }
 
-.help-close {
+.help__close {
   padding: 0rem 3rem;
 }
 
@@ -28,7 +28,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .help-steps-sources {
+  .help__stepsSources {
     margin-left: 2rem;
   }
 }

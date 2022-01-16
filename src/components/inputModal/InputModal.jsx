@@ -126,7 +126,7 @@ const InputModal = () => {
   const comingSoon = <p>Coming Soon...</p>;
 
   return (
-    <div className="input-modal flex flex-column align-center">
+    <div className="inputModal flex flex-column align-center justify-center">
       <h2>{!processing ? "Upload travel history" : "Processing result..."}</h2>
       {!processing && (
         <Dragger {...props} fileList={files}>
@@ -148,7 +148,7 @@ const InputModal = () => {
       >
         {!processing ? "Next" : "Cancel"}
       </Button>
-      <div className="flex supported-platforms">
+      <div className="inputModal__supportedPlatforms flex align-center">
         <p>Supported platforms:</p>
         <GoogleOutlined
           onClick={() => dispatch(setHelpModalVisisbility(true))}
@@ -157,7 +157,7 @@ const InputModal = () => {
           <AppleOutlined />
         </Popover>
         <Popover content={comingSoon}>
-          <img className="waze-icon" src={waze} alt="" />
+          <img className="inputModal__wazeIcon" src={waze} alt="" />
         </Popover>
       </div>
     </div>

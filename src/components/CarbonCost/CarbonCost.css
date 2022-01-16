@@ -1,61 +1,45 @@
-.carbon-cost-container {
+.carbonCost__container {
   background-color: #e7e7e7;
   height: 100%;
   width: 100%;
   margin: 2rem auto;
   padding: 2rem;
-  display: flex;
-  flex-direction: column;
 }
 
-.carbon-cost-heading {
+.carbonCost__heading {
   text-align: center;
-  /* font-size: 1.5rem; */
 }
 
 .carbon-cost-info {
   margin: 0;
   line-height: 1.5rem;
-  /* font-size: 1rem; */
 }
 
-.carbon-cost-table {
+.carbonCost__table {
   margin-block: 2rem;
   margin-inline: auto;
   flex: 1;
 }
 
-.carbon-cost-table input {
+.carbonCost__table input {
   background-color: inherit;
   border: none;
   text-align: center;
 }
 
-.ant-table-thead th {
-  font-weight: 600 !important;
-  background: #1890ff !important;
-  color: #fff !important;
-}
-
-.carbon-cost-actions {
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-}
-
-.carbon-cost-actions button {
+.carbonCost__actions button {
   display: block;
   margin-left: 0.5rem;
 }
 
 @media (max-width: 768px) {
-  .carbon-cost-container {
+  .carbonCost__container {
     width: 95%;
   }
-  .carbon-cost-actions {
+  .carbonCost__actions {
     justify-content: space-between;
   }
-  .carbon-cost-actions button {
+  .carbonCost__actions button {
     margin-top: 0.3rem;
   }
 }

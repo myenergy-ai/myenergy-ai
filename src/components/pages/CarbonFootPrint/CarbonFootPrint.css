@@ -1,21 +1,20 @@
-.carbon-foot-print {
+.carbonFoot__print {
   width: 100%;
   height: 92vh;
 }
 
-.carbon-foot-print-main {
+.carbonFoot__printMain {
   height: 100%;
   flex: 0.825;
-  /* background: var(--space); */
 }
 
 @media only screen and (max-width: 1024px) {
-  .carbon-foot-print {
+  .carbonFoot__print {
     flex-direction: column;
     height: 100vh;
   }
 
-  .carbon-foot-print-main {
+  .carbonFoot__printMain {
     flex: 1;
   }
 }

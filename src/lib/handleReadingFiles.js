@@ -165,7 +165,8 @@ const parseData = (
     const travelMode =
       item[keyOfObjectHavingTravelData][dataFieldsKey[ACTIVITY_TYPE_INDEX]];
     if (!validateModeOfTransport(travelMode)) {
-      notIncludingModesOfTransport.add(travelMode);
+      if (travelMode !== "UNKNOWN_ACTIVITY_TYPE" && travelMode !== "WALKING")
+        notIncludingModesOfTransport.add(travelMode);
       return null;
     }
     modeOfTransport.add(travelMode);

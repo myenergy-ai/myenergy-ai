@@ -27,8 +27,8 @@ const HomePage = () => {
     dispatch(setCurrentStep(0));
   }, [dispatch]);
   return (
-    <div className="home-page flex justify-center align-center">
-      <div className="home-page-main">
+    <div className="homePage flex justify-center align-center">
+      <div className="homePage__main">
         <GetStarted />
       </div>
     </div>

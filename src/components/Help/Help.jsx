@@ -22,9 +22,9 @@ const Help = () => {
       width={window.innerWidth * 0.75}
       footer={null}
     >
-      <div className="help-container">
+      <div className="help__container">
         <h2>Help</h2>
-        <div className="help-brief">
+        <div className="help__brief">
           <p>
             Please note that this service is designed to be extremely secure.
             Therefore, to protect your privacy, no data is held outside your own
@@ -35,9 +35,9 @@ const Help = () => {
           </p>
         </div>
 
-        <div className="help-brief">
+        <div className="help__brief">
           <h3>Follow these steps to get your tarvel data:</h3>
-          <div className="help-steps-sources">
+          <div className="help__stepsSources">
             <ul>
               <li>
                 Go to{" "}
@@ -80,7 +80,7 @@ const Help = () => {
             format. User can upload single or multiple json files.
           </p>
         </div>
-        <div className="help-steps">
+        <div className="help__steps">
           <p>
             <span>Upload travel data:</span> allows you to upload your travel
             data for Carbon Footprint calculation. It accepts Google location
@@ -93,19 +93,19 @@ const Help = () => {
             get your travel data following these steps:
           </p>
         </div>
-        <div className="help-steps">
+        <div className="help__steps">
           <p>
             <span>Adjust Carbon Footprint:</span> allows you to change the
             Carbon Footprint Calculation or reset to default.
           </p>
         </div>
-        <div className="help-steps">
+        <div className="help__steps">
           <p>
             <span>Set Work Hours:</span> allows you to change the work hours for
             each you want the system to calculate your Carbon Footprint.
           </p>
         </div>
-        <div className="help-steps">
+        <div className="help__steps">
           <p>
             <span>Visualize Data:</span> allows you to download the results of
             the current calculation.

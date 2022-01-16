@@ -1,46 +1,43 @@
-.get-started-content {
+.getStarted__content {
   max-width: 35rem;
 }
 
-.get-started-main > h1 {
+.getStarted__main > h1 {
   font-weight: bolder;
   color: var(--colorBlue);
 }
 
-.get-started-main > p {
+.getStarted__main > p {
   color: grey;
   font-size: 1rem;
 }
 
-.user-steps-info {
+.getStarted__userStepsInfo {
   align-items: flex-start;
   margin-top: 1rem;
 }
 
-.user-steps-container {
+.getStarted__userStepsContainer {
   margin-right: 2rem;
   flex-direction: column;
 }
 
-.user-step {
+.getStarted__userStep {
   margin-bottom: 0.5rem;
   align-items: baseline;
 }
 
-.user-step > p {
+.getStarted__userStep > p {
   margin-left: 0.75rem;
   font-size: 1rem;
 }
 
-.get-started-button-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.getStarted__buttonBox {
   margin-top: 1rem;
   padding-right: 1rem;
 }
 
-.get-started-button {
+.getStarted__button {
   border-radius: 4px;
   height: fit-content;
   width: fit-content;
@@ -50,7 +47,7 @@
   cursor: pointer;
 }
 
-.data-policy-button {
+.getStarted__dataPolicyButton {
   border-radius: 4px;
   height: fit-content;
   width: fit-content;
@@ -60,17 +57,17 @@
   font-size: 1rem;
 }
 
-.get-started-image {
+.getStarted__image {
   max-width: 45rem;
   object-fit: contain;
 }
 
 @media only screen and (max-width: 1024px) {
-  .get-started {
+  .getStarted {
     flex-direction: column;
   }
 
-  .get-started-image {
+  .getStarted__image {
     margin: auto;
     width: 100%;
   }
