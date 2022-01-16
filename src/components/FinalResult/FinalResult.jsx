@@ -44,10 +44,12 @@ const FinalResult = () => {
 
   const moveToPreviousStep = () => {
     dispatch(setDataToMap(null));
+    setCarbonCostFinalData([]);
     dispatch(setCurrentStep(WORKING_HOURS_STEP));
   };
 
   const moveToMap = () => {
+    setCarbonCostFinalData([]);
     dispatch(setCurrentStep(MAP_RESULTS_STEP));
   };
 
@@ -179,6 +181,7 @@ const FinalResult = () => {
 
     dispatch(setDataToMap(result));
     setCarbonCostFinalData(updatedLocationDataWithCarbonCost);
+    updatedLocationDataWithCarbonCost = null;
     setProcessing(false);
   }, [
     workingHours,

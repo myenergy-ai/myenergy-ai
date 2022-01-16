@@ -69,20 +69,23 @@ const Help = () => {
               <li>
                 Finally, click on <strong>Create Export</strong> button.
               </li>
+              <li>
+                <p>
+                  We only support data after <strong>2019</strong>. In the
+                  downloaded <strong>Takeout</strong> folder, user needs to go
+                  to <strong>Location History</strong> folder, then to{" "}
+                  <strong>Semantic Location History</strong> folder. Now this
+                  folder consists of year wise location history of the user.
+                  Each year folder has the monthly location history data in json
+                  format. User can upload single or multiple json files.
+                </p>
+              </li>
             </ul>
           </div>
-          <p>
-            <strong>Note:</strong> We only support data after <strong>2019</strong>. In the downloaded <strong>Takeout</strong>{" "}
-            folder, user needs to go to <strong>Location History</strong>{" "}
-            folder, then to <strong>Semantic Location History</strong> folder.
-            Now this folder consists of year wise location history of the user.
-            Each year folder has the monthly location history data in json
-            format. User can upload single or multiple json files.
-          </p>
         </div>
         <div className="help__steps">
           <p>
-            <span>Upload travel data:</span> allows you to upload your travel
+            <span>Upload Travel Data:</span> allows you to upload your travel
             data for Carbon Footprint calculation. It accepts Google location
             history, Waze History and Apple Location history. If it cannot work
             out how to format data it will tell you. You can upload multiple

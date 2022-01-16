@@ -39,11 +39,20 @@ export const carbonCostSlice = createSlice({
     resetCarbonCosts: (state) => {
       state.carbonCosts = state.initialCarbonData;
     },
+
+    removeCarbonCosts: (state) => {
+      state.carbonCosts = [];
+      state.initialCarbonData = [];
+    },
   },
 });
 
-export const { addTravelMode, updateTravelMode, resetCarbonCosts } =
-  carbonCostSlice.actions;
+export const {
+  addTravelMode,
+  updateTravelMode,
+  resetCarbonCosts,
+  removeCarbonCosts,
+} = carbonCostSlice.actions;
 
 export const selectCarbonCost = (state) => state.carbonCost.carbonCosts;
 

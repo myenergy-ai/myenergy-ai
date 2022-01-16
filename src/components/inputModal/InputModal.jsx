@@ -107,6 +107,8 @@ const InputModal = () => {
     setProcessing(false);
     setFiles([]);
     locationData = [];
+    modeOfTransport.clear();
+    notIncludingModesOfTransport.clear();
   };
 
   const error = () => {
