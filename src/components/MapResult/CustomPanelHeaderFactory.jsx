@@ -18,6 +18,7 @@ const LogoComponent = () => {
   return (
     <div className="logoContainer">
       <img
+        loading="lazy"
         onClick={() => navigate("/")}
         src={logo}
         className="logoContainer__logo"

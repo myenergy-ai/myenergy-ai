@@ -20,6 +20,7 @@ const Navbar = () => {
       <nav className="navbar flex justify-center align-center">
         <div className="navbar__main flex justify-between align-items">
           <img
+            loading="lazy"
             onClick={() => navigate("/")}
             src={logo}
             className="navbar__logo"

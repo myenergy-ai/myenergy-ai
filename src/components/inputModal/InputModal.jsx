@@ -157,7 +157,12 @@ const InputModal = () => {
           <AppleOutlined />
         </Popover>
         <Popover content={comingSoon}>
-          <img className="inputModal__wazeIcon" src={waze} alt="" />
+          <img
+            loading="lazy"
+            className="inputModal__wazeIcon"
+            src={waze}
+            alt=""
+          />
         </Popover>
       </div>
     </div>

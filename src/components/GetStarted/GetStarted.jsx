@@ -97,7 +97,7 @@ const GetStarted = () => {
             </Button>
           </div>
         </div>
-        <img className="getStarted__image" src={map} alt="map" />
+        <img loading="lazy" className="getStarted__image" src={map} alt="map" />
       </div>
     </>
   );
