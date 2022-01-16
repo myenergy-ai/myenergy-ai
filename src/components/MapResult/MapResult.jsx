@@ -27,6 +27,14 @@ const MapResult = () => {
   const carbonCost = useSelector(selectCarbonCost);
 
   useEffect(() => {
+    const createToolTips = (data) => {
+      const toolTipArray = {};
+      Object.keys(data).map((mode) => {
+        toolTipArray[mode] = ["distance", "activityType", "carbonCost"];
+        return mode;
+      });
+      return toolTipArray;
+    };
     try {
       const carbonCostData = Object.keys(data).map((mode) => ({
         fields: mapResultDataFields,
@@ -48,6 +56,12 @@ const MapResult = () => {
             config: {
               visState: {
                 layers: createLayersBasedOnModeOfTransport(data, carbonCost),
+                interactionConfig: {
+                  tooltip: {
+                    enabled: true,
+                    fieldsToShow: createToolTips(data),
+                  },
+                },
               },
             },
           },

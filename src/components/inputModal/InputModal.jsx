@@ -111,7 +111,7 @@ const InputModal = () => {
 
   const error = () => {
     setErrorMessage(
-      "No valid data found. Please check the format of the data or upload google takeaway data which are of 2019 and onwards."
+      "No valid data found. Please check the format of the data or upload google takeout data which are of 2019 and onwards."
     );
   };
 

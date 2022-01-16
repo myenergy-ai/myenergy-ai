@@ -1,70 +1,148 @@
-# Getting Started with Create React App
+## Introduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Myenergy-ai** is an open source software developed by [Advanced Infrastructure Technology Ltd](https://www.advanced-infrastructure.co.uk/), for calculating the carbon emitted by a user while traveling. The software takes your travel data, calculates the carbon emitted and plots in on a map for better visualization.
 
-## Available Scripts
+## Live Deploy
 
-In the project directory, you can run:
+[Myenergy-ai](https://myenergy-ai.web.app/) to check your carbon footprint.
 
-### `yarn start`
+## Set Up
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Open terminal in the appropriate folder.
+- Run this command. Make sure you are connected to the internet.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```sh
+git clone https://github.com/myenergy-ai/myenergy-ai.git
+```
 
-### `yarn test`
+- Then run
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+cd myenergy-ai.
+```
 
-### `yarn build`
+- Make sure you have [NodeJS](https://nodejs.org/en/) installed, if not visit [NodeJS Download](https://nodejs.org/en/) to download it and install it with default options.
+- Install [yarn](https://yarnpkg.com/), which is a package manager in your local environment with
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+npm install --global yarn.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Now run this will download all the required dependencies.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+yarn install
+```
 
-### `yarn eject`
+- To use Map for data visualization you need to have a [mapbox](https://www.mapbox.com/) API KEY. To get that go to mapbox, sign in if you have an account or create one if you don't. Follow the steps and verify your email.
+- After verification, scroll down to the **Default public token** and copy the token.
+- Now at the `src` folder level create a **.env.local** file and inside that paste - **REACT_APP_MAPBOX_API=API_KEY**, and replace **API_KEY** with the key you have copied.
+- To start the application in your local environment run
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+yarn start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contibution
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Raise an issue
+- Add new feature
+- Maintain the codebase
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+For more information about the policies read [this](https://github.com/myenergy-ai/myenergy-ai/blob/dev/CONTRIBUTING.md).
 
-## Learn More
+## Platforms Supported
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The application supports only [`Google Takeout data(2019 onwards)`](https://takeout.google.com/settings/takeout).
+[How to download Google Takeout](https://github.com/myenergy-ai/myenergy-ai/blob/dev/README.md#How-to-Download-Google-Takeout)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+We will soon add support for other platforms.
 
-### Code Splitting
+##### If you want to use application with other platforms data:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Customize your data according to the following schema.
 
-### Analyzing the Bundle Size
+```js
+{
+  timelineObjects: [
+    {
+      activitySegment: {
+        startLocation: {
+          latitudeE7: latitudeAndLongitudeFormat,
+          longitudeE7: latitudeAndLongitudeFormat,
+        },
+        endLocation: {
+          latitudeE7: latitudeAndLongitudeFormat,
+          longitudeE7: latitudeAndLongitudeFormat,
+        },
+        duration: {
+          startTimestampMs: timestampFormat,
+          endTimestampMs: timestampFormat,
+        },
+        distance: distanceFormat,
+        activityType: activityFormat,
+      },
+    },
+  ],
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Latitude And Longitude Format
 
-### Making a Progressive Web App
+```js
+const latitudeAndLongitudeFormat = {
+  supportsDataType: ["string", "number"],
+  exampleValues: [212287569, 21.2287569, "-1109036294", "-11.09036294"],
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Timestamp Format
 
-### Advanced Configuration
+```js
+const timestampFormat = {
+  supportsDataType: ["string", "number"],
+  exampleValues: [
+    "Sat Jan 26 2019 17:54:24 GMT+0530",
+    "December 17, 1995 13:24:00",
+    "1995-12-17T13:24:00",
+    "1622349967123",
+    "1647329763",
+  ],
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Distance Format
 
-### Deployment
+```js
+const distanceFormat = {
+  supportsDataType: ["string", "number"],
+  exampleValues: ["1538"],
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Activity Type Format
 
-### `yarn build` fails to minify
+```js
+const activityFormat = {
+  mustBeAmongst: [
+    "FLYING",
+    "IN_BUS",
+    "IN_TRAIN",
+    "IN_PASSENGER_VEHICLE",
+    "MOTORCYCLING",
+  ],
+  caseSensitive: true,
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## How to Download Google Takeout
+
+- Go to [Google Takeout](https://takeout.google.com/settings/takeout).
+- Sign In using your account.
+- Under create new export, click on **Deselect all**.
+- Then, find the **Location History** option and select it.
+- Click on **Next Step** button
+- In this step, you can select the **Delivery Method**, **Frequency**, and **File Type**.
+- Finally, click on **Create Export** button.
+
+Read More about [application](https://myenergy-ai.github.io/myenergy-ai/).
