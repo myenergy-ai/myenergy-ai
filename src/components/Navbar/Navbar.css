@@ -3,28 +3,31 @@
   height: 8vh;
 }
 
-.navbar-main {
+.navbar__main {
   width: 95%;
 }
 
-.navbar-main > div {
+.navbar__main > div {
   margin: auto 0;
 }
 
-.navbar-logo {
+.navbar__logo {
   object-fit: contain;
   width: 8rem;
   border-radius: 0.5rem;
-}
-
-.navbar-help {
-  font-size: 2rem;
-  margin: 1rem;
   cursor: pointer;
 }
 
-.navbar-github {
-  font-size: 2rem;
+.navbar__help {
+  font-size: 1.65rem;
+  margin: auto 0px;
   cursor: pointer;
+}
+
+.navbar__github {
+  font-size: 1.65rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
   color: #262626;
 }

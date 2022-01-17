@@ -33,11 +33,11 @@ const StepsSidebar = () => {
   }, []);
 
   return (
-    <div className="steps-sidebar steps-left">
-      <div className="user-steps-box  flex justify-center align-center">
+    <div className="stepsSidebar steps-left">
+      <div className="stepsSidebar__userStepsBox  flex justify-center align-center">
         <Steps
           current={current}
-          className="user-steps flex justify-center"
+          className="stepsSidebar__userSteps flex justify-center"
           direction={width <= 1024 ? "horizontal" : "vertical"}
           onChange={handleChange}
           status={error}

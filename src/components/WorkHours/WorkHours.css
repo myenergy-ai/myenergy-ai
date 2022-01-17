@@ -1,4 +1,4 @@
-.work-hours-container {
+.workHours__container {
   background-color: #e7e7e7;
   width: 100%;
   height: 100%;
@@ -7,50 +7,44 @@
   overflow-y: scroll;
 }
 
-.work-hours-container::-webkit-scrollbar {
+.workHours__container::-webkit-scrollbar {
   display: none;
 }
 
-.work-hours-heading {
+.workHours__heading {
   text-align: center;
 }
 
-.work-hours-info {
+.workHours__info {
   margin: 0;
   padding-block: 0.3rem;
 }
 
-.time-format {
+.workHours__container .time-format {
   text-align: center;
 }
 
-.work-hours-table {
+.workHours__table {
   margin-block: 2rem;
   margin-inline: auto;
 }
 
-.work-hours-table input {
+.workHours__table input {
   background-color: inherit;
   border: none;
   text-align: center;
 }
 
-.work-hours-actions {
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-}
-
-.work-hours-actions button {
+.workHours__actions button {
   display: block;
   margin-left: 0.5rem;
 }
 
 @media (max-width: 768px) {
-  .work-hours-container {
+  .workHours__container {
     width: 95%;
   }
-  .work-hours-actions button {
+  .workHours__actions button {
     margin-top: 0.3rem;
   }
 }

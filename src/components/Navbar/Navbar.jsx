@@ -18,16 +18,17 @@ const Navbar = () => {
     <>
       <Help />
       <nav className="navbar flex justify-center align-center">
-        <div className="navbar-main flex justify-between align-items">
+        <div className="navbar__main flex justify-between align-items">
           <img
+            loading="lazy"
             onClick={() => navigate("/")}
             src={logo}
-            className="navbar-logo"
+            className="navbar__logo"
             alt="logo"
           />
-          <div>
+          <div className="flex">
             <QuestionCircleOutlined
-              className="navbar-help flex"
+              className="navbar__help flex"
               onClick={handleOpenHelp}
             />
             <a
@@ -35,7 +36,7 @@ const Navbar = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <GithubOutlined className="navbar-github flex" />
+              <GithubOutlined className="navbar__github flex" />
             </a>
           </div>
         </div>

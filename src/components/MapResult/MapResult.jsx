@@ -1,4 +1,3 @@
-import KeplerGl from "kepler.gl";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -14,6 +13,12 @@ import {
   createDataSetBasedOnModeOfTransport,
   createLayersBasedOnModeOfTransport,
 } from "../../lib/createLayers";
+import { PanelHeaderFactory, injectComponents } from "kepler.gl/components";
+import { CustomPanelHeaderFactory } from "./CustomPanelHeaderFactory";
+
+const KeplerGl = injectComponents([
+  [PanelHeaderFactory, CustomPanelHeaderFactory],
+]);
 
 const MapResult = () => {
   const dispatch = useDispatch();
@@ -22,6 +27,14 @@ const MapResult = () => {
   const carbonCost = useSelector(selectCarbonCost);
 
   useEffect(() => {
+    const createToolTips = (data) => {
+      const toolTipArray = {};
+      Object.keys(data).map((mode) => {
+        toolTipArray[mode] = ["distance", "activityType", "carbonCost"];
+        return mode;
+      });
+      return toolTipArray;
+    };
     try {
       const carbonCostData = Object.keys(data).map((mode) => ({
         fields: mapResultDataFields,
@@ -43,6 +56,12 @@ const MapResult = () => {
             config: {
               visState: {
                 layers: createLayersBasedOnModeOfTransport(data, carbonCost),
+                interactionConfig: {
+                  tooltip: {
+                    enabled: true,
+                    fieldsToShow: createToolTips(data),
+                  },
+                },
               },
             },
           },
@@ -55,10 +74,10 @@ const MapResult = () => {
   }, [dispatch, data, carbonCost]);
 
   return (
-    <div className="map-result">
+    <div className="mapResult">
       <Button
         ghost
-        className="map-result-back-button"
+        className="mapResult__backButton"
         onClick={() => {
           dispatch(setDataToMap(null));
           dispatch(setCurrentStep(FINAL_RESULT_STEP));

@@ -44,10 +44,12 @@ const FinalResult = () => {
 
   const moveToPreviousStep = () => {
     dispatch(setDataToMap(null));
+    setCarbonCostFinalData([]);
     dispatch(setCurrentStep(WORKING_HOURS_STEP));
   };
 
   const moveToMap = () => {
+    setCarbonCostFinalData([]);
     dispatch(setCurrentStep(MAP_RESULTS_STEP));
   };
 
@@ -179,6 +181,7 @@ const FinalResult = () => {
 
     dispatch(setDataToMap(result));
     setCarbonCostFinalData(updatedLocationDataWithCarbonCost);
+    updatedLocationDataWithCarbonCost = null;
     setProcessing(false);
   }, [
     workingHours,
@@ -197,9 +200,9 @@ const FinalResult = () => {
         footer={null}
       ></Modal>
       {!processing && (
-        <div className="final-result">
-          <div className="final-result-container">
-            <div className="final-result-header flex flex-column align-center">
+        <div className="finalResult">
+          <div className="finalResult__container">
+            <div className="finalResult__header flex flex-column align-center">
               <h2>Your Carbon Footprint</h2>
               <p>
                 {!includeAllHoursAndDays && "Work hours set to "}
@@ -218,16 +221,13 @@ const FinalResult = () => {
                       </span>
                     ))}
                 . Click{" "}
-                <button
-                  className="ant-btn ant-btn-primary"
-                  onClick={moveToPreviousStep}
-                >
+                <Button type="primary" onClick={moveToPreviousStep}>
                   Set work hours
-                </button>{" "}
+                </Button>{" "}
                 to change
               </p>
             </div>
-            <div className="final-result-carbon-cost">
+            <div className="finalResult__carbonCost">
               <Table
                 columns={finalResultTableColumns}
                 dataSource={carbonCostFinalData}
@@ -240,7 +240,7 @@ const FinalResult = () => {
                 <span>{totalCost}kg</span>
               </h3>
             </div>
-            <div className="final-result-total-carbon">
+            <div className="finalResult__totalCarbon">
               <h3>This set of results uses the Carbon Footprints</h3>
               <Table
                 columns={costPerModeTableColumns}
@@ -249,7 +249,7 @@ const FinalResult = () => {
                 size="middle"
                 pagination={{ position: ["none", "none"] }}
               />
-              <div className="final-result-total-carbon-buttons flex justify-end">
+              <div className="finalResult__totalCarbonButtons flex justify-end">
                 {carbonCostFinalData.length > 1 && (
                   <Button type="primary" onClick={moveToMap}>
                     Visualize Results

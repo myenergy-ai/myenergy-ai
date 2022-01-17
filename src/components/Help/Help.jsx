@@ -22,9 +22,9 @@ const Help = () => {
       width={window.innerWidth * 0.75}
       footer={null}
     >
-      <div className="help-container">
+      <div className="help__container">
         <h2>Help</h2>
-        <div className="help-brief">
+        <div className="help__brief">
           <p>
             Please note that this service is designed to be extremely secure.
             Therefore, to protect your privacy, no data is held outside your own
@@ -35,9 +35,9 @@ const Help = () => {
           </p>
         </div>
 
-        <div className="help-steps">
+        <div className="help__steps">
           <p>
-            <span>1. Upload travel data:</span> allows you to upload your travel
+            <span>1. Upload Travel Data:</span> allows you to upload your travel
             data for Carbon Footprint calculation. It accepts Google location
             history. If it cannot work out how to format data it will tell you.
             You can upload multiple files - they will be merged into one large
@@ -46,7 +46,7 @@ const Help = () => {
             is too long, cancel and try to split up the file before you upload
             it. You can get your travel data following these steps:
           </p>
-          <div className="help-steps-sources">
+          <div className="help__stepsSources">
             <ul>
               <li>
                 Go to{" "}
@@ -97,19 +97,19 @@ const Help = () => {
             </p>
           </div>
         </div>
-        <div className="help-steps">
+        <div className="help__steps">
           <p>
             <span>2. Adjust Carbon Footprint:</span> allows you to change the
             Carbon Footprint Calculation or to reset to default.
           </p>
         </div>
-        <div className="help-steps">
+        <div className="help__steps">
           <p>
             <span>3. Set Work Hours:</span> allows you to change the work hours
             for which you want the system to calculate your Carbon Footprint.
           </p>
         </div>
-        <div className="help-steps">
+        <div className="help__steps">
           <p>
             <span>4. Visualize Data:</span> allows you to download the results
             of the current calculation or you can visualize it on map.

@@ -1,5 +1,5 @@
 /**
- * Initial data used to filter out Modes of transport given by the google take away.
+ * Initial data used to filter out Modes of transport given by the google take out.
  */
 
 const modeOfTransport = [

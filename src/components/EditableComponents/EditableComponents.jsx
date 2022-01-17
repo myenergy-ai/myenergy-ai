@@ -81,7 +81,7 @@ export const EditableCell = ({
         />
       </Form.Item>
     ) : (
-      <div className="editable-cell-value-wrap" onClick={toggleEdit}>
+      <div className="editableComponent--valueWrap" onClick={toggleEdit}>
         {children}
       </div>
     );

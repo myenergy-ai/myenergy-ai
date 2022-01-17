@@ -14,7 +14,6 @@ import { setCurrentStep } from "../../redux/reducers/appSlice";
 import { merge } from "../../lib/mergeRangeArrays";
 import Checkbox from "antd/lib/checkbox/Checkbox";
 import { noWorkingHours } from "../../constants/workingHoursData";
-import { setLocationData } from "../../redux/reducers/dataSlice";
 import { workHoursTableColumns } from "../../constants/tableColumnsInfo";
 
 const WorkHours = () => {
@@ -43,7 +42,6 @@ const WorkHours = () => {
 
   const cancelAndPrevious = () => {
     dispatch(resetWorkingHours());
-    dispatch(setLocationData(null));
     dispatch(setCurrentStep(1));
   };
 
@@ -69,11 +67,11 @@ const WorkHours = () => {
   };
 
   return (
-    <div className="work-hours-container">
-      <div className="work-hours-top">
-        <h2 className="work-hours-heading">Set Work Hours</h2>
+    <div className="workHours__container">
+      <div className="workHours__top">
+        <h2 className="workHours__heading">Set Work Hours</h2>
 
-        <p className="work-hours-info">
+        <p className="workHours__info">
           Work hours is used to set the hours for which you want to include the
           travel data. For each day of the week you can customize the hours. You
           can add a new and update or remove the existing hours. If you wish to
@@ -86,7 +84,7 @@ const WorkHours = () => {
           overlapping ranges.
         </p>
       </div>
-      <div className="work-hours-table">
+      <div className="workHours__table">
         <Table
           bordered
           size="small"
@@ -99,7 +97,7 @@ const WorkHours = () => {
           Want to include all the data
         </Checkbox>
       </div>
-      <div className="work-hours-actions">
+      <div className="workHours__actions flex justify-end flex-wrap">
         <Button type="primary" onClick={resetDataToDefaultValue}>
           Reset to default
         </Button>

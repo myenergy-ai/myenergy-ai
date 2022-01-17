@@ -107,11 +107,13 @@ const InputModal = () => {
     setProcessing(false);
     setFiles([]);
     locationData = [];
+    modeOfTransport.clear();
+    notIncludingModesOfTransport.clear();
   };
 
   const error = () => {
     setErrorMessage(
-      "No valid data found. Please check the format of the data or upload google takeaway data which are of 2019 and onwards."
+      "No valid data found. Please check the format of the data or upload google takeout data which are of 2019 and onwards."
     );
   };
 
@@ -126,7 +128,7 @@ const InputModal = () => {
   const comingSoon = <p>Coming Soon...</p>;
 
   return (
-    <div className="input-modal flex flex-column align-center">
+    <div className="inputModal flex flex-column align-center justify-center">
       <h2>{!processing ? "Upload travel history" : "Processing result..."}</h2>
       {!processing && (
         <Dragger {...props} fileList={files}>
@@ -148,7 +150,7 @@ const InputModal = () => {
       >
         {!processing ? "Next" : "Cancel"}
       </Button>
-      <div className="flex supported-platforms">
+      <div className="inputModal__supportedPlatforms flex align-center">
         <p>Supported platforms:</p>
         <GoogleOutlined
           onClick={() => dispatch(setHelpModalVisisbility(true))}
@@ -157,7 +159,12 @@ const InputModal = () => {
           <AppleOutlined />
         </Popover>
         <Popover content={comingSoon}>
-          <img className="waze-icon" src={waze} alt="" />
+          <img
+            loading="lazy"
+            className="inputModal__wazeIcon"
+            src={waze}
+            alt=""
+          />
         </Popover>
       </div>
     </div>

@@ -3,7 +3,7 @@ import GetStarted from "../../GetStarted/GetStarted";
 import "./HomePage.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { resetCarbonCosts } from "../../../redux/reducers/carbonCostSlice";
+import { removeCarbonCosts } from "../../../redux/reducers/carbonCostSlice";
 import {
   setDataToMap,
   setLocationData,
@@ -20,15 +20,15 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(setLocationData(null));
     dispatch(setDataToMap(null));
-    dispatch(resetCarbonCosts());
+    dispatch(removeCarbonCosts());
     dispatch(resetWorkingHours());
     dispatch(setHelpModalVisisbility(false));
     dispatch(setError(""));
     dispatch(setCurrentStep(0));
   }, [dispatch]);
   return (
-    <div className="home-page flex justify-center align-center">
-      <div className="home-page-main">
+    <div className="homePage flex justify-center align-center">
+      <div className="homePage__main">
         <GetStarted />
       </div>
     </div>

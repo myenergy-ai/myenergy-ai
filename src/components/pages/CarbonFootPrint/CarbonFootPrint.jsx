@@ -15,9 +15,9 @@ const CarbonFootPrint = () => {
   return (
     <>
       <ErrorModal />
-      <div className="carbon-foot-print flex">
+      <div className="carbonFoot__print flex">
         {currentStep < 4 && <StepsSidebar />}
-        <div className="carbon-foot-print-main flex justify-evenly align-center">
+        <div className="carbonFoot__printMain flex justify-evenly align-center">
           {currentStep === 0 && <InputModal />}
           {currentStep === 1 && <CarbonCost />}
           {currentStep === 2 && <WorkHours />}
