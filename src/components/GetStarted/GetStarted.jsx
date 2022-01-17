@@ -40,10 +40,12 @@ const GetStarted = () => {
       <div className="getStarted align-center flex justify-between">
         <div className="getStarted__content">
           <div className="getStarted__main flex justify-between align-items-top flex-column">
-            <h2>Analyze your personal energy data</h2>
+            <h2>Analyse the carbon content of your travel</h2>
             <p>
-              Myenergy.ai is an opensource tool that democratizes the analysis
-              of personal energy data through 4 simple steps.
+              myenergy.ai is an secure, opensource tool that makes it easy to
+              asses the carbon content of every journey recorded in your Google,
+              Waze or Apple location history. Giving you personalised insights
+              to better understand your carbon footprint.
             </p>
           </div>
           <div className="getStarted__userStepsInfo flex">
