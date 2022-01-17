@@ -40,7 +40,11 @@ const GetStarted = () => {
       <div className="getStarted align-center flex justify-between">
         <div className="getStarted__content">
           <div className="getStarted__main flex justify-between align-items-top flex-column">
+<<<<<<< HEAD
             <h2>Analyse the carbon content of your travel</h2>
+=======
+            <h1>Analyze your personal energy data</h1>
+>>>>>>> 1d804bd8a298d9a448699eb9de67bff0811a31e6
             <p>
               myenergy.ai is an secure, opensource tool that makes it easy to
               asses the carbon content of every journey recorded in your Google,
@@ -82,7 +86,7 @@ const GetStarted = () => {
               </div>
             </div>
           </div>
-          <div className="getStarted__buttonBox flex align-center justify-between">
+          <div className="getStarted__buttonBox flex align-center">
             <Button
               onClick={() => setIsDataPolicyModalVisible(true)}
               type="outline"

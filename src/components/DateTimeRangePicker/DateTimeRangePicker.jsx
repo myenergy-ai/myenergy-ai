@@ -209,7 +209,7 @@ const DateTimeRangePicker = ({
           {addNewRange ? (
             <Tooltip title="Close Time Range" placement="top">
               <MinusSquareOutlined
-                className="dateTimeRangePicker__actionIcon"
+                className="action-icon"
                 onClick={toggleAddNewRange}
               />
             </Tooltip>
@@ -223,15 +223,12 @@ const DateTimeRangePicker = ({
           )}
 
           <Tooltip title="Close Editor" placement="bottom">
-            <CloseSquareOutlined
-              className="dateTimeRangePicker__actionIcon"
-              onClick={onClose}
-            />
+            <CloseSquareOutlined className="dateTimeRangePicker__actionIcon" onClick={onClose} />
           </Tooltip>
         </Col>
       </Row>
     ) : (
-      <div className="editable-cell-value-wrap" onClick={toggleEdit}>
+      <div className="editableComponent--valueWrap" onClick={toggleEdit}>
         {children}
       </div>
     );

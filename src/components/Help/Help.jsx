@@ -35,8 +35,17 @@ const Help = () => {
           </p>
         </div>
 
-        <div className="help__brief">
-          <h3>Follow these steps to get your tarvel data:</h3>
+        <div className="help__steps">
+          <p>
+            <span>1. Upload Travel Data:</span> allows you to upload your travel
+            data for Carbon Footprint calculation. It accepts Google location
+            history. If it cannot work out how to format data it will tell you.
+            You can upload multiple files - they will be merged into one large
+            file. The system will attempt to merge duplicate data where it can.
+            The system will estimate how long the calculation will take, if it
+            is too long, cancel and try to split up the file before you upload
+            it. You can get your travel data following these steps:
+          </p>
           <div className="help__stepsSources">
             <ul>
               <li>
@@ -70,48 +79,40 @@ const Help = () => {
                 Finally, click on <strong>Create Export</strong> button.
               </li>
               <li>
-                <p>
-                  We only support data after <strong>2019</strong>. In the
-                  downloaded <strong>Takeout</strong> folder, user needs to go
-                  to <strong>Location History</strong> folder, then to{" "}
-                  <strong>Semantic Location History</strong> folder. Now this
-                  folder consists of year wise location history of the user.
-                  Each year folder has the monthly location history data in json
-                  format. User can upload single or multiple json files.
-                </p>
+                In the downloaded <strong>Takeout</strong> folder, user needs to
+                go to <strong>Location History</strong> folder, then to{" "}
+                <strong>Semantic Location History</strong> folder.
+              </li>
+              <li>
+                Now this folder consists of year wise location history of the
+                user. Each year folder has the monthly location history data in
+                json format.
+              </li>
+              <li>
+                User can upload single or multiple json files from these files.
               </li>
             </ul>
+            <p>
+              <strong>Note: We only support data after 2019</strong>.
+            </p>
           </div>
         </div>
         <div className="help__steps">
           <p>
-            <span>Upload Travel Data:</span> allows you to upload your travel
-            data for Carbon Footprint calculation. It accepts Google location
-            history, Waze History and Apple Location history. If it cannot work
-            out how to format data it will tell you. You can upload multiple
-            files - they will be merged into one large file. The system will
-            attempt to merge duplicate data where it can. The system will
-            estimate how long the calculation will take, if it is too long,
-            cancel and try to split up the file before you upload it. You can
-            get your travel data following these steps:
+            <span>2. Adjust Carbon Footprint:</span> allows you to change the
+            Carbon Footprint Calculation or to reset to default.
           </p>
         </div>
         <div className="help__steps">
           <p>
-            <span>Adjust Carbon Footprint:</span> allows you to change the
-            Carbon Footprint Calculation or reset to default.
+            <span>3. Set Work Hours:</span> allows you to change the work hours
+            for which you want the system to calculate your Carbon Footprint.
           </p>
         </div>
         <div className="help__steps">
           <p>
-            <span>Set Work Hours:</span> allows you to change the work hours for
-            each you want the system to calculate your Carbon Footprint.
-          </p>
-        </div>
-        <div className="help__steps">
-          <p>
-            <span>Visualize Data:</span> allows you to download the results of
-            the current calculation.
+            <span>4. Visualize Data:</span> allows you to download the results
+            of the current calculation or you can visualize it on map.
           </p>
         </div>
       </div>
