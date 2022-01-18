@@ -11,7 +11,7 @@ import {
 } from "../../redux/reducers/appSlice";
 import { useDispatch } from "react-redux";
 import { LOCATION_DATA_STEP } from "../../constants/stepConstants";
-import resetAllStates from "../../lib/helperFunctions";
+import { resetAllStates } from "../../lib/resetAllStates";
 
 const ErrorModal__ = () => {
   const [popOverForIssueVisible, setPopOverForIssueVisible] = useState(false);

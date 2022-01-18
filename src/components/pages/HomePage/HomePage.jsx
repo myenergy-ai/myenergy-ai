@@ -8,7 +8,7 @@ import {
   setError,
   setHelpModalVisisbility,
 } from "../../../redux/reducers/appSlice";
-import resetAllStates from "../../../lib/helperFunctions";
+import { resetAllStates } from "../../../lib/resetAllStates";
 
 const HomePage = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 /**
  * @description The function merges the range of hours of the dates if they overlap.
  * @param {String} dateOrHourRangeString
- * @returns String
+ * @returns {String}
  */
 export const merge = (dateOrHourRangeString) => {
   if (dateOrHourRangeString.workingTime === "") return dateOrHourRangeString;

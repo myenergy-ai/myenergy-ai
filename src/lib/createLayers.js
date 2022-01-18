@@ -3,7 +3,7 @@
  * @param {[Object]} data The data that is to be plotted on the map
  * @param {[Object]} carbonCost The modes of transports that are required with modeName as activityType and travelMode as the name to display
  * @param {Object} options options
- * @returns [Layer]
+ * @returns {[Object]}
  */
 export const createLayersBasedOnModeOfTransport = (
   data,
@@ -61,7 +61,7 @@ export const createLayersBasedOnModeOfTransport = (
  * @param {Object} data key as activityMode and value and [Object] Object as travelData
  * @param {[Object]} carbonCostData The Object contains fields as the keys of the travelData and rows as the actual travel data.
  * @param {[Object]} carbonCost Object has modeName as activityType and travelMode and the name they want to display.
- * @returns [Object] Object containing info and data
+ * @returns {[Object]}
  */
 export const createDataSetBasedOnModeOfTransport = (
   data,

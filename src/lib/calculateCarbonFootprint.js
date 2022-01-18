@@ -1,8 +1,9 @@
+import { INVALID_SCHEMA_ERROR } from "./utils";
 /**
  * @description The function returns the travelData passes by updating/adding the carbonCost to it.
  * @param {[Object]} travelData Data taken from the user.
  * @param {[Object]} travelMode The modes of transports that are required with modeName as activityType and carbonCost as the carbon the travel mode emits.
- * @returns travelData after updating the carbonCost field in every object
+ * @returns {[Object]}
  */
 export const calculateCarbonFootprint = (travelData, travelMode) => {
   return travelData?.map((data) => {
@@ -21,9 +22,7 @@ export const calculateCarbonFootprint = (travelData, travelMode) => {
                   return item.modeName === data.activityType;
                 } else {
                   try {
-                    throw new Error(
-                      "Invalid format. Please provide the data in appropriate format."
-                    );
+                    throw INVALID_SCHEMA_ERROR;
                   } catch (error) {
                     throw error;
                   }
@@ -32,9 +31,7 @@ export const calculateCarbonFootprint = (travelData, travelMode) => {
             : 0,
         };
       } else {
-        throw new Error(
-          "Invalid format. Please provide the data in appropriate format"
-        );
+        throw INVALID_SCHEMA_ERROR;
       }
     } catch (error) {
       throw error;

@@ -1,8 +1,4 @@
 import { schema } from "../constants/schema";
-import { removeCarbonCosts } from "../redux/reducers/carbonCostSlice";
-import { resetLocationData, setDataToMap } from "../redux/reducers/dataSlice";
-import { resetWorkingHours } from "../redux/reducers/workingHoursSlice";
-import store from "../redux/store";
 
 export const indexes = {
   START_LOCATION_INDEX: 0,
@@ -24,9 +20,41 @@ export const indexes = {
 };
 
 /**
+ * @description The function takes the array and adds a unique key to each child.
+ * @param {[*]} list
+ * @returns {[Object]}
+ */
+export const addKeysToObjects = (list) => {
+  return list.map((item, index) => ({ ...item, key: index + 1 }));
+};
+
+export const INVALID_SCHEMA_ERROR = new Error(
+  "INVALID SCHEMA: The schema of object paramater passed is not in valid format"
+);
+
+/**
+ * @description The function returns whether the dataObject has the keys provided in the requiredKey array.
+ * @param {Object} dataObject
+ * @param {[*]} requiredKeys
+ * @returns {Boolean}
+ */
+export function isKeyValid(dataObject, requiredKeys) {
+  const providedKeys = Object.keys(dataObject).slice().sort();
+  return (
+    requiredKeys.length === providedKeys.length &&
+    requiredKeys
+      .slice()
+      .sort()
+      .every(function (value, index) {
+        return value === providedKeys[index];
+      })
+  );
+}
+
+/**
  * @description The function filters out the array based on the field that has travel data.
  * @param {[Object]} data Object that the user has uploaded
- * @returns [Object]
+ * @returns {[Object]}
  */
 export const filterOutOnlyTravelData = (data) => {
   return JSON.parse(data)[getKeyOfArrayOfObjectHavingData()]?.filter(
@@ -36,20 +64,20 @@ export const filterOutOnlyTravelData = (data) => {
 
 /**
  * @description The function returns the key to the array of object from the schema.
- * @returns String
+ * @returns {String}
  */
 export const getKeyOfArrayOfObjectHavingData = () => Object.keys(schema)[0];
 
 /**
  * @description The function return the key to the object that has travel data from the schema.
- * @returns String
+ * @returns {String}
  */
 export const getKeyOfObjectHavingTravelData = () =>
   Object.keys(schema[getKeyOfArrayOfObjectHavingData(schema)][0])[0];
 
 /**
  * The function returns the [String] which has the data from the schema
- * @returns [String]
+ * @returns {[String]}
  */
 export const getDataFieldsKey = () =>
   Object.keys(
@@ -60,7 +88,7 @@ export const getDataFieldsKey = () =>
 
 /**
  * The function returns the latitude and longitude key from the schema
- * @returns String
+ * @returns {String}
  */
 export const getLatitudeAndLongitudeKey = () =>
   Object.keys(
@@ -71,7 +99,7 @@ export const getLatitudeAndLongitudeKey = () =>
 
 /**
  * The function returns the start and end time key from the schema
- * @returns String
+ * @returns {String}
  */
 export const getStartAndEndTimeKey = () =>
   Object.keys(
@@ -84,7 +112,7 @@ export const getStartAndEndTimeKey = () =>
  * @description The function checks whether the lat and lng are in range.
  * @param {Boolean} isLatitude
  * @param {Number} tempValue The value of latitude or longitude
- * @returns Boolean
+ * @returns {Boolean}
  */
 export const isLatitudeOrLongitudeOutofRange = (isLatitude, tempValue) => {
   return (
@@ -96,13 +124,35 @@ export const isLatitudeOrLongitudeOutofRange = (isLatitude, tempValue) => {
 };
 
 /**
- * The function resets all the data in the redux store to default values
+ * @description The function checks whether the lat or lng is valid.
+ * @param {String, Number} value
+ * @param {Boolean} isLatitude
+ * @returns {Boolean}
  */
-const resetAllStates = () => {
-  store.dispatch(resetLocationData());
-  store.dispatch(setDataToMap(null));
-  store.dispatch(removeCarbonCosts());
-  store.dispatch(resetWorkingHours());
-};
+export const validateLatAndLan = (value, isLatitude) => {
+  if (!value) return false;
+  if (
+    !schema[getKeyOfArrayOfObjectHavingData()][0][
+      getKeyOfObjectHavingTravelData()
+    ][getDataFieldsKey()[indexes.START_LOCATION_INDEX]][
+      getLatitudeAndLongitudeKey()[indexes.LATITUDE_INDEX]
+    ].supportsDataType.includes(typeof value)
+  ) {
+    return false;
+  }
+  let tempValue = value;
+  if (typeof value === "string") {
+    tempValue = parseFloat(value);
+    if (tempValue.toString() === "NaN") {
+      return false;
+    }
+  }
 
-export default resetAllStates;
+  if (!`${tempValue}`.includes(".")) {
+    tempValue /= indexes.FACTOR_FOR_LAT_LAN;
+  }
+  if (isLatitudeOrLongitudeOutofRange(isLatitude, tempValue)) {
+    return false;
+  }
+  return true;
+};

@@ -5,12 +5,13 @@ import {
   createDataSetBasedOnModeOfTransport,
   createLayersBasedOnModeOfTransport,
 } from "./createLayers";
-import { validateLatAndLan } from "./validateData";
+import { INVALID_SCHEMA_ERROR } from "./utils";
+import { validateLatAndLan } from "./utils";
 
 /**
  * @description The function takes the obejct with key and activityMode and returns the obejct with same key and value as [String].
  * @param {Object} data Data to be mapped on the map
- * @returns Object
+ * @returns {Object}
  */
 const createToolTips = (data) => {
   const toolTipArray = {};
@@ -24,7 +25,7 @@ const createToolTips = (data) => {
 /**
  * @description The function checks whether the input data is in correct format or not.
  * @param {Object} data The data to be plotted to map
- * @returns Boolean
+ * @returns {Boolean}
  */
 const validateInputData = (data) => {
   if (!(typeof data === "object")) {
@@ -58,7 +59,7 @@ const validateInputData = (data) => {
 /**
  * @description The function checks whether the carbon Cost data has required fields and has correct format.
  * @param {[Object]} data travelMode data
- * @returns Boolean
+ * @returns {Boolean}
  */
 const validateCarbonCost = (data) => {
   if (!Array.isArray(data)) {
@@ -137,9 +138,7 @@ const validateCarbonCost = (data) => {
 const plotDataToMap = (data, carbonCost, options = null) => {
   if (!validateInputData(data) || !validateCarbonCost(carbonCost)) {
     try {
-      throw new Error(
-        "Invalid Format. Please provide the data in appropriate format."
-      );
+      throw INVALID_SCHEMA_ERROR;
     } catch (error) {
       throw error;
     }

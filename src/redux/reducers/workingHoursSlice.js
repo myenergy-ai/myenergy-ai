@@ -10,12 +10,15 @@ const workingHoursSlice = createSlice({
   name: "workingHours",
   initialState,
   reducers: {
+    addCustomWorkingHours: (state, action) => {
+      state.workingTimes = action.payload;
+    },
     // For updating the working time.
     updateWorkingTime: (state, action) => {
       const updatedWorkingTimes = [...state.workingTimes];
       const updatedData = action.payload;
       const existingDataIndex = updatedWorkingTimes.findIndex(
-        (item) => item.key === updatedData.key
+        (item) => item.day === updatedData.day
       );
       const existingData = updatedWorkingTimes[existingDataIndex];
       updatedWorkingTimes.splice(existingDataIndex, 1, {
@@ -37,6 +40,7 @@ const workingHoursSlice = createSlice({
 });
 
 export const {
+  addCustomWorkingHours,
   updateWorkingTime,
   resetWorkingHours,
   setIncludeAllHoursAndDays,

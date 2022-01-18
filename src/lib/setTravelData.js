@@ -14,7 +14,8 @@ import {
   getStartAndEndTimeKey,
   indexes,
   isLatitudeOrLongitudeOutofRange,
-} from "./helperFunctions";
+} from "./utils";
+import { INVALID_SCHEMA_ERROR } from "./utils";
 
 const keyOfObjectHavingTravelData = getKeyOfObjectHavingTravelData();
 const dataFieldsKey = getDataFieldsKey();
@@ -51,7 +52,7 @@ const addTravelModesToExistingModes = (modeOfTransport) => {
 /**
  * @description The function extracts the distance from the user data.
  * @param {String, Number} value
- * @returns Number
+ * @returns {Number}
  */
 const convertDistance = (value) => {
   if (!value) return 0;
@@ -64,7 +65,7 @@ const convertDistance = (value) => {
  * @description The function extracts the lat and lng from the user data.
  * @param {String, Number} value
  * @param {Boolean} isLatitude
- * @returns Number
+ * @returns {Number}
  */
 const convertLatAndLan = (value, isLatitude) => {
   let tempValue = typeof value === "string" ? parseFloat(value) : value;
@@ -76,7 +77,7 @@ const convertLatAndLan = (value, isLatitude) => {
 /**
  * The function converts the time to milliseconds as per Javascript date object.
  * @param {String, Number} value
- * @returns Number
+ * @returns {Number}
  */
 const convertTime = (value) => {
   let tempValue = typeof value === "string" ? value.trim() : value;
@@ -108,7 +109,7 @@ export const setTravelData = (
 
   try {
     if (!validateSchema(data)) {
-      throw new Error("Invalid schema. Pass data in appropriate format.");
+      throw INVALID_SCHEMA_ERROR;
     }
   } catch (error) {
     throw error;

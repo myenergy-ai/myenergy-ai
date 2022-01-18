@@ -21,8 +21,8 @@ import {
   finalResultCarbonCostTableColumns,
   finalResultTravelModeTableColumns,
 } from "../../constants/tableColumnsInfo";
-import downloadFile from "../../lib/downloadFinalResult";
-import convertDataToMapFormat from "../../lib/splitDataIntoCategories";
+import { downloadData } from "../../lib/downloadFinalResult";
+import { convertDataToMapFormat } from "../../lib/splitDataIntoCategories";
 import { calculateCarbonFootprint } from "../../lib/calculateCarbonFootprint";
 
 const FinalResult = () => {
@@ -64,7 +64,7 @@ const FinalResult = () => {
     /**
      * @description The function removes all the objects from the array which have less than 0 carbon cost
      * @param {[Object]} updatedLocationDataWithCarbonCost
-     * @returns [Object]
+     * @returns {[Object]}
      */
     const removeTravelWithNoCarbonEmission = (
       updatedLocationDataWithCarbonCost
@@ -268,7 +268,7 @@ const FinalResult = () => {
                     type="primary"
                     onClick={() => {
                       try {
-                        downloadFile(carbonCostFinalData);
+                        downloadData(carbonCostFinalData);
                       } catch (error) {
                         dispatch(setError(error.message));
                       }

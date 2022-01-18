@@ -1,7 +1,9 @@
+import { INVALID_SCHEMA_ERROR } from "./utils";
+
 /**
  * @description The function converts the JSON to CSV format
  * @param {Object} json Object
- * @returns json in csv format
+ * @returns {String}
  */
 const convertToCsv = (json) => {
   var fields = Object.keys(json[0]);
@@ -21,9 +23,7 @@ const convertToCsv = (json) => {
         .join(",");
     } else {
       try {
-        throw new Error(
-          "Missing Attributes. Please check the format of the data."
-        );
+        throw INVALID_SCHEMA_ERROR;
       } catch (error) {
         throw error;
       }
@@ -39,7 +39,7 @@ const convertToCsv = (json) => {
  * @param {[Object]} carbonCostFinalData The data with all reuired fields to be downloaded
  * @param {Boolean} isFormatCSV Whether to download as CSV or JSON
  */
-const downloadData = async (carbonCostFinalData, isFormatCSV = true) => {
+export const downloadData = async (carbonCostFinalData, isFormatCSV = true) => {
   try {
     if (Array.isArray(carbonCostFinalData)) {
       if (isFormatCSV) {
@@ -72,7 +72,7 @@ const downloadData = async (carbonCostFinalData, isFormatCSV = true) => {
       }
     } else {
       try {
-        throw new Error("Invalid Format. Please pass an array.");
+        throw INVALID_SCHEMA_ERROR;
       } catch (error) {
         throw error;
       }
@@ -81,5 +81,3 @@ const downloadData = async (carbonCostFinalData, isFormatCSV = true) => {
     throw error;
   }
 };
-
-export default downloadData;

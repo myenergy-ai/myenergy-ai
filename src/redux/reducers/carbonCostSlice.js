@@ -14,25 +14,30 @@ export const carbonCostSlice = createSlice({
       state.carbonCosts.push(...action.payload);
     },
 
+    addCustomTravelMode: (state, action) => {
+      state.carbonCosts = action.payload;
+    },
+
     // To update existing travel mode:
     // get new values from payload
     // find the existing value and replace it
     updateTravelMode: (state, action) => {
-      const { key, travelMode, carbonCost } = action.payload;
+      const { travelMode, carbonCost, modeName } = action.payload;
       const updatedData = {
-        key,
         travelMode,
         carbonCost: Number(carbonCost),
+        modeName,
       };
       const updatedCarbonCosts = [...state.carbonCosts];
       const existingCostIndex = updatedCarbonCosts.findIndex(
-        (item) => updatedData.key === item.key
+        (item) => updatedData.modeName === item.modeName
       );
       const existingCost = updatedCarbonCosts[existingCostIndex];
       updatedCarbonCosts.splice(existingCostIndex, 1, {
         ...existingCost,
         ...updatedData,
       });
+
       state.carbonCosts = updatedCarbonCosts;
     },
 
