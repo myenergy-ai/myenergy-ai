@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentStep: 0,
-  error: "Somethiing wrong",
+  error: "",
   helpModalVisisbility: false,
 };
 

@@ -14,7 +14,7 @@ import {
 import { setLocationData } from "../../redux/reducers/dataSlice";
 import "./InputModal.css";
 import carbonCostInitialData from "../../constants/carbonCostInitialData";
-import { addTravelMode } from "../../redux/reducers/carbonCostSlice";
+import { appendTravelMode } from "../../redux/reducers/carbonCostSlice";
 import handleDataParsing from "../../lib/handleReadingFiles";
 import Dragger from "antd/lib/upload/Dragger";
 import waze from "../../assets/waze.svg";
@@ -100,7 +100,7 @@ const InputModal = () => {
     const newCarbonCostData = carbonCostInitialData.filter((mode) =>
       modeOfTransport.has(mode.modeName)
     );
-    dispatch(addTravelMode(newCarbonCostData));
+    dispatch(appendTravelMode(newCarbonCostData));
   };
 
   const cleanUpData = () => {
