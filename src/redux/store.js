@@ -25,6 +25,8 @@ const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     }).concat(taskMiddleware),
+
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export default store;

@@ -1,3 +1,9 @@
+/**
+ * @description The function returns the travelData passes by updating/adding the carbonCost to it.
+ * @param {[Object]} travelData Data taken from the user.
+ * @param {[Object]} travelMode The modes of transports that are required with modeName as activityType and carbonCost as the carbon the travel mode emits.
+ * @returns travelData after updating the carbonCost field in every object
+ */
 export const calculateCarbonFootprint = (travelData, travelMode) => {
   return travelData?.map((data) => {
     try {

@@ -56,6 +56,7 @@ People _love_ thorough bug reports. I'm not even kidding.
   - CSS classnames must be according to [BEM naming](http://getbem.com/naming/).
 - 2 spaces for indentation rather than tabs
 - Use [Ant Design](https://ant.design/) principles for designing.
+- Try to put the logic outside the component.
 
 ## License
 

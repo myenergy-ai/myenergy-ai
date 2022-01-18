@@ -1,20 +1,15 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { addDataToMap } from "kepler.gl/actions";
 import { selectDataToMap, setDataToMap } from "../../redux/reducers/dataSlice";
 import { setCurrentStep, setError } from "../../redux/reducers/appSlice";
 import "./MapResult.css";
 import { Button } from "antd";
 import { selectCarbonCost } from "../../redux/reducers/carbonCostSlice";
 import { FINAL_RESULT_STEP } from "../../constants/stepConstants";
-import { mapResultDataFields } from "../../constants/tableColumnsInfo";
-import {
-  createDataSetBasedOnModeOfTransport,
-  createLayersBasedOnModeOfTransport,
-} from "../../lib/createLayers";
 import { PanelHeaderFactory, injectComponents } from "kepler.gl/components";
 import { CustomPanelHeaderFactory } from "./CustomPanelHeaderFactory";
+import plotDataToMap from "../../lib/plotDataToMap";
 
 const KeplerGl = injectComponents([
   [PanelHeaderFactory, CustomPanelHeaderFactory],
@@ -27,46 +22,12 @@ const MapResult = () => {
   const carbonCost = useSelector(selectCarbonCost);
 
   useEffect(() => {
-    const createToolTips = (data) => {
-      const toolTipArray = {};
-      Object.keys(data).map((mode) => {
-        toolTipArray[mode] = ["distance", "activityType", "carbonCost"];
-        return mode;
-      });
-      return toolTipArray;
-    };
     try {
-      const carbonCostData = Object.keys(data).map((mode) => ({
-        fields: mapResultDataFields,
-        rows: data[mode].map((row) => Object.values(row)),
-      }));
-
-      dispatch(
-        addDataToMap({
-          datasets: createDataSetBasedOnModeOfTransport(
-            data,
-            carbonCostData,
-            carbonCost
-          ),
-          option: {
-            centerMap: true,
-          },
-          config: {
-            version: "v1",
-            config: {
-              visState: {
-                layers: createLayersBasedOnModeOfTransport(data, carbonCost),
-                interactionConfig: {
-                  tooltip: {
-                    enabled: true,
-                    fieldsToShow: createToolTips(data),
-                  },
-                },
-              },
-            },
-          },
-        })
-      );
+      try {
+        plotDataToMap(data, carbonCost);
+      } catch (error) {
+        throw error;
+      }
     } catch (error) {
       dispatch(setError(error.message));
       dispatch(setDataToMap(null));

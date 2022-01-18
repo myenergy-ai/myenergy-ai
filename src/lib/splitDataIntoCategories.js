@@ -1,3 +1,8 @@
+/**
+ * @description The function takes the array of objects and converts it to object with key as activityType and value as [Object] Objec is the travelData which has the activityType as the key.
+ * @param {[Object]} updatedLocationDataWithCarbonCost Obejct must have an activityType and all other data like startLatitude, endLatitude...
+ * @returns Object
+ */
 const convertDataToMapFormat = (updatedLocationDataWithCarbonCost) => {
   if (Array.isArray(updatedLocationDataWithCarbonCost)) {
     return updatedLocationDataWithCarbonCost.reduce(function (newObj, oldObj) {

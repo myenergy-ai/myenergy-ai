@@ -64,7 +64,6 @@ const InputModal = () => {
               dispatch(setCurrentStep(1));
             }
           } catch (error) {
-            console.log(error);
             setErrorMessage(error.message);
           }
         };

@@ -20,12 +20,18 @@ const ErrorModal__ = () => {
   const raiseIssueRef = useRef(null);
   const [instructionsShown, setInstructionsShown] = useState(false);
 
+  /**
+   * Funtion to close the modal and clean up the data.
+   */
   const handleExit = () => {
     resetAllStates();
     dispatch(setError(""));
     dispatch(setCurrentStep(LOCATION_DATA_STEP));
   };
 
+  /**
+   * Funtion to show the raise issue option
+   */
   const raiseAnIssue = (
     <>
       <ul className="errorModal__issueSteps">

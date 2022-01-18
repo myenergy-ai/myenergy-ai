@@ -43,18 +43,29 @@ const FinalResult = () => {
     ?.reduce((prev, curr) => prev + curr.carbonCost, 0)
     .toFixed(2);
 
+  /**
+   * Clean up data and move to previous step.
+   */
   const moveToPreviousStep = () => {
     dispatch(setDataToMap(null));
     setCarbonCostFinalData([]);
     dispatch(setCurrentStep(WORKING_HOURS_STEP));
   };
 
+  /**
+   * Move to next step.
+   */
   const moveToMap = () => {
     setCarbonCostFinalData([]);
     dispatch(setCurrentStep(MAP_RESULTS_STEP));
   };
 
   useEffect(() => {
+    /**
+     * @description The function removes all the objects from the array which have less than 0 carbon cost
+     * @param {[Object]} updatedLocationDataWithCarbonCost
+     * @returns [Object]
+     */
     const removeTravelWithNoCarbonEmission = (
       updatedLocationDataWithCarbonCost
     ) => {
@@ -91,6 +102,9 @@ const FinalResult = () => {
             .map((date) => new Date(date).getTime())
         );
 
+      /**
+       * Filtering out the data which is out of hours range or in date range to exclude
+       */
       updatedLocationDataWithCarbonCost = locationData?.filter((data) => {
         const startDayOfTheTravel = new Date(
           parseInt(data.startTimestamp)
@@ -244,12 +258,12 @@ const FinalResult = () => {
                 pagination={{ position: ["none", "none"] }}
               />
               <div className="finalResult__totalCarbonButtons flex justify-end">
-                {carbonCostFinalData.length > 1 && (
+                {carbonCostFinalData.length >= 1 && (
                   <Button type="primary" onClick={moveToMap}>
                     Visualize Results
                   </Button>
                 )}
-                {carbonCostFinalData.length > 1 && (
+                {carbonCostFinalData.length >= 1 && (
                   <Button
                     type="primary"
                     onClick={() => {

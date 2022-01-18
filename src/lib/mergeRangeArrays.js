@@ -1,7 +1,12 @@
-export const merge = (string) => {
-  if (string.workingTime === "") return string;
-  if (string.key === 8) {
-    const ranges = string.workingTime.split(";").map((range) =>
+/**
+ * @description The function merges the range of hours of the dates if they overlap.
+ * @param {String} dateOrHourRangeString
+ * @returns String
+ */
+export const merge = (dateOrHourRangeString) => {
+  if (dateOrHourRangeString.workingTime === "") return dateOrHourRangeString;
+  if (dateOrHourRangeString.key === 8) {
+    const ranges = dateOrHourRangeString.workingTime.split(";").map((range) =>
       range
         .trim()
         .split("-")
@@ -11,7 +16,7 @@ export const merge = (string) => {
 
     const result = combine(ranges);
 
-    string.workingTime = result
+    dateOrHourRangeString.workingTime = result
       .map((range) =>
         range
           .map((hour) => {
@@ -26,9 +31,9 @@ export const merge = (string) => {
       )
       .join(" ; ");
 
-    return string;
+    return dateOrHourRangeString;
   } else {
-    const ranges = string.workingTime.split(";").map((range) =>
+    const ranges = dateOrHourRangeString.workingTime.split(";").map((range) =>
       range
         .trim()
         .split("-")
@@ -38,14 +43,14 @@ export const merge = (string) => {
 
     const result = combine(ranges);
 
-    string.workingTime = result
+    dateOrHourRangeString.workingTime = result
       .map((range) =>
         range.map((hour) => hour.toString().padStart(4, "0")).join("-")
       )
       .join(" ; ");
   }
 
-  return string;
+  return dateOrHourRangeString;
 };
 
 const combine = (ranges) => {

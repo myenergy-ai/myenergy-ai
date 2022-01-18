@@ -1,3 +1,8 @@
+/**
+ * @description The function converts the JSON to CSV format
+ * @param {Object} json Object
+ * @returns json in csv format
+ */
 const convertToCsv = (json) => {
   var fields = Object.keys(json[0]);
   var replacer = (_, value) => {
@@ -29,6 +34,11 @@ const convertToCsv = (json) => {
   return csv;
 };
 
+/**
+ * @description The function starts downloading the data in eith CSV or JSON format.
+ * @param {[Object]} carbonCostFinalData The data with all reuired fields to be downloaded
+ * @param {Boolean} isFormatCSV Whether to download as CSV or JSON
+ */
 const downloadData = async (carbonCostFinalData, isFormatCSV = true) => {
   try {
     if (Array.isArray(carbonCostFinalData)) {

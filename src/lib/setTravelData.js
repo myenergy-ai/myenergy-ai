@@ -21,6 +21,10 @@ const dataFieldsKey = getDataFieldsKey();
 const latitudeAndLongitudeKey = getLatitudeAndLongitudeKey();
 const startAndEndTimeKey = getStartAndEndTimeKey();
 
+/**
+ * @description The function takes the activityType and stores it with appropriate fields.
+ * @param {[String]} modeOfTransport The activityType from te user data
+ */
 const addTravelModesToExistingModes = (modeOfTransport) => {
   let keys = store.getState().carbonCost.carbonCosts.length;
   const newCarbonCostData = [];
@@ -44,6 +48,11 @@ const addTravelModesToExistingModes = (modeOfTransport) => {
   store.dispatch(appendTravelMode(newCarbonCostData));
 };
 
+/**
+ * @description The function extracts the distance from the user data.
+ * @param {String, Number} value
+ * @returns Number
+ */
 const convertDistance = (value) => {
   if (!value) return 0;
   return typeof value === "string"
@@ -51,6 +60,12 @@ const convertDistance = (value) => {
     : value / indexes.METER_TO_KM;
 };
 
+/**
+ * @description The function extracts the lat and lng from the user data.
+ * @param {String, Number} value
+ * @param {Boolean} isLatitude
+ * @returns Number
+ */
 const convertLatAndLan = (value, isLatitude) => {
   let tempValue = typeof value === "string" ? parseFloat(value) : value;
   return isLatitudeOrLongitudeOutofRange(isLatitude, tempValue)
@@ -58,6 +73,11 @@ const convertLatAndLan = (value, isLatitude) => {
     : tempValue;
 };
 
+/**
+ * The function converts the time to milliseconds as per Javascript date object.
+ * @param {String, Number} value
+ * @returns Number
+ */
 const convertTime = (value) => {
   let tempValue = typeof value === "string" ? value.trim() : value;
   return parseInt(tempValue).toString() === "NaN"
@@ -70,6 +90,12 @@ const convertTime = (value) => {
           : tempValue);
 };
 
+/**
+ * @description The function takes the user data as stores it for further calculations.
+ * @param {Object} data The user travel data according to the schema.
+ * @param {Boolean} overrideTravelData
+ * @param {Boolean} overrideTravelModes
+ */
 export const setTravelData = (
   data,
   overrideTravelData,
