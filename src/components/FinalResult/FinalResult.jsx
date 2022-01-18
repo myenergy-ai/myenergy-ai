@@ -6,7 +6,7 @@ import {
   setDataToMap,
 } from "../../redux/reducers/dataSlice";
 import { useDispatch } from "react-redux";
-import { setCurrentStep } from "../../redux/reducers/appSlice";
+import { setCurrentStep, setError } from "../../redux/reducers/appSlice";
 import { selectCarbonCost } from "../../redux/reducers/carbonCostSlice";
 import {
   selectIncludeAllHoursAndDays,
@@ -22,7 +22,8 @@ import {
   finalResultTravelModeTableColumns,
 } from "../../constants/tableColumnsInfo";
 import downloadFile from "../../lib/downloadFinalResult";
-import splitDataIntoModeOfCategories from "../../lib/splitDataIntoCategories";
+import convertDataToMapFormat from "../../lib/splitDataIntoCategories";
+import { calculateCarbonFootprint } from "../../lib/calculateCarbonFootprint";
 
 const FinalResult = () => {
   const dispatch = useDispatch();
@@ -54,19 +55,6 @@ const FinalResult = () => {
   };
 
   useEffect(() => {
-    const updateCarbonCostForEachObject = (
-      updatedLocationDataWithCarbonCost
-    ) => {
-      return updatedLocationDataWithCarbonCost?.map((data) => ({
-        ...data,
-        carbonCost: data.distance
-          ? data.distance *
-            carbonCostData.find((item) => item.modeName === data.activityType)
-              ?.carbonCost
-          : 0,
-      }));
-    };
-
     const removeTravelWithNoCarbonEmission = (
       updatedLocationDataWithCarbonCost
     ) => {
@@ -166,18 +154,24 @@ const FinalResult = () => {
         );
       });
     }
-
-    updatedLocationDataWithCarbonCost = updateCarbonCostForEachObject(
-      updatedLocationDataWithCarbonCost
-    );
+    try {
+      updatedLocationDataWithCarbonCost = calculateCarbonFootprint(
+        updatedLocationDataWithCarbonCost,
+        carbonCostData
+      );
+    } catch (error) {
+      dispatch(setError(error.message));
+    }
 
     updatedLocationDataWithCarbonCost = removeTravelWithNoCarbonEmission(
       updatedLocationDataWithCarbonCost
     );
-
-    const result = splitDataIntoModeOfCategories(
-      updatedLocationDataWithCarbonCost
-    );
+    let result = null;
+    try {
+      result = convertDataToMapFormat(updatedLocationDataWithCarbonCost);
+    } catch (error) {
+      dispatch(setError(error.message));
+    }
 
     dispatch(setDataToMap(result));
     setCarbonCostFinalData(updatedLocationDataWithCarbonCost);
@@ -259,7 +253,11 @@ const FinalResult = () => {
                   <Button
                     type="primary"
                     onClick={() => {
-                      downloadFile(carbonCostFinalData);
+                      try {
+                        downloadFile(carbonCostFinalData);
+                      } catch (error) {
+                        dispatch(setError(error.message));
+                      }
                     }}
                   >
                     Download as CSV

@@ -11,9 +11,7 @@ import {
 } from "../../redux/reducers/appSlice";
 import { useDispatch } from "react-redux";
 import { LOCATION_DATA_STEP } from "../../constants/stepConstants";
-import { resetCarbonCosts } from "../../redux/reducers/carbonCostSlice";
-import { resetWorkingHours } from "../../redux/reducers/workingHoursSlice";
-import { setDataToMap, setLocationData } from "../../redux/reducers/dataSlice";
+import resetAllStates from "../../lib/helperFunctions";
 
 const ErrorModal__ = () => {
   const [popOverForIssueVisible, setPopOverForIssueVisible] = useState(false);
@@ -23,10 +21,7 @@ const ErrorModal__ = () => {
   const [instructionsShown, setInstructionsShown] = useState(false);
 
   const handleExit = () => {
-    dispatch(resetCarbonCosts());
-    dispatch(resetWorkingHours());
-    dispatch(setLocationData(null));
-    dispatch(setDataToMap(null));
+    resetAllStates();
     dispatch(setError(""));
     dispatch(setCurrentStep(LOCATION_DATA_STEP));
   };
@@ -37,6 +32,10 @@ const ErrorModal__ = () => {
         <li>1. Take a screenshot of the screen.</li>
         <li>
           2. Click on the Raise button and create an issue at our github page.
+        </li>
+        <li>
+          3. In the issue provide the details, of the steps and the type of data
+          as well for us to solve it.
         </li>
       </ul>
       <Button

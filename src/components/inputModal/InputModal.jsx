@@ -3,7 +3,7 @@ import {
   GoogleOutlined,
   AppleOutlined,
 } from "@ant-design/icons";
-import { Button, message, Popover } from "antd";
+import { Button, Popover } from "antd";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -11,20 +11,13 @@ import {
   setError,
   setHelpModalVisisbility,
 } from "../../redux/reducers/appSlice";
-import { setLocationData } from "../../redux/reducers/dataSlice";
 import "./InputModal.css";
-import carbonCostInitialData from "../../constants/carbonCostInitialData";
-import { addTravelMode } from "../../redux/reducers/carbonCostSlice";
-import handleDataParsing from "../../lib/handleReadingFiles";
 import Dragger from "antd/lib/upload/Dragger";
 import waze from "../../assets/waze.svg";
+import { setTravelData } from "../../lib/setTravelData";
 
 const InputModal = () => {
   const dispatch = useDispatch();
-
-  let locationData = [];
-  const modeOfTransport = new Set();
-  const notIncludingModesOfTransport = new Set();
 
   const [files, setFiles] = useState([]);
   const [processing, setProcessing] = useState(false);
@@ -60,27 +53,19 @@ const InputModal = () => {
       files.map((file, index) => {
         const reader = new FileReader();
         reader.onload = (e) => {
-          handleDataParsing(
-            e.target.result,
-            setErrorMessage,
-            modeOfTransport,
-            locationData,
-            notIncludingModesOfTransport
-          );
-
-          if (index === files.length - 1) {
-            if (locationData.length > 1) {
-              if (notIncludingModesOfTransport.size > 0) {
-                warning();
-              }
-              sortCarbonCostDataBasedOnModeOfTransportInDataFiles();
-              dispatch(setLocationData(locationData));
+          try {
+            if (index === 0) {
+              setTravelData(e.target.result, true, true);
+            } else {
+              setTravelData(e.target.result, false, true);
+            }
+            if (index === files.length - 1) {
               cleanUpData();
               dispatch(setCurrentStep(1));
-            } else {
-              error();
-              cleanUpData();
             }
+          } catch (error) {
+            console.log(error);
+            setErrorMessage(error.message);
           }
         };
         reader.readAsText(file.originFileObj);
@@ -96,33 +81,9 @@ const InputModal = () => {
     dispatch(setError(message));
   };
 
-  const sortCarbonCostDataBasedOnModeOfTransportInDataFiles = () => {
-    const newCarbonCostData = carbonCostInitialData.filter((mode) =>
-      modeOfTransport.has(mode.modeName)
-    );
-    dispatch(addTravelMode(newCarbonCostData));
-  };
-
   const cleanUpData = () => {
     setProcessing(false);
     setFiles([]);
-    locationData = [];
-    modeOfTransport.clear();
-    notIncludingModesOfTransport.clear();
-  };
-
-  const error = () => {
-    setErrorMessage(
-      "No valid data found. Please check the format of the data or upload google takeout data which are of 2019 and onwards."
-    );
-  };
-
-  const warning = () => {
-    message.warning(
-      `We only support 'FLYING IN_BUS IN_TRAIN IN_PASSENGER_VEHICLE MOTORCYCLING' travel modes. So your travel datas including '${new Array(
-        ...notIncludingModesOfTransport
-      ).join(" ")}' as travel modes are skipped.`
-    );
   };
 
   const comingSoon = <p>Coming Soon...</p>;

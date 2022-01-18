@@ -9,9 +9,9 @@ export const carbonCostSlice = createSlice({
   name: "carbonCost",
   initialState,
   reducers: {
-    addTravelMode: (state, action) => {
-      state.initialCarbonData = action.payload;
-      state.carbonCosts = action.payload;
+    appendTravelMode: (state, action) => {
+      state.initialCarbonData.push(...action.payload);
+      state.carbonCosts.push(...action.payload);
     },
 
     // To update existing travel mode:
@@ -48,7 +48,7 @@ export const carbonCostSlice = createSlice({
 });
 
 export const {
-  addTravelMode,
+  appendTravelMode,
   updateTravelMode,
   resetCarbonCosts,
   removeCarbonCosts,

@@ -18,7 +18,7 @@ import {
   WORKING_HOURS_STEP,
 } from "../../constants/stepConstants";
 import { carbonCostTableColumns } from "../../constants/tableColumnsInfo";
-import { setLocationData } from "../../redux/reducers/dataSlice";
+import { resetLocationData } from "../../redux/reducers/dataSlice";
 
 const CarbonCost = () => {
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ const CarbonCost = () => {
 
   const cancelAndPrevious = () => {
     dispatch(removeCarbonCosts());
-    dispatch(setLocationData(null));
+    dispatch(resetLocationData());
     dispatch(setCurrentStep(LOCATION_DATA_STEP));
   };
 
