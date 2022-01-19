@@ -41,7 +41,7 @@ export const addLayerToMap = (config) => {
  * @param {Number} index Index of the layer to remove
  */
 export const removeLayerFromMap = (index) => {
-  if (!dataId) return;
+  if (!index) return;
   store.dispatch(removeLayer(index));
 };
 
@@ -59,7 +59,7 @@ export const addFilterToMap = (dataId) => {
  * @param {Number} index Index of the filter to remove.
  */
 export const removeFilterFromMap = (index) => {
-  if (!dataId) return;
+  if (!index) return;
   store.dispatch(removeFilter(index));
 };
 
@@ -100,7 +100,7 @@ export const updateVisualData = (datasets, options, config) => {
  * @param {Object} mapConfig new config `{visibleLayerGroups: {label: false, road: true, background: true}}`}
  */
 export const updateMapConfig = (mapConfig) => {
-  if (!config) return;
+  if (!mapConfig) return;
   store.dispatch(mapConfigChange(mapConfig));
 };
 
