@@ -92,7 +92,6 @@ function isTimeStringValid(timeString) {
  */
 function isDateValid(date) {
   const format = "YYYY/MM/DD";
-  console.log(date, format, moment(date, format, true).isValid());
   return moment(date, format, true).isValid();
 }
 
