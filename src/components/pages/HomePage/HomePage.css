@@ -1,9 +1,9 @@
-.home-page {
-  width: 100vw;
-  height: fit-content;
+.homePage {
+  width: 100%;
+  min-height: 92vh;
 }
 
-.home-page-main {
+.homePage__main {
   width: 95%;
-  height: 100%;
+  height: fit-content;
 }

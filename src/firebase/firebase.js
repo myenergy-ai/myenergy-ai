@@ -1,4 +1,6 @@
-import { intializeApp } from "firebase/app";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCUkHKquqH4Y_oynHTdtECTFm97xTNmy8Y",
@@ -10,4 +12,4 @@ const firebaseConfig = {
   measurementId: "G-CR55F2SY1W",
 };
 
-const app = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);

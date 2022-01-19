@@ -1,38 +1,34 @@
-.ant-modal-content {
+.help .ant-modal {
+  max-width: 1440px;
+}
+
+.help .ant-modal-content {
   background-color: var(--color-gray-white);
 }
 
-.help-brief,
-.help-steps,
-.help-steps-sources,
-.help-steps > p {
-  font-size: 0.8rem;
-}
-
-.help-steps-sources {
+.help__stepsSources {
   margin-left: 4rem;
 }
 
-.help-steps > p > span {
+.help__steps > p > span,
+.help__brief h3 {
   font-weight: 700;
-  font-size: 0.9rem;
 }
 
-.help-steps-sources > p > a {
+.help__stepsSources a {
   text-decoration: underline;
 }
 
-.help-close {
+.help__close {
   padding: 0rem 3rem;
-  font-size: 0.8rem;
 }
 
-.help-container > h2 {
-  font-size: 1.45rem;
+.help > .ant-modal-content > .ant-modal-body {
+  padding: 1rem;
 }
 
 @media only screen and (max-width: 768px) {
-  .help-steps-sources {
+  .help__stepsSources {
     margin-left: 2rem;
   }
 }

@@ -1,8 +1,8 @@
 /**
- * Initial data used to filter out Modes of transport given by the google take away.
+ * Initial data used to filter out Modes of transport given by the google take out.
  */
 
-const data = [
+const modeOfTransport = [
   {
     key: 1,
     travelMode: "Plane",
@@ -35,4 +35,4 @@ const data = [
   },
 ];
 
-export default data;
+export default modeOfTransport;

@@ -1,170 +1,107 @@
-import { UploadOutlined } from "@ant-design/icons";
-import { Button, Upload } from "antd";
+import {
+  InboxOutlined,
+  GoogleOutlined,
+  AppleOutlined,
+} from "@ant-design/icons";
+import { Button, Popover } from "antd";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCurrentStep, setError } from "../../redux/reducers/appSlice";
-import { setLocationData } from "../../redux/reducers/dataSlice";
+import {
+  setCurrentStep,
+  setError,
+  setHelpModalVisisbility,
+} from "../../redux/reducers/appSlice";
 import "./InputModal.css";
-import carbonCostInitialData from "../../lib/carbonCostInitialData";
-import { addTravelMode } from "../../redux/reducers/carbonCostSlice";
+import Dragger from "antd/lib/upload/Dragger";
+import waze from "../../assets/waze.svg";
+import { setTravelData } from "../../lib/setTravelData";
 
 const InputModal = () => {
   const dispatch = useDispatch();
 
-  /**
-   * State to maintain all the files uploaded by the user
-   */
   const [files, setFiles] = useState([]);
   const [processing, setProcessing] = useState(false);
 
-  /**
-   * Function to handle file upload
-   */
-  const handleChange = (info) => {
-    const newFiles = [...info.fileList];
-    setFiles(newFiles);
+  const addOrRemoveFileFromProcessing = (info) => {
+    const uniqueFiles = info.fileList.filter(
+      (value, index, self) =>
+        index ===
+        self.findIndex((t) => t.name === value.name && t.size === value.size)
+    );
+    setFiles(uniqueFiles);
   };
 
-  /**
-   * This function stops the files from getting uploaded to the action url
-   */
-  const stopFromUploading = () => {
-    return false;
-  };
-
-  /**
-   * Setting up the upload component to accept only json and csv files
-   */
   const props = {
-    onChange: handleChange,
+    onChange: addOrRemoveFileFromProcessing,
     multiple: true,
     accept: ".json",
-    beforeUpload: stopFromUploading,
+    beforeUpload: () => {
+      return false;
+    },
     fileList: files,
   };
 
-  /**
-   * function for scanning the data and storing it to redux store
-   */
-  let locationData = [];
-  const modeOfTransport = new Set();
   const handleFileScanOrCancel = () => {
-    /**
-     * For cancelling processing
-     */
     if (processing) {
       cleanUpData();
       return;
     }
+
     setProcessing(true);
 
-    /**
-     * For each file we iterate over all the elements and select only required fields
-     */
     try {
       files.map((file, index) => {
         const reader = new FileReader();
         reader.onload = (e) => {
-          /**
-           * Checking if the data has the field which is required for the processing.
-           */
-          if (!JSON.parse(e.target.result).hasOwnProperty("timelineObjects")) {
-            cleanUpData();
-            dispatch(
-              setError(
-                "Please select only those files that are named by year followed by month given by Google."
-              )
-            );
-            return;
-          }
-          /**
-           * Filtering out only travel data and rejecting other data
-           */
-          const fileData = JSON.parse(e.target.result).timelineObjects.filter(
-            (file) => file.activitySegment
-          );
-
-          /**
-           * For each item collect only required fields
-           */
-          fileData.map((item) => {
-            if (
-              item.activitySegment.activityType === "UNKNOWN_ACTIVITY_TYPE" ||
-              item.activitySegment.activityType === "WALKING" ||
-              !item.activitySegment.distance
-            )
-              return item;
-            modeOfTransport.add(item.activitySegment.activityType);
-            locationData.push({
-              key: locationData.length + 1,
-              startLatitude:
-                item.activitySegment.startLocation.latitudeE7 / 10000000,
-              startLongitude:
-                item.activitySegment.startLocation.longitudeE7 / 10000000,
-              endLatitude:
-                item.activitySegment.endLocation.latitudeE7 / 10000000,
-              endLongitude:
-                item.activitySegment.endLocation.longitudeE7 / 10000000,
-              startTimestamp: item.activitySegment.duration.startTimestampMs,
-              endTimestamp: item.activitySegment.duration.endTimestampMs,
-              distance: item.activitySegment.distance,
-              activityType: item.activitySegment.activityType,
-              activityConfidence: item.activitySegment.confidence,
-              activityProbability:
-                item.activitySegment.activities[0].probability,
-              carbonCost: 0,
-            });
-            return item;
-          });
-
-          /**
-           * Checking if this is the last fie if so push the data to redux store and move to next step
-           */
-          if (index === files.length - 1) {
-            sortCarbonCostData();
-            dispatch(setLocationData(locationData));
-            cleanUpData();
-            dispatch(setCurrentStep(1));
+          try {
+            if (index === 0) {
+              setTravelData(e.target.result, true, true);
+            } else {
+              setTravelData(e.target.result, false, true);
+            }
+            if (index === files.length - 1) {
+              cleanUpData();
+              dispatch(setCurrentStep(1));
+            }
+          } catch (error) {
+            setErrorMessage(error.message);
           }
         };
         reader.readAsText(file.originFileObj);
         return file;
       });
     } catch (error) {
-      cleanUpData();
-      dispatch(setError(error.message));
-      dispatch(setLocationData(null));
+      setErrorMessage(error.message);
     }
   };
 
-  /**
-   * Function to filter out carbon cost and show only selected modes of transport.
-   */
-  const sortCarbonCostData = () => {
-    const newCarbonCostData = carbonCostInitialData.filter((mode) =>
-      modeOfTransport.has(mode.modeName)
-    );
-    dispatch(addTravelMode(newCarbonCostData));
+  const setErrorMessage = (message) => {
+    cleanUpData();
+    dispatch(setError(message));
   };
 
-  /**
-   * Cleanup data
-   */
   const cleanUpData = () => {
     setProcessing(false);
     setFiles([]);
-    locationData = [];
   };
 
+  const comingSoon = <p>Coming Soon...</p>;
+
   return (
-    <div className="input-modal flex flex-column align-center">
-      <h2>{!processing ? "Upload file" : "Processing result..."}</h2>
+    <div className="inputModal flex flex-column align-center justify-center">
+      <h2>{!processing ? "Upload travel history" : "Processing result..."}</h2>
       {!processing && (
-        <Upload {...props} fileList={files}>
-          <Button type="primary" icon={<UploadOutlined />}>
-            Upload
-          </Button>
-        </Upload>
+        <Dragger {...props} fileList={files}>
+          <p className="ant-upload-drag-icon">
+            <InboxOutlined />
+          </p>
+          <p className="ant-upload-text">
+            Click or drag file to this area to upload
+          </p>
+          <p className="ant-upload-hint">
+            Support for a single or bulk upload.
+          </p>
+        </Dragger>
       )}
       <Button
         disabled={files.length < 1}
@@ -173,6 +110,23 @@ const InputModal = () => {
       >
         {!processing ? "Next" : "Cancel"}
       </Button>
+      <div className="inputModal__supportedPlatforms flex align-center">
+        <p>Supported platforms:</p>
+        <GoogleOutlined
+          onClick={() => dispatch(setHelpModalVisisbility(true))}
+        />
+        <Popover content={comingSoon}>
+          <AppleOutlined />
+        </Popover>
+        <Popover content={comingSoon}>
+          <img
+            loading="lazy"
+            className="inputModal__wazeIcon"
+            src={waze}
+            alt=""
+          />
+        </Popover>
+      </div>
     </div>
   );
 };

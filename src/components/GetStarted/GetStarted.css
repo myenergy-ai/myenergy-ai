@@ -1,45 +1,44 @@
-.get-started {
-  margin: 3rem auto 0 auto;
+.getStarted__content {
+  max-width: 35rem;
 }
 
-.get-started-main > h1 {
+.getStarted__main > h1 {
   font-weight: bolder;
   color: var(--colorBlue);
-  font-size: 3rem;
 }
 
-.get-started-main > p {
-  margin-left: 3rem;
+.getStarted__main > p {
   color: grey;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
-.user-steps-info {
+.getStarted__userStepsInfo {
   align-items: flex-start;
-  margin-left: 3rem;
+  margin-top: 1rem;
 }
 
-.user-steps-container {
+.getStarted__userStepsContainer {
   margin-right: 2rem;
   flex-direction: column;
 }
 
-.user-step {
-  margin-bottom: 1rem;
+.getStarted__userStep {
+  margin-bottom: 0.5rem;
   align-items: baseline;
 }
 
-.user-step > p {
-  margin-left: 0.25rem;
-  font-size: 1.2rem;
+.getStarted__userStep > p {
+  margin-left: 0.75rem;
+  font-size: 1rem;
 }
 
-.get-started-button-box {
-  margin-left: auto;
-  width: fit-content;
+.getStarted__buttonBox {
+  gap: 2rem;
+  margin-top: 1rem;
+  padding-right: 1rem;
 }
 
-.get-started-button {
+.getStarted__button {
   border-radius: 4px;
   height: fit-content;
   width: fit-content;
@@ -47,44 +46,31 @@
   color: #fff;
   border: none;
   cursor: pointer;
+}
+
+.getStarted__dataPolicyButton {
+  border-radius: 4px;
+  height: fit-content;
+  width: fit-content;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  color: #1890ff;
+  border: 2px solid #1890ff;
   font-size: 1rem;
 }
 
-.get-started-image {
-  width: 40vw;
+.getStarted__image {
+  max-width: 45rem;
   object-fit: contain;
 }
 
-@media only screen and (max-width: 768px) {
-  html {
-    font-size: 13px;
-  }
-
-  .get-started {
-    margin: 1.75rem auto 0 auto;
+@media only screen and (max-width: 1024px) {
+  .getStarted {
     flex-direction: column;
   }
 
-  .get-started-image {
+  .getStarted__image {
     margin: auto;
-    width: 35vw;
-  }
-}
-
-@media only screen and (max-width: 576px) {
-  html {
-    font-size: 11px;
-  }
-
-  .get-started-main > p {
-    margin-left: 0rem;
-  }
-
-  .user-steps-info {
-    margin-left: 0rem;
-  }
-
-  .get-started-image {
-    width: 50vw;
+    width: 100%;
   }
 }

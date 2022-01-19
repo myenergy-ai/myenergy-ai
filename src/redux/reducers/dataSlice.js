@@ -1,36 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-/**
- * States for maintainig the steps and error messages
- */
 const initialState = {
-  locationData: null,
+  locationData: [],
   dataToMap: null,
 };
 
-/**
- * Reducers for changing the data
- */
 export const dataSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
-    // Setting up location data uploaded by the user.
     setLocationData: (state, action) => {
-      state.locationData = action.payload;
+      state.locationData.push(...action.payload);
     },
-    // Setting up data for showing in the map.
+    resetLocationData: (state) => {
+      state.locationData = [];
+    },
     setDataToMap: (state, action) => {
       state.dataToMap = action.payload;
+    },
+    resetDataToMap: (state) => {
+      state.dataToMap = null;
     },
   },
 });
 
-export const { setLocationData, setDataToMap } = dataSlice.actions;
+export const {
+  setLocationData,
+  setDataToMap,
+  resetLocationData,
+  resetDataToMap,
+} = dataSlice.actions;
 
-/**
- * Selectors for acessing data in the components
- */
 export const selectLocationData = (state) => state.data.locationData;
 export const selectDataToMap = (state) => state.data.dataToMap;
 

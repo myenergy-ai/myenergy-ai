@@ -9,17 +9,15 @@ import Navbar from "./components/Navbar/Navbar";
 function App() {
   return (
     <div className="app">
-      <>
-        <Navbar />
-        <Routes>
-          <Route exact path={ROUTES.HOME} element={<HomePage />} />
-          <Route
-            exact
-            path={ROUTES.CARBON_FOOT_PRINT}
-            element={<CarbonFootPrint />}
-          />
-        </Routes>
-      </>
+      <Navbar />
+      <Routes>
+        <Route exact path={ROUTES.HOME} element={<HomePage />} />
+        <Route
+          exact
+          path={ROUTES.CARBON_FOOT_PRINT}
+          element={<CarbonFootPrint />}
+        />
+      </Routes>
     </div>
   );
 }

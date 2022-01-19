@@ -1,21 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// default values of carbon costs
 const initialState = {
   carbonCosts: [],
   initialCarbonData: [],
 };
 
-// Reducer for updating and reseting carbon costs
 export const carbonCostSlice = createSlice({
   name: "carbonCost",
   initialState,
   reducers: {
-    // To add new travel mode:
-    // sets the initial travel modes based
-    // based on the input files.
-    addTravelMode: (state, action) => {
-      state.initialCarbonData = action.payload;
+    appendTravelMode: (state, action) => {
+      state.initialCarbonData.push(...action.payload);
+      state.carbonCosts.push(...action.payload);
+    },
+
+    addCustomTravelMode: (state, action) => {
       state.carbonCosts = action.payload;
     },
 
@@ -23,36 +22,43 @@ export const carbonCostSlice = createSlice({
     // get new values from payload
     // find the existing value and replace it
     updateTravelMode: (state, action) => {
-      const { key, travelMode, carbonCost } = action.payload;
+      const { travelMode, carbonCost, modeName } = action.payload;
       const updatedData = {
-        key,
         travelMode,
         carbonCost: Number(carbonCost),
+        modeName,
       };
       const updatedCarbonCosts = [...state.carbonCosts];
       const existingCostIndex = updatedCarbonCosts.findIndex(
-        (item) => updatedData.key === item.key
+        (item) => updatedData.modeName === item.modeName
       );
       const existingCost = updatedCarbonCosts[existingCostIndex];
       updatedCarbonCosts.splice(existingCostIndex, 1, {
         ...existingCost,
         ...updatedData,
       });
+
       state.carbonCosts = updatedCarbonCosts;
     },
 
-    // set current state to initial state
     resetCarbonCosts: (state) => {
       state.carbonCosts = state.initialCarbonData;
+    },
+
+    removeCarbonCosts: (state) => {
+      state.carbonCosts = [];
+      state.initialCarbonData = [];
     },
   },
 });
 
-// export all the actions
-export const { addTravelMode, updateTravelMode, resetCarbonCosts } =
-  carbonCostSlice.actions;
+export const {
+  appendTravelMode,
+  updateTravelMode,
+  resetCarbonCosts,
+  removeCarbonCosts,
+} = carbonCostSlice.actions;
 
 export const selectCarbonCost = (state) => state.carbonCost.carbonCosts;
 
-// default export the reducer
 export default carbonCostSlice.reducer;

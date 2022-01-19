@@ -10,15 +10,14 @@ import "./StepsSidebar.css";
 import { useEffect, useState } from "react";
 
 const StepsSidebar = () => {
+  const dispatch = useDispatch();
+
   const [width, setWidth] = useState(window.innerWidth);
 
   const { Step } = Steps;
 
   const current = useSelector(selectCurrentStep);
-
   const error = useSelector(selectError);
-
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     dispatch(setCurrentStep(e));
@@ -34,19 +33,19 @@ const StepsSidebar = () => {
   }, []);
 
   return (
-    <div className="steps-sidebar steps-left">
-      <div className="user-steps-box  flex justify-center align-center">
+    <div className="stepsSidebar steps-left">
+      <div className="stepsSidebar__userStepsBox  flex justify-center align-center">
         <Steps
           current={current}
-          className="user-steps flex justify-center"
+          className="stepsSidebar__userSteps flex justify-center"
           direction={width <= 1024 ? "horizontal" : "vertical"}
           onChange={handleChange}
           status={error}
         >
           <Step disabled title="Upload Travel Data" />
-          <Step disabled title="Adjust Cost Cost" />
-          <Step disabled title="Set work hours" />
-          <Step disabled title="Download results" />
+          <Step disabled title="Adjust Carbon Footprints" />
+          <Step disabled title="Set Work Hours" />
+          <Step disabled title="Visualize Data" />
         </Steps>
       </div>
     </div>

@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "myenergy-ai"
-  }
+    "default": "myenergy-ai",
+    "myenergy": "myenergy-ai"
+  },
+  "targets": {}
 }

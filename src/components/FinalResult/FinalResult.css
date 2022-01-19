@@ -1,4 +1,4 @@
-.final-result {
+.finalResult {
   background-color: var(--color-gray-white);
   width: 100%;
   height: 100%;
@@ -6,90 +6,51 @@
   padding: 0.2rem 0;
 }
 
-.final-result-container {
+.finalResult__container {
   width: 73vw;
   margin: auto;
 }
 
-.final-result-header > h2 {
-  font-size: 1.5rem;
-}
-
-.final-result-header > p {
-  font-size: 0.8rem;
+.finalResult__header > p {
   padding-block: 0.5rem;
   text-align: center;
 }
 
-.final-result-header > p > .ant-btn {
-  font-size: 0.8rem;
+.finalResult__header > p > .ant-btn {
   padding: 0px 7px;
 }
 
-.ant-pagination {
-  margin: 0.5rem 0 !important;
-}
-
-.final-result-carbon-cost > h3 {
+.finalResult__carbonCost > h3 {
   text-align: end;
-  font-size: 0.8rem;
 }
 
-.final-result-carbon-cost > h3 > span {
+.finalResult__carbonCost > h3 > span {
   font-weight: 600;
-  margin-left: 1rem;
 }
 
-.final-result-total-carbon > h2 {
-  font-size: 1rem;
-}
-
-.ant-table-cell {
-  padding: 0.2rem !important;
-  font-size: 0.8rem;
-}
-
-.ant-pagination-item-link,
-.ant-pagination-item {
-  font-size: 0.6rem;
-}
-
-.ant-table-tbody > tr > td {
+.finalResult .ant-table-tbody > tr > td {
   overflow-wrap: initial;
 }
 
-.final-result-total-carbon-buttons > .ant-btn {
-  font-size: 1rem;
+.finalResult__totalCarbonButtons > .ant-btn {
   padding: 0px 7px;
   margin: 0.2rem;
 }
 
-.ant-table-body::-webkit-scrollbar {
-  height: 8px;
-  width: 0px;
-  border: 1px solid #fff;
+.finalResult__totalCarbonButtons {
+  margin-top: 1rem;
 }
 
-.ant-table-body::-webkit-scrollbar-track {
-  border-radius: 0;
-  background: #eeeeee;
-}
-
-.ant-table-body::-webkit-scrollbar-thumb {
-  border-radius: 0;
-  background: #b0b0b0;
-}
-
-.final-result::-webkit-scrollbar {
+.finalResult::-webkit-scrollbar {
   display: none;
 }
 
 @media only screen and (max-width: 1024px) {
-  .final-result {
+  .finalResult {
     width: 95%;
     height: 95%;
   }
-  .final-result-container {
+  .finalResult__container {
     width: 90vw;
     margin: auto;
   }

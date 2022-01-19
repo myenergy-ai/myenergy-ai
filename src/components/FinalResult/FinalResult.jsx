@@ -1,267 +1,89 @@
 import "./FinalResult.css";
-import { Table, Modal } from "antd";
+import { Table, Modal, Button } from "antd";
 import { useSelector } from "react-redux";
 import {
   selectLocationData,
   setDataToMap,
 } from "../../redux/reducers/dataSlice";
 import { useDispatch } from "react-redux";
-import { setCurrentStep } from "../../redux/reducers/appSlice";
+import { setCurrentStep, setError } from "../../redux/reducers/appSlice";
 import { selectCarbonCost } from "../../redux/reducers/carbonCostSlice";
 import {
   selectIncludeAllHoursAndDays,
   selectWorkingHours,
 } from "../../redux/reducers/workingHoursSlice";
 import { useEffect, useState } from "react";
+import {
+  MAP_RESULTS_STEP,
+  WORKING_HOURS_STEP,
+} from "../../constants/stepConstants";
+import {
+  finalResultCarbonCostTableColumns,
+  finalResultTravelModeTableColumns,
+} from "../../constants/tableColumnsInfo";
+import { downloadData } from "../../lib/downloadFinalResult";
+import { convertDataToMapFormat } from "../../lib/splitDataIntoCategories";
+import { calculateCarbonFootprint } from "../../lib/calculateCarbonFootprint";
 
 const FinalResult = () => {
   const dispatch = useDispatch();
 
   const [processing, setProcessing] = useState(true);
-
-  /**
-   * Keep track of the data to be shown in the table.
-   */
   const [carbonCostFinalData, setCarbonCostFinalData] = useState([]);
 
-  /**
-   * These are the result table columns heading
-   */
-  const locationColumns = [
-    {
-      title: "",
-      dataIndex: "key",
-      key: "srno",
-      width: 30,
-      fixed: "left",
-      sorter: {
-        compare: (a, b) => a.key - b.key,
-        multiple: 1,
-      },
-    },
-    {
-      title: "Start Latitude",
-      dataIndex: "startLatitude",
-      key: "sLat",
-      width: 110,
-    },
-    {
-      title: "Start Longitude",
-      dataIndex: "startLongitude",
-      key: "sLong",
-      width: 110,
-    },
-    {
-      title: "End Latitude",
-      dataIndex: "endLatitude",
-      key: "eLat",
-      width: 110,
-    },
-    {
-      title: "End Longitude",
-      dataIndex: "endLongitude",
-      key: "eLong",
-      width: 110,
-    },
-    {
-      title: "Start Time",
-      dataIndex: "startTimestamp",
-      key: "sTime",
-      width: 190,
-      render: (text) => (
-        <span>{`${new Date(parseInt(text)).toDateString()} ${new Date(
-          parseInt(text)
-        ).toLocaleTimeString()}`}</span>
-      ),
-    },
-    {
-      title: "End Time",
-      dataIndex: "endTimestamp",
-      key: "eTime",
-      width: 190,
-      render: (text) => (
-        <span>{`${new Date(parseInt(text)).toDateString()} ${new Date(
-          parseInt(text)
-        ).toLocaleTimeString()}`}</span>
-      ),
-    },
-    {
-      title: "Distance",
-      dataIndex: "distance",
-      key: "dist",
-      width: 70,
-    },
-    {
-      title: "Activity Type",
-      dataIndex: "activityType",
-      key: "actType",
-      width: 170,
-    },
-    {
-      title: "Activity Confidence",
-      dataIndex: "activityConfidence",
-      key: "actConf",
-      width: 140,
-    },
-    {
-      title: "Activity Probability",
-      dataIndex: "activityProbability",
-      key: "actProb",
-      width: 140,
-      render: (text) => <span>{text.toFixed(3)}</span>,
-    },
-    {
-      title: "Carbon Cost",
-      dataIndex: "carbonCost",
-      key: "carbonCost",
-      width: 90,
-      fixed: "right",
-      render: (text) => <span>{text.toFixed(3)}</span>,
-      sorter: {
-        compare: (a, b) => a.carbonCost - b.carbonCost,
-        multiple: 1,
-      },
-    },
-  ];
+  const finalResultTableColumns = finalResultCarbonCostTableColumns;
+  const costPerModeTableColumns = finalResultTravelModeTableColumns;
 
-  /**
-   * These are carbon cost table columns heading
-   */
-  const costPerModeColumns = [
-    {
-      title: "Travel Mode",
-      dataIndex: "travelMode",
-      key: "travelMode",
-      width: "60%",
-    },
-    {
-      title: "Carbon Cost:kg/person/km",
-      dataIndex: "carbonCost",
-      key: "carbonCost",
-      width: "30%",
-    },
-  ];
-
-  /**
-   * Carbon cost of all the transport modes.
-   */
   const carbonCostData = useSelector(selectCarbonCost);
-
-  /**
-   * Working hours set by the users.
-   */
   const workingHours = useSelector(selectWorkingHours);
-
-  /**
-   * Getting the location data from redux store
-   */
-  let locationData = useSelector(selectLocationData);
-
-  /**
-   * Should we filter out data for the working hours and days to exclude.
-   */
+  const locationData = useSelector(selectLocationData);
   const includeAllHoursAndDays = useSelector(selectIncludeAllHoursAndDays);
 
-  /**
-   * Calculating the total carbon cost
-   */
   const totalCost = carbonCostFinalData
     ?.reduce((prev, curr) => prev + curr.carbonCost, 0)
-    .toFixed(3);
+    .toFixed(2);
 
   /**
-   * Function to move to previous step
+   * Clean up data and move to previous step.
    */
   const moveToPreviousStep = () => {
-    dispatch(setCurrentStep(2));
+    dispatch(setDataToMap(null));
+    setCarbonCostFinalData([]);
+    dispatch(setCurrentStep(WORKING_HOURS_STEP));
   };
 
   /**
-   * Function to convert JSON object to CSV format for downloading
+   * Move to next step.
    */
-  const convertToCsv = (json) => {
-    var fields = Object.keys(json[0]);
-    var replacer = (_, value) => {
-      return value === null ? "" : value;
-    };
-    var csv = json.map((row) => {
-      /**
-       * Chnaging the start and end time
-       */
-      row.startTimestamp = new Date(
-        parseInt(row.startTimestamp)
-      ).toLocaleString();
-      row.endTimestamp = new Date(parseInt(row.endTimestamp)).toLocaleString();
-      return fields
-        .map((fieldName) => {
-          return JSON.stringify(row[fieldName], replacer);
-        })
-        .join(",");
-    });
-    /**
-     * Adding the heading to the csv data.
-     */
-    csv.unshift(fields.join(","));
-    csv = csv.join("\r\n");
-    return csv;
-  };
-
-  /**
-   * Function to download csv file
-   */
-  const downloadFile = async () => {
-    /**
-     * Creating a copy of the data as we need to update the start and end time.
-     */
-    const a = JSON.parse(JSON.stringify(carbonCostFinalData));
-    const myData = convertToCsv(a);
-    const fileName = "carboncost";
-    /**
-     * Generating the file to download
-     */
-    const blob = new Blob([myData], { type: "text/csv" });
-    const href = await URL.createObjectURL(blob);
-    /**
-     * Creating an element, attatch the file, click it programmically and remove it.
-     */
-    const link = document.createElement("a");
-    link.href = href;
-    link.download = fileName + ".csv";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   const moveToMap = () => {
-    dispatch(setCurrentStep(4));
+    setCarbonCostFinalData([]);
+    dispatch(setCurrentStep(MAP_RESULTS_STEP));
   };
 
   useEffect(() => {
     /**
-     * Initializing the location data for filtering and updating the carbon cost.
+     * @description The function removes all the objects from the array which have less than 0 carbon cost
+     * @param {[Object]} updatedLocationDataWithCarbonCost
+     * @returns {[Object]}
      */
+    const removeTravelWithNoCarbonEmission = (
+      updatedLocationDataWithCarbonCost
+    ) => {
+      return updatedLocationDataWithCarbonCost.filter(
+        (travelData) => travelData.carbonCost > 0
+      );
+    };
+
     let updatedLocationDataWithCarbonCost = locationData;
 
-    /**
-     * If user has selected not to apply filters skip the days and hours filters.
-     */
     if (!includeAllHoursAndDays) {
-      /**
-       * Filtering out the days in which the user has a holiday.
-       */
-      const filteredDays = workingHours.filter(
+      const daysWithWorkingHours = workingHours.filter(
         (workingHour) => workingHour.workingTime !== ""
       );
 
-      /**
-       * Converting the days as per javascript date object.
-       */
-      const days = filteredDays.map((day) => day.key % 7);
+      const daysYouHaveWorked = daysWithWorkingHours.map((day) => day.key % 7);
 
-      /**
-       * Getting out hours of work for working days.
-       */
-      let hours = filteredDays.map((day) => ({
+      let hoursYouHaveWorkedForAday = daysWithWorkingHours.map((day) => ({
         key: day.key % 7,
         hour: day.workingTime.split(";").map((times) =>
           times
@@ -271,10 +93,7 @@ const FinalResult = () => {
         ),
       }));
 
-      /**
-       * Calculating the holidays or the days user want to exclude.
-       */
-      const rangeToExclude = workingHours[7].workingTime
+      const dateRangeYouWantToExclude = workingHours[7].workingTime
         .split(";")
         .map((range) =>
           range
@@ -284,135 +103,93 @@ const FinalResult = () => {
         );
 
       /**
-       * Updating the user data and filtering out entries which are out of work hours or user want ot exclude.
+       * Filtering out the data which is out of hours range or in date range to exclude
        */
       updatedLocationDataWithCarbonCost = locationData?.filter((data) => {
-        /**
-         * Entry start day for checking whether it's a holiday or not
-         */
-        const startDay = new Date(parseInt(data.startTimestamp)).getDay();
+        const startDayOfTheTravel = new Date(
+          parseInt(data.startTimestamp)
+        ).getDay();
 
-        /**
-         * Entry end day for checking whether it's a holiday or not
-         */
-        const endDay = new Date(parseInt(data.endTimestamp)).getDay();
+        const endDayOfTheTravel = new Date(
+          parseInt(data.endTimestamp)
+        ).getDay();
 
-        /**
-         * Entry travel start time for checking whether it is in the working hours range.
-         */
-        const startTime =
+        const startTimeOfTheTravel =
           new Date(parseInt(data.startTimestamp)).getHours() * 100 +
           new Date(parseInt(data.startTimestamp)).getMinutes();
 
-        /**
-         * Finding the working hours of the day when the user starts travelling.
-         */
-        const startDayWorkingHours = hours.find(
-          (hour) => hour.key === startDay
+        const startDayOfTravelWorkingHours = hoursYouHaveWorkedForAday.find(
+          (hour) => hour.key === startDayOfTheTravel
         );
 
-        /**
-         * Entry travel end time for checking whether it is in the working hours range.
-         */
-        const endTime =
+        const endTimeOfTheTravel =
           new Date(parseInt(data.endTimestamp)).getHours() * 100 +
           new Date(parseInt(data.endTimestamp)).getMinutes();
 
-        /**
-         * Finding the working hours of the day when the user ends travelling.
-         */
-        const endDayWorkingHours = hours.find((hour) => hour.key === endDay);
+        const endDayOfTravelWorkingHours = hoursYouHaveWorkedForAday.find(
+          (hour) => hour.key === endDayOfTheTravel
+        );
 
-        /**
-         * Excluding the date range to be excluded.
-         */
-        let toExclude = false;
-        rangeToExclude.forEach((range) => {
+        let dateInRangeToExclude = false;
+        dateRangeYouWantToExclude.forEach((range) => {
           if (
             parseInt(data.startTimestamp) >= range[0] &&
             parseInt(data.endTimestamp) <= range[1] + 86400000
           ) {
-            toExclude = true;
+            dateInRangeToExclude = true;
             return;
           }
         });
 
-        /**
-         * Checking whether user starts it's travel in working hours.
-         */
-        let isStartInRange = false;
-        startDayWorkingHours?.hour.forEach((hour) => {
-          if (hour[0] < startTime && hour[1] > startTime) {
-            isStartInRange = true;
+        let isStartTimeInWorkingHourRange = false;
+        startDayOfTravelWorkingHours?.hour.forEach((hour) => {
+          if (
+            hour[0] < startTimeOfTheTravel &&
+            hour[1] > startTimeOfTheTravel
+          ) {
+            isStartTimeInWorkingHourRange = true;
             return;
           }
         });
 
-        /**
-         * Checking whether user ends it's travel in working hours.
-         */
-        let isEndInRange = false;
-        endDayWorkingHours?.hour.forEach((hour) => {
-          if (hour[0] < endTime && hour[1] > endTime) {
-            isEndInRange = true;
+        let isEndTimeInWorkingHourRange = false;
+        endDayOfTravelWorkingHours?.hour.forEach((hour) => {
+          if (hour[0] < endTimeOfTheTravel && hour[1] > endTimeOfTheTravel) {
+            isEndTimeInWorkingHourRange = true;
             return;
           }
         });
 
         return (
-          /**
-           * If in working days
-           */
-          days.includes(startDay) &&
-          days.includes(endDay) &&
-          /**
-           * Either starts or end in working hours.
-           */
-          (isStartInRange || isEndInRange) &&
-          /**
-           * Not in to be excluded range.
-           */
-          !toExclude
+          daysYouHaveWorked.includes(startDayOfTheTravel) &&
+          daysYouHaveWorked.includes(endDayOfTheTravel) &&
+          (isStartTimeInWorkingHourRange || isEndTimeInWorkingHourRange) &&
+          !dateInRangeToExclude
         );
       });
     }
-    /**
-     * Updating the cost of the carbon emitted by the user while travelling;
-     */
-    updatedLocationDataWithCarbonCost = updatedLocationDataWithCarbonCost?.map(
-      (data) => {
-        /**
-         * Set the data as it was just update the carbonCost.
-         */
-        return {
-          ...data,
-          carbonCost:
-            (data.distance / 1000) *
-            carbonCostData.find((item) => item.modeName === data.activityType)
-              ?.carbonCost,
-        };
-      }
-    );
+    try {
+      updatedLocationDataWithCarbonCost = calculateCarbonFootprint(
+        updatedLocationDataWithCarbonCost,
+        carbonCostData
+      );
+    } catch (error) {
+      dispatch(setError(error.message));
+    }
 
-    /**
-     * Storing the data according the mode of transports for showing
-     * different layers on the map for differnt mode of transport.
-     */
-    const result = updatedLocationDataWithCarbonCost.reduce(function (
-      newObj,
-      oldObj
-    ) {
-      const key = oldObj.activityType;
-      if (newObj[key] || (newObj[key] = [])) newObj[key].push(oldObj);
-      return newObj;
-    },
-    {});
+    updatedLocationDataWithCarbonCost = removeTravelWithNoCarbonEmission(
+      updatedLocationDataWithCarbonCost
+    );
+    let result = null;
+    try {
+      result = convertDataToMapFormat(updatedLocationDataWithCarbonCost);
+    } catch (error) {
+      dispatch(setError(error.message));
+    }
+
     dispatch(setDataToMap(result));
-    /**
-     * Checking if the previous data is same as the current one if not dispatching it.
-     */
-    // dispatch(setCarbonCostData(updatedLocationDataWithCarbonCost));
     setCarbonCostFinalData(updatedLocationDataWithCarbonCost);
+    updatedLocationDataWithCarbonCost = null;
     setProcessing(false);
   }, [
     workingHours,
@@ -431,12 +208,11 @@ const FinalResult = () => {
         footer={null}
       ></Modal>
       {!processing && (
-        <div className="final-result">
-          <div className="final-result-container">
-            <div className="final-result-header flex flex-column align-center">
-              <h2>Your Carbon Cost</h2>
+        <div className="finalResult">
+          <div className="finalResult__container">
+            <div className="finalResult__header flex flex-column align-center">
+              <h2>Your Carbon Footprint</h2>
               <p>
-                {/* Showing working hours only if user selects to apply filter  */}
                 {!includeAllHoursAndDays && "Work hours set to "}
                 {includeAllHoursAndDays
                   ? "Included all data"
@@ -453,46 +229,54 @@ const FinalResult = () => {
                       </span>
                     ))}
                 . Click{" "}
-                <button
-                  className="ant-btn ant-btn-primary"
-                  onClick={moveToPreviousStep}
-                >
+                <Button type="primary" onClick={moveToPreviousStep}>
                   Set work hours
-                </button>{" "}
+                </Button>{" "}
                 to change
               </p>
             </div>
-            <div className="final-result-carbon-cost">
+            <div className="finalResult__carbonCost">
               <Table
-                columns={locationColumns}
+                columns={finalResultTableColumns}
                 dataSource={carbonCostFinalData}
                 bordered
                 size="middle"
                 scroll={{ x: window.innerWidth * 0.6, y: 400 }}
               />
               <h3>
-                Total Carbon Cost for this time period: <span>{totalCost}</span>
+                Total Carbon Footprint for this time period:{" "}
+                <span>{totalCost}kg</span>
               </h3>
             </div>
-            <div className="final-result-total-carbon">
-              <h2>This set of results uses the Carbon Costs</h2>
+            <div className="finalResult__totalCarbon">
+              <h3>This set of results uses the Carbon Footprints</h3>
               <Table
-                columns={costPerModeColumns}
+                columns={costPerModeTableColumns}
                 dataSource={carbonCostData}
                 bordered
                 size="middle"
                 pagination={{ position: ["none", "none"] }}
               />
-              <div className="final-result-total-carbon-buttons flex justify-end">
-                <button className="ant-btn ant-btn-primary" onClick={moveToMap}>
-                  Map Results
-                </button>
-                <button
-                  className="ant-btn ant-btn-primary"
-                  onClick={downloadFile}
-                >
-                  Just download results as CSV
-                </button>
+              <div className="finalResult__totalCarbonButtons flex justify-end">
+                {carbonCostFinalData.length >= 1 && (
+                  <Button type="primary" onClick={moveToMap}>
+                    Visualize Results
+                  </Button>
+                )}
+                {carbonCostFinalData.length >= 1 && (
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      try {
+                        downloadData(carbonCostFinalData);
+                      } catch (error) {
+                        dispatch(setError(error.message));
+                      }
+                    }}
+                  >
+                    Download as CSV
+                  </Button>
+                )}
               </div>
             </div>
           </div>
