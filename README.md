@@ -43,7 +43,7 @@ yarn install
 yarn start
 ```
 
-## Contibution
+## Conrtribution
 
 - Raise an issue
 - Add new feature
