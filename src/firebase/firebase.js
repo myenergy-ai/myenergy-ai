@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-const firebaseUpdatedConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyCUkHKquqH4Y_oynHTdtECTFm97xTNmy8Y",
   authDomain: "myenergy-ai.firebaseapp.com",
   projectId: "myenergy-ai",
@@ -12,4 +12,4 @@ const firebaseUpdatedConfig = {
   measurementId: "G-CR55F2SY1W",
 };
 
-firebase.initializeApp(firebaseUpdatedConfig);
+firebase.initializeApp(firebaseConfig);
