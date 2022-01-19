@@ -1,0 +1,45 @@
+.carbonCost__container {
+  background-color: #e7e7e7;
+  height: 100%;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.carbonCost__heading {
+  text-align: center;
+}
+
+.carbon-cost-info {
+  margin: 0;
+  line-height: 1.5rem;
+}
+
+.carbonCost__table {
+  margin-block: 2rem;
+  margin-inline: auto;
+  flex: 1;
+}
+
+.carbonCost__table input {
+  background-color: inherit;
+  border: none;
+  text-align: center;
+}
+
+.carbonCost__actions button {
+  display: block;
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .carbonCost__container {
+    width: 95%;
+  }
+  .carbonCost__actions {
+    justify-content: space-between;
+  }
+  .carbonCost__actions button {
+    margin-top: 0.3rem;
+  }
+}

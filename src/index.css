@@ -1,12 +1,18 @@
+:root {
+  --colorBlue: navy;
+  --color-grey: #444;
+  --space: #041e42;
+  --color-gray-white: #eeeeee;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Noto Sans", sans-serif;
 }
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -15,3 +21,116 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: capitalize;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700 !important;
+}
+
+h2 {
+  font-size: 1.7rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+p {
+  font-size: 0.9rem;
+}
+
+.ant-table-body::-webkit-scrollbar {
+  height: 8px;
+  width: 0px;
+  border: 1px solid #fff;
+}
+
+.ant-table-body::-webkit-scrollbar-track {
+  border-radius: 0;
+  background: #eeeeee;
+}
+
+.ant-table-body::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: #b0b0b0;
+}
+
+.ant-table-cell {
+  padding: 0.2rem !important;
+}
+
+.ant-pagination {
+  margin: 0.5rem 0 !important;
+}
+
+.ant-table-thead th {
+  font-weight: 600 !important;
+  background: #1890ff !important;
+  color: #fff !important;
+}
+
+.flex {
+  display: flex !important;
+}
+
+.justify-start {
+  justify-content: start !important;
+}
+
+.justify-center {
+  justify-content: center !important;
+}
+
+.justify-between {
+  justify-content: space-between !important;
+}
+
+.justify-evenly {
+  justify-content: space-evenly !important;
+}
+
+.justify-end {
+  justify-content: flex-end !important;
+}
+
+.align-center {
+  align-items: center !important;
+}
+
+.align-items-end {
+  align-items: flex-end !important;
+}
+
+.align-items-top {
+  align-items: flex-start !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* responsive styles */
+
+/**
+ * Breakpoints
+ * Small Screen (Phones) 425px,
+ * Medium Screen (Tablets) 768px,
+ * Large Screen (Laptops) 1024px,
+*/

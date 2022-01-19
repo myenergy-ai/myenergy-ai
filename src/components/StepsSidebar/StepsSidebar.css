@@ -1,0 +1,66 @@
+.stepsSidebar {
+  flex: 0.175;
+  padding: 0 1rem;
+}
+
+.stepsSidebar__userStepsBox {
+  height: 30rem;
+}
+
+.stepsSidebar__userSteps {
+  width: fit-content;
+  height: 20rem;
+}
+
+.stepsSidebar .ant-steps-item {
+  width: fit-content;
+  padding-left: 1rem !important;
+}
+
+.stepsSidebar .ant-steps-item-title {
+  font-size: 1rem;
+  padding-right: 1rem;
+}
+
+.stepsSidebar .ant-steps-item-icon {
+  font-size: 1rem;
+}
+
+.stepsSidebar .ant-steps-item-tail {
+  left: 2rem !important;
+}
+
+.stepsSidebar .ant-steps-item {
+  cursor: text;
+}
+
+@media only screen and (max-width: 1024px) {
+  .stepsSidebar {
+    margin: 1rem 0;
+    flex: 0;
+  }
+
+  .stepsSidebar__userStepsBox {
+    height: fit-content;
+  }
+
+  .stepsSidebar .ant-steps {
+    height: fit-content;
+    width: 100%;
+    margin: 0 1rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .stepsSidebar .ant-steps-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .stepsSidebar .ant-steps-item-title {
+    font-size: 0.75rem;
+  }
+}

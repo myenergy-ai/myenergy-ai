@@ -1,0 +1,57 @@
+.finalResult {
+  background-color: var(--color-gray-white);
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 0.2rem 0;
+}
+
+.finalResult__container {
+  width: 73vw;
+  margin: auto;
+}
+
+.finalResult__header > p {
+  padding-block: 0.5rem;
+  text-align: center;
+}
+
+.finalResult__header > p > .ant-btn {
+  padding: 0px 7px;
+}
+
+.finalResult__carbonCost > h3 {
+  text-align: end;
+}
+
+.finalResult__carbonCost > h3 > span {
+  font-weight: 600;
+}
+
+.finalResult .ant-table-tbody > tr > td {
+  overflow-wrap: initial;
+}
+
+.finalResult__totalCarbonButtons > .ant-btn {
+  padding: 0px 7px;
+  margin: 0.2rem;
+}
+
+.finalResult__totalCarbonButtons {
+  margin-top: 1rem;
+}
+
+.finalResult::-webkit-scrollbar {
+  display: none;
+}
+
+@media only screen and (max-width: 1024px) {
+  .finalResult {
+    width: 95%;
+    height: 95%;
+  }
+  .finalResult__container {
+    width: 90vw;
+    margin: auto;
+  }
+}

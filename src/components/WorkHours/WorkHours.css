@@ -1,0 +1,50 @@
+.workHours__container {
+  background-color: #e7e7e7;
+  width: 100%;
+  height: 100%;
+  margin: 1rem auto;
+  padding: 1rem;
+  overflow-y: scroll;
+}
+
+.workHours__container::-webkit-scrollbar {
+  display: none;
+}
+
+.workHours__heading {
+  text-align: center;
+}
+
+.workHours__info {
+  margin: 0;
+  padding-block: 0.3rem;
+}
+
+.workHours__container .time-format {
+  text-align: center;
+}
+
+.workHours__table {
+  margin-block: 2rem;
+  margin-inline: auto;
+}
+
+.workHours__table input {
+  background-color: inherit;
+  border: none;
+  text-align: center;
+}
+
+.workHours__actions button {
+  display: block;
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .workHours__container {
+    width: 95%;
+  }
+  .workHours__actions button {
+    margin-top: 0.3rem;
+  }
+}

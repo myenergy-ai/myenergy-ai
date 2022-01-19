@@ -1,0 +1,25 @@
+.mapResult {
+  position: relative;
+  height: 100%;
+}
+
+.mapResult__backButton {
+  width: fit-content;
+  position: absolute;
+  bottom: 2.5rem;
+  right: 1rem;
+  color: black;
+  z-index: 100;
+  padding: 0.25rem;
+  background-color: white;
+}
+
+.logoContainer {
+  margin-top: -1rem;
+}
+
+.logoContainer__logo {
+  height: 4rem;
+  width: 7rem;
+  cursor: pointer;
+}

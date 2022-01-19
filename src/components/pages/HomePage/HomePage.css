@@ -1,0 +1,9 @@
+.homePage {
+  width: 100%;
+  min-height: 92vh;
+}
+
+.homePage__main {
+  width: 95%;
+  height: fit-content;
+}

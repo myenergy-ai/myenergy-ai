@@ -1,0 +1,35 @@
+.errorModal__topHeading {
+  height: 6rem;
+  border-bottom: 1px solid whitesmoke;
+  margin-bottom: 1rem;
+}
+
+.errorModal__topHeading > h2 {
+  font-size: 1.5rem;
+}
+
+.errorModal__topHeading > * {
+  color: tomato;
+}
+
+.errorModal__warningIcon {
+  font-size: 2rem;
+}
+
+.errorModal__itemsIcon {
+  color: tomato;
+}
+
+.errorModal__items > p {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  font-size: 1rem;
+}
+
+.errorModal__infoText {
+  margin: 0.2rem !important;
+}
+
+.errorModal__issueSteps {
+  list-style: none;
+}
