@@ -9,7 +9,7 @@ import { selectCarbonCost } from "../../redux/reducers/carbonCostSlice";
 import { FINAL_RESULT_STEP } from "../../constants/stepConstants";
 import { PanelHeaderFactory, injectComponents } from "kepler.gl/components";
 import { CustomPanelHeaderFactory } from "./CustomPanelHeaderFactory";
-import plotDataToMap from "../../lib/plotDataToMap";
+import { plotDataToMap } from "../../lib/plotDataToMap";
 
 const KeplerGl = injectComponents([
   [PanelHeaderFactory, CustomPanelHeaderFactory],

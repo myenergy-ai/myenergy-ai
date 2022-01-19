@@ -135,7 +135,7 @@ const validateCarbonCost = (data) => {
     }
   };
  */
-const plotDataToMap = (data, carbonCost, options = null) => {
+export const plotDataToMap = (data, carbonCost, options = null) => {
   if (!validateInputData(data) || !validateCarbonCost(carbonCost)) {
     try {
       throw INVALID_SCHEMA_ERROR;
@@ -182,5 +182,3 @@ const plotDataToMap = (data, carbonCost, options = null) => {
     })
   );
 };
-
-export default plotDataToMap;
