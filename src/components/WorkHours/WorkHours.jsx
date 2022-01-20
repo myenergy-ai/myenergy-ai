@@ -15,6 +15,10 @@ import { merge } from "../../lib/mergeRangeArrays";
 import Checkbox from "antd/lib/checkbox/Checkbox";
 import { noWorkingHours } from "../../constants/workingHoursData";
 import { workHoursTableColumns } from "../../constants/tableColumnsInfo";
+import {
+  CARBON_COST_STEP,
+  FINAL_RESULT_STEP,
+} from "../../constants/stepConstants";
 
 const WorkHours = () => {
   const dispatch = useDispatch();
@@ -42,12 +46,12 @@ const WorkHours = () => {
 
   const cancelAndPrevious = () => {
     dispatch(resetWorkingHours());
-    dispatch(setCurrentStep(1));
+    dispatch(setCurrentStep(CARBON_COST_STEP));
   };
 
   const saveAndNext = () => {
     dispatch(setIncludeAllHoursAndDays(checked));
-    dispatch(setCurrentStep(3));
+    dispatch(setCurrentStep(FINAL_RESULT_STEP));
   };
 
   const columnsOfTheTable = workHoursTableColumns.map((column) => ({

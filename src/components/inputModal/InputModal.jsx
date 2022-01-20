@@ -15,6 +15,7 @@ import "./InputModal.css";
 import Dragger from "antd/lib/upload/Dragger";
 import waze from "../../assets/waze.svg";
 import { setTravelData } from "../../lib/setTravelData";
+import { CARBON_COST_STEP } from "../../constants/stepConstants";
 
 const InputModal = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const InputModal = () => {
             }
             if (index === files.length - 1) {
               cleanUpData();
-              dispatch(setCurrentStep(1));
+              dispatch(setCurrentStep(CARBON_COST_STEP));
             }
           } catch (error) {
             setErrorMessage(error.message);
