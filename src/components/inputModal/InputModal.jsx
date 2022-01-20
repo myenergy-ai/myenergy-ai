@@ -86,11 +86,11 @@ const InputModal = () => {
     setFiles([]);
   };
 
-  const comingSoon = <p>Coming Soon...</p>;
+  const comingSoon = <p>Coming soon...</p>;
 
   return (
     <div className="inputModal flex flex-column align-center justify-center">
-      <h2>{!processing ? "Upload travel history" : "Processing result..."}</h2>
+      <h2>{!processing ? "Upload travel data" : "Processing result..."}</h2>
       {!processing && (
         <Dragger {...props} fileList={files}>
           <p className="ant-upload-drag-icon">
