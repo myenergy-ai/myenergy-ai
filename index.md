@@ -1,8 +1,8 @@
-# Myenery-ai Documentation
+# Myenergy-ai Documentation
 
-Myenergy-ai is an open source software developed by **Advanced Infrastructure Technology Ltd**, for calculating the carbon emitted by a user while traveling. The software takes your travel data, calculates the carbon emitted and plots in on a map for better visualization.
+Myenergy-ai is an open-source software developed by **`Advanced Infrastructure Technology Ltd`**, for calculating the carbon emitted by a user while traveling. The software takes your travel data, calculates the carbon emitted, and plots it on a map for better visualization.
 
-## Set Up
+## Set-Up
 
 - Open terminal in the appropriate folder.
 - Run this command. Make sure you are connected to the internet.
@@ -30,7 +30,7 @@ npm install --global yarn.
 yarn install
 ```
 
-- To use Map for data visualization you need to have a [mapbox](https://www.mapbox.com/) API KEY. To get that go to mapbox, sign in if you have an account or create one if you don't. Follow the steps and verify your email.
+- To use Map for data visualization you need to have a [Mapbox](https://www.mapbox.com/) API KEY. To get that go to Mapbox, sign in if you have an account, or create one if you don't. Follow the steps and verify your email.
 - After verification, scroll down to the **Default public token** and copy the token.
 - Now at the `src` folder level create a **.env.local** file and inside that paste - **REACT_APP_MAPBOX_API=API_KEY**, and replace **API_KEY** with the key you have copied.
 - To start the application in your local environment run
@@ -48,109 +48,28 @@ yarn start
 5. Click on **Next Step** button
 6. In this step, you can select the Delivery Method, Frequency, and File Type.
 7. Finally, click on **Create Export** button.
-8. In the downloaded **Takeout** folder, user needs to
-   go to **Location History** folder, then to
-   **Semantic Location History** folder.
-9. Now this folder consists of year wise location history of the
-   user. Each year folder has the monthly location history data in json format.
-10. User can upload single or multiple json files from these files.
+8. In the downloaded **Takeout** folder, the user needs to go to the **Location History** folder, then to the **Semantic Location History** folder.
+9. Now, this folder consists of the year-wise location history of the user.
+10. Each year folder has the monthly location history data in JSON format.
+11. Users can upload single or multiple JSON files
 
-## Other Data Support:
+**`Note: We only support data after 2019.`**
 
-- Customize your data according to the following schema.
+## Other Data Support
 
-```js
-{
-  timelineObjects: [
-    {
-      activitySegment: {
-        startLocation: {
-          latitudeE7: latitudeAndLongitudeFormat,
-          longitudeE7: latitudeAndLongitudeFormat,
-        },
-        endLocation: {
-          latitudeE7: latitudeAndLongitudeFormat,
-          longitudeE7: latitudeAndLongitudeFormat,
-        },
-        duration: {
-          startTimestampMs: timestampFormat,
-          endTimestampMs: timestampFormat,
-        },
-        distance: distanceFormat,
-        activityType: activityFormat,
-      },
-    },
-  ],
-};
-```
-
-- Latitude And Longitude Format
-
-```js
-const latitudeAndLongitudeFormat = {
-  supportsDataType: ["string", "number"],
-  exampleValues: [212287569, 21.2287569, "-1109036294", "-11.09036294"],
-};
-```
-
-- Timestamp Format
-
-```js
-const timestampFormat = {
-  supportsDataType: ["string", "number"],
-  exampleValues: [
-    "Sat Jan 26 2019 17:54:24 GMT+0530",
-    "December 17, 1995 13:24:00",
-    "1995-12-17T13:24:00",
-    "1622349967123",
-    "1647329763",
-  ],
-};
-```
-
-- Distance Format
-
-```js
-const distanceFormat = {
-  supportsDataType: ["string", "number"],
-  exampleValues: ["1538"],
-};
-```
-
-- Activity Type Format
-
-```js
-const activityFormat = {
-  mustBeAmongst: [
-    "FLYING",
-    "IN_BUS",
-    "IN_TRAIN",
-    "IN_PASSENGER_VEHICLE",
-    "MOTORCYCLING",
-  ],
-  caseSensitive: true,
-};
-```
+If the user wants to use location history from some other service, the user needs to structure that data according to the given schemas. You can find all the related schemas below.
 
 ## Dashboard Flow
 
-1. Landing page, use the Get Started button to start the process.
-2. In the InputModal component we have used file input with multiple upload options.
-3. Once the data is uploaded we read all the files one by one and check whether it has the travel data and filter out other irrelevant data and store only necessary data. Refer: `src/components/inputModal/InputModal.jsx` and `src/lib/handleReadingFiles.js`.
-4. After reading all the files we filter out the mode of transport provided, get the complete data of that mode and store it. Refer `src/constants/carbonCostInitialData.js`.
-5. Next we display the mode of transport gathered from the data and other information related to that mode of travel. We can update the name and carbon they emit based on our will. Refer `src/components/CarbonCost/CarbonCost.jsx`.
-6. The next step is setting up the work hours and date ranges to exclude from the input data. We have some initial values of the working hours, you can add a new hour range by clicking on + icons and the same goes for the date range. If you mistakenly add an overlapping hour range or date range it will be merged into one unit. We even have an option which will exclude all the hours and dates filter and include all the travel data. Refer `src/components/WorkHours/WorkHours.jsx`.
+1. Landing page, use the **`Get Started`** button to start the process.
+2. In the InputModal component, we have used file input with multiple upload options.
+3. Once the data is uploaded we read all the files one by one and check whether it has the travel data, filter out other irrelevant data, and store only necessary data. Refer: `src/components/inputModal/InputModal.jsx` and `src/lib/handleReadingFiles.js`.
+4. After reading all the files we filter out the mode of transport provided, get the complete data of that mode, and store it. Refer `src/constants/carbonCostInitialData.js`.
+5. Next, we display the mode of transport gathered from the data and other information related to that mode of travel. We can update the name and carbon they emit based on our will. Refer `src/components/CarbonCost/CarbonCost.jsx`.
+6. The next step is setting up the work hours and date ranges to exclude from the input data. We have some initial values of the working hours, you can add a new hour range by clicking on + icons and the same goes for the date range. If you mistakenly add an overlapping hour range or date range it will be merged into one unit. We even have an option that will exclude all the hours and dates filter and include all the travel data. Refer `src/components/WorkHours/WorkHours.jsx`.
 7. This is the step where we calculate the carbon cost based on the mode you have used and the distance you have traveled. Firstly we filter out the travels which are out of the range you have chosen and exclude the dates which you wanted to exclude. Then we segregate the data based on the mode of transport. Then we calculate the total carbon emission by adding the carbon cost for each object. Refer `src/components/FinalResult/FinalResult.jsx`. Refer `src/lib/splitDataIntoCategories.js`.
-8. You can download the final result in csv format. Refer `src/lib/downloadFinalResult.js`.
+8. You can download the final result in CSV format. Refer `src/lib/downloadFinalResult.js`.
 9. You can also plot the data on the map using the data we have stored in the different categories of travel mode. Refer `src/components/MapResult/MapResult.jsx`.
-
-### Note:
-
-- We only support data after 2019.
-- In the downloaded Takeout folder, user needs to go to Location History folder, then to Semantic Location History folder.
-- Now this folder consists of year wise location history of the user.
-- Each year folder has the monthly location history data in json format.
-- User can upload single or multiple json files.
 
 ## State Management
 
@@ -167,12 +86,12 @@ const activityFormat = {
 
 ### Carbon-Cost States:
 
-- **Carbon Costs (array of objects)**: It stores the user defined carbon cost value for the travel modes that are available in the data provided by the user. The initial value of this state is the same as the initial carbon cost state.
+- **Carbon Costs (array of objects)**: It stores the user-defined carbon cost value for the travel modes that are available in the data provided by the user. The initial value of this state is the same as the initial carbon cost state.
 - **Initial Carbon Costs (array of objects)**: It stores the standard carbon costs values for the travel modes that are available in the data provided by the user. If we don’t have the standard value of carbon cost for some travel mode it is set to zero. Users can set this value in the Adjust Carbon Costs step.
 
 ### Working Hours States:
 
-- **Working Times (array of objects)**: It stores the user defined working times. The array consists of eight objects, seven for the seven week days and one for the dates. The week day objects have day names and the start time - end time of their work. The last object consists of the date ranges to exclude. Initially, the working time is set to 09:00 AM to 05:00 PM and no date ranges are excluded.
+- **Working Times (array of objects)**:  It stores the user-defined working times. The array consists of eight objects, seven for the seven weekdays and one for the dates. The week-day objects have day names and the start time-end time of their work. The last object consists of the date ranges to exclude. Initially, the working time is set to 09:00 AM to 05:00 PM and no date ranges are excluded.
 - **Include all days and times (boolean)**: If this state is set to true then the above state holds no meaning, the final carbon cost will be calculated using the whole data.
 
 ## Schema Guide
@@ -298,7 +217,7 @@ const carbonCostFormat = {
 
 ### **3. Work Hours Schema**
 
-The working hours data should be according to the following format.
+The working hours' data should be according to the following format.
 
 - The workingHours array must contain exactly 8 objects.
 - Each object should have 2 keys, day and workingTime.
@@ -353,13 +272,13 @@ We love your input! We want to make contributing to this project as easy and tra
 - Proposing new features
 - Becoming a maintainer
 
-### We Develop with Github
+### We Develop with GitHub
 
-We use github to host code, to track issues and feature requests, as well as accept pull requests.
+We use github to host code, track issues, and feature requests, as well as accept pull requests.
 
-### We Use [Github Flow](https://guides.github.com/introduction/flow/index.html)
+### We Use [GitHub Flow](https://guides.github.com/introduction/flow/index.html)
 
-All Code Changes Happen Through Pull Requests. Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
+All Code Changes Happen Through Pull Requests. Pull requests are the best way to propose changes to the codebase (we use [GitHub Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
 
 1. Fork the repo and create your branch from `master`.
 2. If you've added code that should be tested, add tests.
@@ -368,26 +287,26 @@ All Code Changes Happen Through Pull Requests. Pull requests are the best way to
 5. Make sure your code lints.
 6. Issue that pull request!
 
-**Note: Make sure you remove irrelavent imports and console logs. If not, it may lead to errors while performing [Github Actions](https://github.com/myenergy-ai/myenergy-ai/actions).**
+**Note: Make sure you remove irrelevent imports and console logs. If not, it may lead to errors while performing [GitHub Actions](https://github.com/myenergy-ai/myenergy-ai/actions).**
 
 ### Any contributions you make will be under the MIT Software License
 
 In short, when you submit code changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers the project. Feel free to contact the maintainers if that's a concern.
 
-## Report bugs using Github's [issues](https://github.com/myenergy-ai/myenergy-ai/issues)
+## Report bugs using GitHub's [issues](https://github.com/myenergy-ai/myenergy-ai/issues)
 
 We use GitHub issues to track public bugs. Report a bug by [opening a new issue](); it's that easy!
 
 ### Write bug reports with detail, background, and sample code
 
-[This is the template](https://gist.github.com/carlo/3402842) of a bug report. Here's [another example from Andreas Larsen](https://gist.github.com/larsenwork/3f92a3adf79838abd7d6b15c5b74f7b0), an Frontend fanatic, type tinkerer, speaker supreme and open source optimist.
+[This is the template](https://gist.github.com/carlo/3402842) of a bug report. Here's [another example from Andreas Larsen](https://gist.github.com/larsenwork/3f92a3adf79838abd7d6b15c5b74f7b0), a Frontend fanatic, type tinkerer, speaker supreme, and open-source optimist.
 
 **Great Bug Reports** tend to have:
 
 - A quick summary and/or background
 - Steps to reproduce
   - Be specific!
-  - Give sample code if you can. [My stackoverflow question](http://stackoverflow.com/q/12488905/180626) includes sample code that _anyone_ with a base R setup can run to reproduce what I was seeing
+  - Give a sample code if you can. [My StackOverflow question](http://stackoverflow.com/q/12488905/180626) includes sample code that _anyone_ with a base R setup can run to reproduce what I was seeing
 - What you expected would happen
 - What actually happens
 - Sample Input you provided
@@ -398,8 +317,7 @@ People _love_ thorough bug reports. I'm not even kidding.
 ### Use a Consistent Coding Style
 
 - Naming Convention
-  - File, class, variable and functions must follow camcel-case format.
-  - CSS classnames must be according to [BEM naming](http://getbem.com/naming/).
+  - Files, classes, variables, and functions must follow camel-case format.
+  - CSS class names must be according to [BEM naming](http://getbem.com/naming/).
 - 2 spaces for indentation rather than tabs
 - Use [Ant Design](https://ant.design/) principles for designing.
-```
