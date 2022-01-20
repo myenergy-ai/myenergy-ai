@@ -1,6 +1,6 @@
 # Myenergy-ai Documentation
 
-Myenergy-ai is an open-source software developed by **`Advanced Infrastructure Technology Ltd`**, for calculating the carbon emitted by a user while traveling. The software takes your travel data, calculates the carbon emitted, and plots it on a map for better visualization.
+Myenergy-ai is an open-source software developed by **Advanced Infrastructure Technology Ltd**, for calculating the carbon emitted by a user while traveling. The software takes your travel data, calculates the carbon emitted, and plots it on a map for better visualization.
 
 ## Set-Up
 
@@ -45,7 +45,7 @@ yarn start
 2. Sign In using your account.
 3. Under create new export, click on **Deselect all**.
 4. Then, find the **Location History** option and select it.
-5. Click on **Next Step** button
+5. Click on the **Next Step** button
 6. In this step, you can select the Delivery Method, Frequency, and File Type.
 7. Finally, click on **Create Export** button.
 8. In the downloaded **Takeout** folder, the user needs to go to the **Location History** folder, then to the **Semantic Location History** folder.
@@ -61,7 +61,7 @@ If the user wants to use location history from some other service, the user need
 
 ## Dashboard Flow
 
-1. Landing page, use the **`Get Started`** button to start the process.
+1. Landing page, use the **Get Started** button to start the process.
 2. In the InputModal component, we have used file input with multiple upload options.
 3. Once the data is uploaded we read all the files one by one and check whether it has the travel data, filter out other irrelevant data, and store only necessary data. Refer: `src/components/inputModal/InputModal.jsx` and `src/lib/handleReadingFiles.js`.
 4. After reading all the files we filter out the mode of transport provided, get the complete data of that mode, and store it. Refer `src/constants/carbonCostInitialData.js`.
@@ -125,55 +125,55 @@ const locationHistoryData = {
 };
 ```
 
-The values should be in following format.
+The values should be in the following format.
 
 - latitudeAndLongitudeFormat
 
-```js
-const latitudeAndLongitudeFormat = {
-  supportsDataType: ["string", "number"],
-  supportsValueType: [212287569, 21.2287569, "-1109036294", "-11.09036294"],
-};
-```
+  ```js
+  const latitudeAndLongitudeFormat = {
+    supportsDataType: ["string", "number"],
+    supportsValueType: [212287569, 21.2287569, "-1109036294", "-11.09036294"],
+  };
+  ```
 
 - timestampFormat
 
-```js
-const timestampFormat = {
-  supportsDataType: ["string", "number"],
-  supportsValueType: [
-    "Sat Jan 26 2019 17:54:24 GMT+0530",
-    "December 17, 1995 13:24:00",
-    "1995-12-17T13:24:00",
-    "Number of milliseconds",
-    "Unix epoch time",
-  ],
-};
-```
+  ```js
+  const timestampFormat = {
+    supportsDataType: ["string", "number"],
+    supportsValueType: [
+      "Sat Jan 26 2019 17:54:24 GMT+0530",
+      "December 17, 1995 13:24:00",
+      "1995-12-17T13:24:00",
+      "Number of milliseconds",
+      "Unix epoch time",
+    ],
+  };
+  ```
 
 - distanceFormat
 
-```js
-const distanceFormat = {
-  supportsDataType: ["string", "number"],
-  supportsValueType: ["Distance in Meters"],
-};
-```
+  ```js
+  const distanceFormat = {
+    supportsDataType: ["string", "number"],
+    supportsValueType: ["Distance in Meters"],
+  };
+  ```
 
 - activityFormat
 
-```js
-const activityFormat = {
-  canBeAmong: [
-    "FLYING",
-    "IN_BUS",
-    "IN_TRAIN",
-    "IN_PASSENGER_VEHICLE",
-    "MOTORCYCLING",
-  ],
-  caseSensitive: true,
-};
-```
+  ```js
+  const activityFormat = {
+    canBeAmong: [
+      "FLYING",
+      "IN_BUS",
+      "IN_TRAIN",
+      "IN_PASSENGER_VEHICLE",
+      "MOTORCYCLING",
+    ],
+    caseSensitive: true,
+  };
+  ```
 
 ### **2. Travel Mode Schema**
 
@@ -189,31 +189,31 @@ const modesOfTransport = [
 ];
 ```
 
-The values should be in following format
+The values should be in the following format
 
-- modeNameFormat : This value will be used to match the activityType in the locationHistoryData passed.
-```js
-const modeNameFormat = {
-  type: "string",
-  examples: ["IN_BUS", "IN_TRAIN", "FLYING", "WALKING"]
-}
-```
+- modeNameFormat: This value will be used to match the activityType in the locationHistoryData passed.
+  ```js
+  const modeNameFormat = {
+    type: "string",
+    examples: ["IN_BUS", "IN_TRAIN", "FLYING", "WALKING"]
+  }
+  ```
 
-- travelModeFormat : This value will be used as display name for travel mode.
-```js
-const travelModeFormat = {
-  type: "string",
-  examples: ["Bus", "Train", "Plane", "Walk"]
-}
-```
+- travelModeFormat: This value will be used as a display name for travel mode.
+  ```js
+  const travelModeFormat = {
+    type: "string",
+    examples: ["Bus", "Train", "Plane", "Walk"]
+  }
+  ```
 
-- carbonCostFormat : This value will be used as the carbon cost of the travel mode.
-```js
-const carbonCostFormat = {
-  type: "number",
-  examples: [0.105, 0.041, 0.187, 0.11]
-}
-```
+- carbonCostFormat: This value will be used as the carbon cost of the travel mode.
+  ```js
+  const carbonCostFormat = {
+    type: "number",
+    examples: [0.105, 0.041, 0.187, 0.11]
+  }
+  ```
 
 ### **3. Work Hours Schema**
 
@@ -261,6 +261,155 @@ const workingHours = [
 ]
 ```
 
+## Data Connector SDK
+
+Developers can add their travel data which they may have captured from their application or from another service their application may have subscribed to. The only requirement for data ingestion is that the data must be supplied in a standard format which is explained clearly in the above sections of this document.
+
+**Note: The data passed to the below methods should be according to the schemas given above, otherwise the methods will throw *INVALID_SCHEMA_ERROR***
+
+- ### Location History
+  The following method can be used to set location history data.
+
+  ```js
+  /**
+  * @description The function takes the user data and stores it for further calculations.
+  * @param {Object} data The user travels data according to the schema.
+  * @param {Boolean} overrideTravelData
+  * @param {Boolean} overrideTravelModes
+  */
+  export const setTravelData = (
+    data,overrideTravelData,overrideTravelModes
+  )
+  ```
+
+- ### Travel Mode
+
+  Following methods can be used to set, get and update travel modes.
+
+  - **setTravelModes**: Sets new values of travel modes.
+    
+  ```js
+  /**
+  * @description Validates and adds the travel modes provided by the user
+  * @param {[Objects]} travelModes: list of objects containing travelMode, modeName and carbonCost
+  * @returns {
+      true: if travelModes schema is valid and travel modes are successfully added,
+      INVALID_SCHEMA_ERROR: if travelModes schema is not valid
+    }
+  */
+  export const setTravelModes = (travelModes)
+  ```
+
+  - **updateCarbonCosts**: Updates carbon cost of existing travel mode.
+
+  ```js
+  /**
+  * @description Updates the existing value of carbon cost
+  * @param {Object} updatedTravelMode: object containing travelMode, modeName and carbonCost
+  * @returns {
+      true: if param is valid and carbon cost is successfully updated,
+      INVALID_SCHEMA_ERROR: if updatedTravelMode schema is not valid
+    }
+  */
+  export const updateCarbonCosts = (updatedTravelMode)
+  ```
+
+  - **getTravelModes**: Returns the current value of travel modes
+
+  ```js
+  /**
+  * @description Getter method for travel modes
+  * @returns {[Objects]}
+  */
+  export const getTravelModes = ()
+  ```
+
+- ### Work Hours
+  Following methods can be used to set, get and update working hours.
+
+  - **setWorkingHours**: Sets new values of working hours
+
+  ```js
+  /** 
+  * @description Validates and adds the working hours provided by the user
+  * @param {[Objects]} workingHours: list of objects containing day and workingHour
+  * @returns {
+      true: if workingHours schema is valid and working hours are successfully added,
+      INVALID_SCHEMA_ERROR: if workingHours schema is not valid
+    }
+  */
+  export const setWorkingHours = (workingHours)
+  ```
+
+  - **updateWorkingHour**: Update the existing value of the working hour 
+
+  ```js
+  /**
+  * @description Updates the existing working hour
+  * @param {Object} updatedWorkingHour: object containing day and workingHour
+  * @returns {
+      true: if param is valid and working hour is successfully updated
+      INVALID_SCHEMA_ERROR: if updatedWorkingHour schema is not valid
+    }
+  */
+  export const updateWorkingHour = (updatedWorkingHour)
+  ```
+
+  - **getWorkingHours**: Returns the current value of working hours
+
+  ```js
+    /**
+  * @description Getter method for working hour
+  * @returns {[Objects]}
+  */
+  export const getWorkingHours = ()
+  ```
+
+- ### Final Carbon Cost
+  Following methods can be used to calculate total carbon cost, download the carbon cost data and convert carbon cost data to map format.
+
+  - **calculateCarbonFootprint**: To calculate the final carbon cost
+
+  ```js
+  /**
+  * @description The function returns the travelData passed by updating/adding the carbonCost to it.
+  * @param {[Object]} travelData Data taken from the user.
+  * @param {[Object]} travelMode The modes of transport that are required with modeName as activityType and carbonCost as the carbon the travel mode emits.
+  * @returns {[Object]}
+  */
+  export const calculateCarbonFootprint = (travelData, travelMode)
+  ```
+
+  - **downloadData**: To download final carbon cost data
+
+  ```js
+  /**
+  * @description The function starts downloading the data in CSV or JSON format.
+  * @param {[Object]} carbonCostFinalData The data with all required fields to be downloaded
+  * @param {Boolean} isFormatCSV download as CSV or JSON
+  */
+  export const downloadData = async (carbonCostFinalData, isFormatCSV = true)
+  ```
+
+  - **convertDataToMapFormat**: To convert data to map format, if the developer wants to visualize data on a map.
+
+  ```js
+    /**
+  * @description The function takes the array of objects and converts it to object with key as activityType and value as [Object] Object is the travelData which has the activityType as the key.
+  * @param {[Object]} updatedLocationDataWithCarbonCost Object must have an activityType and all other data like startLatitude, endLatitude...
+  * @returns {Object}
+  */
+  export const convertDataToMapFormat = (updatedLocationDataWithCarbonCost)
+  ```
+
+- ### Reset Data
+
+```js
+/**
+* The function resets all the data in the redux store to default values
+*/
+export const resetAllStates = ()
+```
 
 ## Contribution Guidelines
 
@@ -274,7 +423,7 @@ We love your input! We want to make contributing to this project as easy and tra
 
 ### We Develop with GitHub
 
-We use github to host code, track issues, and feature requests, as well as accept pull requests.
+We use GitHub to host code, track issues, and feature requests, as well as accept pull requests.
 
 ### We Use [GitHub Flow](https://guides.github.com/introduction/flow/index.html)
 
@@ -287,13 +436,13 @@ All Code Changes Happen Through Pull Requests. Pull requests are the best way to
 5. Make sure your code lints.
 6. Issue that pull request!
 
-**Note: Make sure you remove irrelevent imports and console logs. If not, it may lead to errors while performing [GitHub Actions](https://github.com/myenergy-ai/myenergy-ai/actions).**
+**Note: Make sure you remove irrelevant imports and console logs. If not, it may lead to errors while performing [GitHub Actions](https://github.com/myenergy-ai/myenergy-ai/actions).**
 
 ### Any contributions you make will be under the MIT Software License
 
 In short, when you submit code changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers the project. Feel free to contact the maintainers if that's a concern.
 
-## Report bugs using GitHub's [issues](https://github.com/myenergy-ai/myenergy-ai/issues)
+## Report bugs using GitHub's [Issues](https://github.com/myenergy-ai/myenergy-ai/issues)
 
 We use GitHub issues to track public bugs. Report a bug by [opening a new issue](); it's that easy!
 
@@ -308,7 +457,7 @@ We use GitHub issues to track public bugs. Report a bug by [opening a new issue]
   - Be specific!
   - Give a sample code if you can. [My StackOverflow question](http://stackoverflow.com/q/12488905/180626) includes sample code that _anyone_ with a base R setup can run to reproduce what I was seeing
 - What you expected would happen
-- What actually happens
+- What happens
 - Sample Input you provided
 - Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
 
@@ -317,7 +466,7 @@ People _love_ thorough bug reports. I'm not even kidding.
 ### Use a Consistent Coding Style
 
 - Naming Convention
-  - Files, classes, variables, and functions must follow camel-case format.
+  - Files, classes, variables, and functions must follow the camel-case format.
   - CSS class names must be according to [BEM naming](http://getbem.com/naming/).
 - 2 spaces for indentation rather than tabs
 - Use [Ant Design](https://ant.design/) principles for designing.
