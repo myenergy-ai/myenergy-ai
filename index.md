@@ -427,6 +427,7 @@ Myenergy.ai uses kepler.gl for map visualisation. Kepler.gl is a high-performanc
   ```
 
 - ### Removing layers
+
   ```js
   /**
   * @description This function removes the layer whose index is passed.
@@ -437,6 +438,7 @@ Myenergy.ai uses kepler.gl for map visualisation. Kepler.gl is a high-performanc
   ```
 
 - ### Removing datasets
+
   ```js
   /**
   * @description The function removes the uploaded datasets from the map.
@@ -530,6 +532,7 @@ Myenergy.ai uses kepler.gl for map visualisation. Kepler.gl is a high-performanc
   Filters are used for filtering the data uploaded in the layers section. Many times during the data analysis process, we have to filter our dataset to gain insights from it. The following functions give programmatic access to developers to create, read, update or delete filters.
 
   - **addFilterToMap**
+
   ```js
   /**
   * @description The function adds filters to the data set.
@@ -540,6 +543,7 @@ Myenergy.ai uses kepler.gl for map visualisation. Kepler.gl is a high-performanc
   ```
 
   - **removeFilterFromMap**
+
   ```js
   /**
   * @description The function removes the filter of the given index.
@@ -550,6 +554,7 @@ Myenergy.ai uses kepler.gl for map visualisation. Kepler.gl is a high-performanc
   ```
 
   - **updateFilter**
+  
   ```js
   /**
   * @description The function updates the filter.
