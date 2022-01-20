@@ -4,14 +4,14 @@ import { useNavigate } from "react-router";
 import { QuestionCircleOutlined, GithubOutlined } from "@ant-design/icons";
 import Help from "../Help/Help";
 import { useDispatch } from "react-redux";
-import { setHelpModalVisisbility } from "../../redux/reducers/appSlice";
+import { setHelpModalVisibility } from "../../redux/reducers/appSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleOpenHelp = () => {
-    dispatch(setHelpModalVisisbility(true));
+    dispatch(setHelpModalVisibility(true));
   };
 
   return (

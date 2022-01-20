@@ -1,8 +1,8 @@
 import { INVALID_SCHEMA_ERROR } from "./utils";
 /**
- * @description The function returns the travelData passes by updating/adding the carbonCost to it.
+ * @description The function returns the travelData passed by updating/adding the carbonCost to it.
  * @param {[Object]} travelData Data taken from the user.
- * @param {[Object]} travelMode The modes of transports that are required with modeName as activityType and carbonCost as the carbon the travel mode emits.
+ * @param {[Object]} travelMode The modes of transport that are required with modeName as activityType and carbonCost as the carbon the travel mode emits.
  * @returns {[Object]}
  */
 export const calculateCarbonFootprint = (travelData, travelMode) => {

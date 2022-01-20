@@ -24,7 +24,7 @@ const startAndEndTimeKey = getStartAndEndTimeKey();
 
 /**
  * @description The function takes the activityType and stores it with appropriate fields.
- * @param {[String]} modeOfTransport The activityType from te user data
+ * @param {[String]} modeOfTransport The activityType from the user data
  */
 const addTravelModesToExistingModes = (modeOfTransport) => {
   let keys = store.getState().carbonCost.carbonCosts.length;
@@ -92,7 +92,7 @@ const convertTime = (value) => {
 };
 
 /**
- * @description The function takes the user data as stores it for further calculations.
+ * @description The function takes the user data and stores it for further calculations.
  * @param {Object} data The user travel data according to the schema.
  * @param {Boolean} overrideTravelData
  * @param {Boolean} overrideTravelModes

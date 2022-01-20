@@ -11,31 +11,31 @@ export const finalResultCarbonCostTableColumns = [
     },
   },
   {
-    title: "Start Latitude",
+    title: "Start latitude",
     dataIndex: "startLatitude",
     key: "sLat",
     width: 110,
   },
   {
-    title: "Start Longitude",
+    title: "Start longitude",
     dataIndex: "startLongitude",
     key: "sLong",
     width: 110,
   },
   {
-    title: "End Latitude",
+    title: "End latitude",
     dataIndex: "endLatitude",
     key: "eLat",
     width: 110,
   },
   {
-    title: "End Longitude",
+    title: "End longitude",
     dataIndex: "endLongitude",
     key: "eLong",
     width: 110,
   },
   {
-    title: "Start Time",
+    title: "Start time",
     dataIndex: "startTimestamp",
     key: "sTime",
     width: 210,
@@ -46,7 +46,7 @@ export const finalResultCarbonCostTableColumns = [
     ),
   },
   {
-    title: "End Time",
+    title: "End time",
     dataIndex: "endTimestamp",
     key: "eTime",
     width: 210,
@@ -64,13 +64,13 @@ export const finalResultCarbonCostTableColumns = [
     render: (text) => <span>{text.toFixed(3)}</span>,
   },
   {
-    title: "Activity Type",
+    title: "Activity type",
     dataIndex: "activityType",
     key: "actType",
     width: 170,
   },
   {
-    title: "Carbon Footprint",
+    title: "Carbon footprint",
     dataIndex: "carbonCost",
     key: "carbonCost",
     width: 100,
@@ -85,13 +85,13 @@ export const finalResultCarbonCostTableColumns = [
 
 export const finalResultTravelModeTableColumns = [
   {
-    title: "Travel Mode",
+    title: "Travel mode",
     dataIndex: "travelMode",
     key: "travelMode",
     width: "60%",
   },
   {
-    title: "Carbon Footpint:kg/person/km",
+    title: "Carbon footprint:kg/person/km",
     dataIndex: "carbonCost",
     key: "carbonCost",
     width: "30%",
@@ -106,7 +106,7 @@ export const workHoursTableColumns = [
     width: "50%",
   },
   {
-    title: "Working Times",
+    title: "Working times",
     dataIndex: "workingTime",
     key: "workingTimes",
     editable: true,
@@ -117,7 +117,7 @@ export const workHoursTableColumns = [
 
 export const carbonCostTableColumns = [
   {
-    title: "Travel Mode",
+    title: "Travel mode",
     dataIndex: "travelMode",
     key: "travelMode",
     align: "center",
@@ -126,7 +126,7 @@ export const carbonCostTableColumns = [
     type: "text",
   },
   {
-    title: "Carbon Footprint: kg/person/km",
+    title: "Carbon footprint: kg/person/km",
     dataIndex: "carbonCost",
     key: "carbonCost",
     editable: true,

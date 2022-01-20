@@ -29,7 +29,7 @@ export const addKeysToObjects = (list) => {
 };
 
 export const INVALID_SCHEMA_ERROR = new Error(
-  "INVALID SCHEMA: The schema of object paramater passed is not in valid format"
+  "INVALID SCHEMA: The schema of object parameter passed is not in valid format"
 );
 
 /**
@@ -63,13 +63,13 @@ export const filterOutOnlyTravelData = (data) => {
 };
 
 /**
- * @description The function returns the key to the array of object from the schema.
+ * @description The function returns the key to the array of objects from the schema.
  * @returns {String}
  */
 export const getKeyOfArrayOfObjectHavingData = () => Object.keys(schema)[0];
 
 /**
- * @description The function return the key to the object that has travel data from the schema.
+ * @description The function returns the key to the object that has travel data from the schema.
  * @returns {String}
  */
 export const getKeyOfObjectHavingTravelData = () =>

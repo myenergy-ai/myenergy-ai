@@ -1,6 +1,6 @@
 ## Introduction
 
-**Myenergy-ai** is an open source software developed by [Advanced Infrastructure Technology Ltd](https://www.advanced-infrastructure.co.uk/), for calculating the carbon emitted by a user while traveling. The software takes your travel data, calculates the carbon emitted and plots in on a map for better visualization.
+**Myenergy-ai** is an open source software developed by [Advanced Infrastructure Technology Ltd](https://www.advanced-infrastructure.co.uk/), for calculating the carbon emitted by a user while travelling. The software takes your travel data, calculates the carbon emitted and plots in on a map for better visualisation.
 
 ## Live Deploy
 
@@ -34,7 +34,7 @@ npm install --global yarn.
 yarn install
 ```
 
-- To use Map for data visualization you need to have a [mapbox](https://www.mapbox.com/) API KEY. To get that go to mapbox, sign in if you have an account or create one if you don't. Follow the steps and verify your email.
+- To use Map for data visualisation you need to have a [mapbox](https://www.mapbox.com/) API KEY. To get that go to mapbox, sign in if you have an account or create one if you don't. Follow the steps and verify your email.
 - After verification, scroll down to the **Default public token** and copy the token.
 - Now at the `src` folder level create a **.env.local** file and inside that paste - **REACT_APP_MAPBOX_API=API_KEY**, and replace **API_KEY** with the key you have copied.
 - To start the application in your local environment run
@@ -43,13 +43,13 @@ yarn install
 yarn start
 ```
 
-## Conrtribution
+## Contribution
 
 - Raise an issue
 - Add new feature
 - Maintain the codebase
 
-For more information about the policies read [this](https://github.com/myenergy-ai/myenergy-ai/blob/dev/CONTRIBUTING.md).
+For more information about the policies read [this](https://github.com/myenergy-ai/myenergy-ai/blob/master/CONTRIBUTING.md).
 
 ## Platforms Supported
 
@@ -60,7 +60,7 @@ We will soon add support for other platforms.
 
 ##### If you want to use application with other platforms data:
 
-- Customize your data according to the following schema.
+- Customise your data according to the following schema.
 
 ```js
 {

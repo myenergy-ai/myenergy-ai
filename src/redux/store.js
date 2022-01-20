@@ -19,7 +19,7 @@ const store = configureStore({
   },
 
   /**
-   * Middlewares used by kepler gl
+   * Middleware used by kepler gl
    */
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
