@@ -73,7 +73,7 @@ const WorkHours = () => {
   return (
     <div className="workHours__container">
       <div className="workHours__top">
-        <h2 className="workHours__heading">Set Work Hours</h2>
+        <h2 className="workHours__heading">Set work hours</h2>
 
         <p className="workHours__info">
           Work hours are used to set the hours for which you want to include the

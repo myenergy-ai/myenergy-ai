@@ -71,14 +71,14 @@ const GetStarted = () => {
                   2
                 </Button>
 
-                <p>Adjust carbon footprint</p>
+                <p>Adjust carbon footprints</p>
               </div>
               <div className="getStarted__userStep flex">
                 <Button type="primary" shape="circle">
                   4
                 </Button>
 
-                <p>Download results</p>
+                <p>Visualise data</p>
               </div>
             </div>
           </div>
