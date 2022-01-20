@@ -211,7 +211,7 @@ const FinalResult = () => {
         <div className="finalResult">
           <div className="finalResult__container">
             <div className="finalResult__header flex flex-column align-center">
-              <h2>Your Carbon Footprint</h2>
+              <h2>Visualise data</h2>
               <p>
                 {!includeAllHoursAndDays && "Work hours set to "}
                 {includeAllHoursAndDays
