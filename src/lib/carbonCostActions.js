@@ -7,7 +7,7 @@ import { INVALID_SCHEMA_ERROR, isKeyValid } from "./utils";
 import { addKeysToObjects } from "./utils";
 
 /**
- * @description The function return whether the fields of the objects are valid.
+ * @description The function returns whether the fields of the objects are valid.
  * @param {Object} travelMode Object provided by the user
  * @returns {Boolean}
  */
@@ -52,7 +52,7 @@ function isTravelModeSchemaValid(travelModes) {
  * @description Validates and adds the travel modes provided by the user
  * @param {[Objects]} travelModes : list of objects containing travelMode, modeName and carbonCost
  * @returns {
- *  true: if travelModes schema is valid and travel modes are succesfully added
+ *  true: if travelModes schema is valid and travel modes are successfully added
  *  INVALID_SCHEMA_ERROR: if travelModes schema is not valid
  * }
  */
@@ -69,7 +69,7 @@ export const setTravelModes = (travelModes) => {
  * @description Updates the existing value of carbon cost
  * @param {Object} updatedTravelMode : object containing travelMode, modeName and carbonCost
  * @returns {
- *  true: if param is valid and carbon cost is succesfully updated
+ *  true: if param is valid and carbon cost is successfully updated
  *  INVALID_SCHEMA_ERROR: if updatedTravelMode schema is not valid
  * }
  */

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import {
   setCurrentStep,
   setError,
-  setHelpModalVisisbility,
+  setHelpModalVisibility,
 } from "../../../redux/reducers/appSlice";
 import { resetAllStates } from "../../../lib/resetAllStates";
 
@@ -14,7 +14,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     resetAllStates();
-    dispatch(setHelpModalVisisbility(false));
+    dispatch(setHelpModalVisibility(false));
     dispatch(setError(""));
     dispatch(setCurrentStep(0));
   }, [dispatch]);

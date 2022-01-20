@@ -9,7 +9,7 @@ import { INVALID_SCHEMA_ERROR } from "./utils";
 import { validateLatAndLan } from "./utils";
 
 /**
- * @description The function takes the obejct with key and activityMode and returns the obejct with same key and value as [String].
+ * @description The function takes the object with key and activityMode and returns the object with the same key and value as [String].
  * @param {Object} data Data to be mapped on the map
  * @returns {Object}
  */
@@ -57,7 +57,7 @@ const validateInputData = (data) => {
 };
 
 /**
- * @description The function checks whether the carbon Cost data has required fields and has correct format.
+ * @description The function checks whether the carbon Cost data has required fields and has the correct format.
  * @param {[Object]} data travelMode data
  * @returns {Boolean}
  */
@@ -77,8 +77,8 @@ const validateCarbonCost = (data) => {
 /**
  * @description The function plots the data to the map
  * @param {Object} data Object with key as activityType and value as [Object] Object with travel data
- * @param {[Obejct]} carbonCost Object with modeName, carbonCost and travelMode
- * @param {Obejct} options Optional example 
+ * @param {[Object]} carbonCost Object with modeName, carbonCost and travelMode
+ * @param {Object} options Optional example 
  * const options = {
     tooltip: {
       "DATA_ID": ["fields_in_the_data_set",..],

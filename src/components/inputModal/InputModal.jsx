@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import {
   setCurrentStep,
   setError,
-  setHelpModalVisisbility,
+  setHelpModalVisibility,
 } from "../../redux/reducers/appSlice";
 import "./InputModal.css";
 import Dragger from "antd/lib/upload/Dragger";
@@ -113,7 +113,7 @@ const InputModal = () => {
       <div className="inputModal__supportedPlatforms flex align-center">
         <p>Supported platforms:</p>
         <GoogleOutlined
-          onClick={() => dispatch(setHelpModalVisisbility(true))}
+          onClick={() => dispatch(setHelpModalVisibility(true))}
         />
         <Popover content={comingSoon}>
           <AppleOutlined />

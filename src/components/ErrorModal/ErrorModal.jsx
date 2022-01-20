@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { LOCATION_DATA_STEP } from "../../constants/stepConstants";
 import { resetAllStates } from "../../lib/resetAllStates";
 
-const ErrorModal__ = () => {
+const ErrorModal = () => {
   const [popOverForIssueVisible, setPopOverForIssueVisible] = useState(false);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const ErrorModal__ = () => {
   const [instructionsShown, setInstructionsShown] = useState(false);
 
   /**
-   * Funtion to close the modal and clean up the data.
+   * Function to close the modal and clean up the data.
    */
   const handleExit = () => {
     resetAllStates();
@@ -30,7 +30,7 @@ const ErrorModal__ = () => {
   };
 
   /**
-   * Funtion to show the raise issue option
+   * Function to show the raise issue option
    */
   const raiseAnIssue = (
     <>
@@ -131,4 +131,4 @@ const ErrorModal__ = () => {
   );
 };
 
-export default ErrorModal__;
+export default ErrorModal;

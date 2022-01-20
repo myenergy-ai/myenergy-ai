@@ -72,14 +72,14 @@ const WorkHours = () => {
         <h2 className="workHours__heading">Set Work Hours</h2>
 
         <p className="workHours__info">
-          Work hours is used to set the hours for which you want to include the
-          travel data. For each day of the week you can customize the hours. You
-          can add a new and update or remove the existing hours. If you wish to
-          exclude the whole day remove all the ranges from that day. For
-          removing a range of dates from your travel data update the Date ranges
-          to exclude by setting the start and end dates. To include all the
-          travel data check the box at bottom which says Want to include all the
-          data. <br />
+          Work hours are used to set the hours for which you want to include the
+          travel data. For each day of the week, you can customise the hours.
+          You can add a new and update or remove the existing hours. If you wish
+          to exclude the whole day and remove all the ranges from that day. For
+          removing a range of dates from your travel data, update the Date
+          ranges to exclude by setting the start and end dates. To include all
+          the travel data, check the box at the bottom which says 'Want to
+          include all the data'. <br />
           Note: The dates or hours range would be merged if you select
           overlapping ranges.
         </p>
@@ -105,7 +105,7 @@ const WorkHours = () => {
           Cancel
         </Button>
         <Button type="primary" onClick={saveAndNext}>
-          Save & Next
+          Next
         </Button>
       </div>
     </div>

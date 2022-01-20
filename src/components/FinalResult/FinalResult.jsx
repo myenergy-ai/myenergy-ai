@@ -44,7 +44,7 @@ const FinalResult = () => {
     .toFixed(2);
 
   /**
-   * Clean up data and move to previous step.
+   * Clean up data and move to the previous step.
    */
   const moveToPreviousStep = () => {
     dispatch(setDataToMap(null));
@@ -53,7 +53,7 @@ const FinalResult = () => {
   };
 
   /**
-   * Move to next step.
+   * Move to the next step.
    */
   const moveToMap = () => {
     setCarbonCostFinalData([]);
@@ -83,7 +83,7 @@ const FinalResult = () => {
 
       const daysYouHaveWorked = daysWithWorkingHours.map((day) => day.key % 7);
 
-      let hoursYouHaveWorkedForAday = daysWithWorkingHours.map((day) => ({
+      let hoursYouHaveWorkedForADay = daysWithWorkingHours.map((day) => ({
         key: day.key % 7,
         hour: day.workingTime.split(";").map((times) =>
           times
@@ -118,7 +118,7 @@ const FinalResult = () => {
           new Date(parseInt(data.startTimestamp)).getHours() * 100 +
           new Date(parseInt(data.startTimestamp)).getMinutes();
 
-        const startDayOfTravelWorkingHours = hoursYouHaveWorkedForAday.find(
+        const startDayOfTravelWorkingHours = hoursYouHaveWorkedForADay.find(
           (hour) => hour.key === startDayOfTheTravel
         );
 
@@ -126,7 +126,7 @@ const FinalResult = () => {
           new Date(parseInt(data.endTimestamp)).getHours() * 100 +
           new Date(parseInt(data.endTimestamp)).getMinutes();
 
-        const endDayOfTravelWorkingHours = hoursYouHaveWorkedForAday.find(
+        const endDayOfTravelWorkingHours = hoursYouHaveWorkedForADay.find(
           (hour) => hour.key === endDayOfTheTravel
         );
 
@@ -249,7 +249,7 @@ const FinalResult = () => {
               </h3>
             </div>
             <div className="finalResult__totalCarbon">
-              <h3>This set of results uses the Carbon Footprints</h3>
+              <h3>The carbon footprint used for calculations</h3>
               <Table
                 columns={costPerModeTableColumns}
                 dataSource={carbonCostData}
@@ -260,7 +260,7 @@ const FinalResult = () => {
               <div className="finalResult__totalCarbonButtons flex justify-end">
                 {carbonCostFinalData.length >= 1 && (
                   <Button type="primary" onClick={moveToMap}>
-                    Visualize Results
+                    Visualise results
                   </Button>
                 )}
                 {carbonCostFinalData.length >= 1 && (

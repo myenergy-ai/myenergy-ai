@@ -3,16 +3,16 @@ import { Modal } from "antd";
 import "./Help.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectHelpModalVisisbility,
-  setHelpModalVisisbility,
+  selectHelpModalVisibility,
+  setHelpModalVisibility,
 } from "../../redux/reducers/appSlice";
 
 const Help = () => {
   const dispatch = useDispatch();
   const handleCloseHelp = () => {
-    dispatch(setHelpModalVisisbility(false));
+    dispatch(setHelpModalVisibility(false));
   };
-  const isVisible = useSelector(selectHelpModalVisisbility);
+  const isVisible = useSelector(selectHelpModalVisibility);
   return (
     <Modal
       className="help"
@@ -31,15 +31,15 @@ const Help = () => {
             web browser and nothing is uploaded to our servers. However, be
             warned that this does mean that if you refresh the page at any time,
             you will have to start again. So, please let the tool finish the job
-            it is working on if you want to download your data.
+            it is working, if you want to download your data.
           </p>
         </div>
 
         <div className="help__steps">
           <p>
-            <span>1. Upload Travel Data:</span> allows you to upload your travel
+            <span>1. Upload travel data:</span> allows you to upload your travel
             data for Carbon Footprint calculation. It accepts Google location
-            history. If it cannot work out how to format data it will tell you.
+            history. If it cannot work out how to format data, it will tell you.
             You can upload multiple files - they will be merged into one large
             file. The system will attempt to merge duplicate data where it can.
             The system will estimate how long the calculation will take, if it
@@ -76,7 +76,7 @@ const Help = () => {
                 and <strong>File Type</strong>.
               </li>
               <li>
-                Finally, click on <strong>Create Export</strong> button.
+                Finally, click on the <strong>Create Export</strong> button.
               </li>
               <li>
                 In the downloaded <strong>Takeout</strong> folder, user needs to
@@ -89,7 +89,7 @@ const Help = () => {
                 json format.
               </li>
               <li>
-                User can upload single or multiple json files from these files.
+                Users can upload single or multiple json files from these files.
               </li>
             </ul>
             <p>
@@ -99,20 +99,20 @@ const Help = () => {
         </div>
         <div className="help__steps">
           <p>
-            <span>2. Adjust Carbon Footprint:</span> allows you to change the
+            <span>2. Adjust carbon footprint:</span> allows you to change the
             Carbon Footprint Calculation or to reset to default.
           </p>
         </div>
         <div className="help__steps">
           <p>
-            <span>3. Set Work Hours:</span> allows you to change the work hours
+            <span>3. Set work hours:</span> allows you to change the work hours
             for which you want the system to calculate your Carbon Footprint.
           </p>
         </div>
         <div className="help__steps">
           <p>
-            <span>4. Visualize Data:</span> allows you to download the results
-            of the current calculation or you can visualize it on map.
+            <span>4. Visualise data:</span> allows you to download the results
+            of the current calculation, or you can visualise it on a map.
           </p>
         </div>
       </div>

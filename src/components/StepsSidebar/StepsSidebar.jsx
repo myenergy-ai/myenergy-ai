@@ -42,10 +42,10 @@ const StepsSidebar = () => {
           onChange={handleChange}
           status={error}
         >
-          <Step disabled title="Upload Travel Data" />
-          <Step disabled title="Adjust Carbon Footprints" />
-          <Step disabled title="Set Work Hours" />
-          <Step disabled title="Visualize Data" />
+          <Step disabled title="Upload travel data" />
+          <Step disabled title="Adjust carbon footprints" />
+          <Step disabled title="Set work hours" />
+          <Step disabled title="Visualise data" />
         </Steps>
       </div>
     </div>

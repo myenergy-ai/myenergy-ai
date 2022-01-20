@@ -42,7 +42,7 @@ const GetStarted = () => {
           <div className="getStarted__main flex justify-between align-items-top flex-column">
             <h2>Analyse the carbon content of your travel</h2>
             <p>
-              myenergy.ai is an secure, opensource tool that makes it easy to
+              myenergy.ai is a secure, open-source tool that makes it easy to
               asses the carbon content of every journey recorded in your Google,
               Waze or Apple location history. Giving you personalised insights
               to better understand your carbon footprint.
@@ -55,7 +55,7 @@ const GetStarted = () => {
                   1
                 </Button>
 
-                <p>Upload Travel Data</p>
+                <p>Upload travel data</p>
               </div>
               <div className="getStarted__userStep flex">
                 <Button type="primary" shape="circle">
@@ -71,7 +71,7 @@ const GetStarted = () => {
                   2
                 </Button>
 
-                <p>Adjust Carbon Footprint</p>
+                <p>Adjust carbon footprint</p>
               </div>
               <div className="getStarted__userStep flex">
                 <Button type="primary" shape="circle">

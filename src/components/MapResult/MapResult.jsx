@@ -44,7 +44,7 @@ const MapResult = () => {
           dispatch(setCurrentStep(FINAL_RESULT_STEP));
         }}
       >
-        Go Back
+        Go back
       </Button>
       <KeplerGl
         id="carbonCost"

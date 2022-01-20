@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   currentStep: 0,
   error: "",
-  helpModalVisisbility: false,
+  helpModalVisibility: false,
 };
 
 export const appSlice = createSlice({
@@ -16,18 +16,18 @@ export const appSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
-    setHelpModalVisisbility: (state, action) => {
-      state.helpModalVisisbility = action.payload;
+    setHelpModalVisibility: (state, action) => {
+      state.helpModalVisibility = action.payload;
     },
   },
 });
 
-export const { setCurrentStep, setError, setHelpModalVisisbility } =
+export const { setCurrentStep, setError, setHelpModalVisibility } =
   appSlice.actions;
 
 export const selectCurrentStep = (state) => state.app.currentStep;
 export const selectError = (state) => state.app.error;
-export const selectHelpModalVisisbility = (state) =>
-  state.app.helpModalVisisbility;
+export const selectHelpModalVisibility = (state) =>
+  state.app.helpModalVisibility;
 
 export default appSlice.reducer;
