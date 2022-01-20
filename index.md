@@ -411,6 +411,230 @@ Developers can add their travel data which they may have captured from their app
 export const resetAllStates = ()
 ```
 
+## Visualization SDK
+
+Myenergy.ai uses kepler.gl for map visualisation. Kepler.gl is a high-performance web-based tool created by the Uber’s Visualization Team for visual exploration of large scale geospatial datasets.
+
+- ### Customising Maps in kepler.gl through myenergy.ai: Layers
+  A layer in the kepler.gl  map is a layer of visualisation that can be created, modified, and deleted according to the use case.  Kepler provides many types of layers that you can create for data analysis. Documentation on all the types of layers that are compatible can be found [here](https://docs.kepler.gl/docs/user-guides/c-types-of-layers).
+
+  ```js
+  /**
+  * @description The function adds a new layer to the map.
+  * @param {Object} config The config containing data, columns, style and other required config fields.
+  */
+  export const addLayerToMap = (config)
+  ```
+
+- ### Removing layers
+  ```js
+  /**
+  * @description This function removes the layer whose index is passed.
+  * @param {Number} index Index of the layer to remove
+  * @returns nothing
+  */
+  export const removeLayerFromMap = (index)
+  ```
+
+- ### Removing datasets
+  ```js
+  /**
+  * @description The function removes the uploaded datasets from the map.
+  * @param {String} dataId ID of the data set. It is the by default the activityType given in the data set
+  * @returns returns nothing
+  */
+  export const removeDataFromMap = (dataId)
+  ```
+
+- ### Adding carbon footprint data to the map
+  If the developer is not aware of the configurations and the schema kepler needs to visualise data, they can pass the data object having key as activityType and value as array of objects. Each object having start and end location, start and end time, carbon footprint and other information as well. We will convert it to Kepler compatible format and display it on the map. To customise the visuals developer can pass options with different parameters. Developers can’t pass custom colours as kepler doesn’t support it. They have a predefined set of colours, you can find it [here](https://github.com/keplergl/kepler.gl/blob/master/src/constants/custom-color-ranges.js).
+
+  ```js
+  /**
+  * @description The function plots the data to the map
+  * @param {Object} data Object with key as activityType and value as [Object] Object with travel data
+  * @param {[Object]} carbonCost Object with modeName, carbonCost and travelMode
+  * @param {Object} options Optional example
+  * const options = {
+      tooltip: {
+        "DATA_ID": ["fields_in_the_data_set",..],
+      },
+      filters: [
+        {
+          "dataId": ["data_set_name",..],
+          "id": string,
+          "name": ["name",..],
+          "type": "range",
+          "value": [min, max],
+        }
+      ],
+      mapState: {
+        "latitude": "number",
+        "longitude": "number",
+        "zoom": number,
+      },
+      mapStyle: {
+        "styleType": "dark, light, Terrain",
+        "visibleLayerGroups": {
+          "label": boolean,
+          "road": boolean,
+          "border": boolean,
+          "building": boolean,
+          "water": boolean,
+          "land": boolean,
+          "3d building": boolean
+        },
+        "threeDBuildingColor": [
+          number,..
+        ],
+      },
+      color: [30, 150, 190],
+      thickness: number,
+      colorRange: {
+        "name": "Uber Viz Diverging 2.5",
+        "type": "DIV",
+        "category": "Uber",
+        "colors": [
+          "#C22E00",
+          "#D45F39",
+          "#E68F71",
+          "#F8C0AA",
+          "#BAE1E2",
+          "#7CC7CB",
+          "#3EADB3",
+          "#00939C",
+        ].reverse(),
+      },
+      colorField: {
+        "name": "data_set_field",
+        "type": "field_data_type",
+      }
+    };
+  */
+  export const plotDataToMap = (data, carbonCost, options = null)
+  ```
+
+- ### Data Table
+  If the uploaded GIS data has to be visualised in a form of a table, developers can invoke the below function which uses a table component to visualise the data.
+
+  ```js
+  /**
+  * @description the function pops up the table with the data from the dataset with dataId
+  * @param {String} dataId The id of the dataset. It is the by default the activityType given in the data set
+  * @returns nothing
+  */
+  export const showDataSet = (dataId)
+  ```
+
+- ### Filters
+  Filters are used for filtering the data uploaded in the layers section. Many times during the data analysis process, we have to filter our dataset to gain insights from it. The following functions give programmatic access to developers to create, read, update or delete filters.
+
+  - **addFilterToMap**
+  ```js
+  /**
+  * @description The function adds filters to the data set.
+  * @param {String} dataId The id of the data set.It is the by default the activityType given in the data set
+  * @returns nothing
+  */
+  export const addFilterToMap = (dataId)
+  ```
+
+  - **removeFilterFromMap**
+  ```js
+  /**
+  * @description The function removes the filter of the given index.
+  * @param {Number} index Index of the filter to remove.
+  * @returns nothing
+  */
+  export const removeFilterFromMap = (index)
+  ```
+
+  - **updateFilter**
+  ```js
+  /**
+  * @description The function updates the filter.
+  * @param {Number} index Index of the filter to be updated
+  * @param {String} props prop of filter, eg. "dataId", "name", "value"
+  * @param {String} value value of the updated field
+  * @param {Number} valueIndex dataId index
+  * @returns nothing
+  */
+  export const updateFilter = (index, props, value, valueIndex)
+  ```
+
+- ### Base Map
+  The basemap is the map the user sees in the background without any data. We’ve created wrapper functions for developers to set themes and the interface of the basemap as per their requirements. Some of these functions are - 
+
+  ```js
+  /**
+  * @description This function adds a new custom map style.
+  * @param {Object} inputStyle
+  * inputStyle.url - style url e.g. `'mapbox://styles//xxxxxyyyyzzz'`
+  * inputStyle.id - style id e.g. `'custom_style_1'`
+  * inputStyle.style - actual mapbox style json
+  * inputStyle.label - style name
+  * inputStyle.accessToken - mapbox access token
+  * inputStyle.icon - icon image data url
+  * @param {Object} mapStyle style for the map.
+  * @returns nothing
+  */
+  export const addNewMapStyle = (inputStyle, mapStyle)
+  ```
+
+  The base layer is provided by mapbox which is like Photoshop, for maps. To read more about how to download maps or how to create custom maps please refer to [mapbox](https://docs.mapbox.com/).
+
+  - **Updating map style using mapconfig**
+
+  ```js
+  /**
+  * @description This function updates the map style.
+  * @param {Object} mapConfig new config `{visibleLayerGroups: {label: false, road: true, background: true}}`}
+  * @returns nothing
+  */
+  export const updateMapConfig = (mapConfig)
+  ```
+
+  ```js
+  /**
+  * This function changes the map style.
+  * @param {Object} styleType style to update the style of the map.
+  * @returns nothing
+  */
+  export const changeMapSyle = (styleType)
+  ```
+
+  ```js
+  /**
+  * the function resets the config of the map to the passed one.
+  * @param {Object} config The config object
+  * @param {Object} options
+  * {boolean} options.centerMap `default: true` if `centerMap` is set to `true` kepler.gl will
+  * {boolean} options.readOnly `default: false` if `readOnly` is set to `true`
+  * {boolean} options.keepExistingConfig whether to keep exiting layer filter and interaction config
+  * {boolean} options.autoCreateLayers whether to automatically create layers based on dataset }
+  * @returns nothing
+  */
+  export const resetMapConfiguration = (config, options)
+  ```
+
+  ```js
+  /**
+  * The function toggles to 3D mode.
+  */
+  export const toggle3DMode = ()
+  ```
+
+  All of the configuration is seen on the side panel. In our user research we found that users preferred a distraction free view with just the map. For this reason we created a function developers can invoke to toggle the visibility of the side panel.
+
+  ```js
+  /**
+  * The function changes the visibility of the side panel.
+  * @param {String} id one of `layer`, `filter`, `interaction`, `map`
+  * @returns nothing
+  */
+  export const changeVisisbiliyOfSidePanel = (id)
+  ```
+
 ## Contribution Guidelines
 
 We love your input! We want to make contributing to this project as easy and transparent as possible, whether it's:
