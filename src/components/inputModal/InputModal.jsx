@@ -9,12 +9,13 @@ import { useDispatch } from "react-redux";
 import {
   setCurrentStep,
   setError,
-  setHelpModalVisisbility,
+  setHelpModalVisibility,
 } from "../../redux/reducers/appSlice";
 import "./InputModal.css";
 import Dragger from "antd/lib/upload/Dragger";
 import waze from "../../assets/waze.svg";
 import { setTravelData } from "../../lib/setTravelData";
+import { CARBON_COST_STEP } from "../../constants/stepConstants";
 
 const InputModal = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const InputModal = () => {
             }
             if (index === files.length - 1) {
               cleanUpData();
-              dispatch(setCurrentStep(1));
+              dispatch(setCurrentStep(CARBON_COST_STEP));
             }
           } catch (error) {
             setErrorMessage(error.message);
@@ -113,7 +114,7 @@ const InputModal = () => {
       <div className="inputModal__supportedPlatforms flex align-center">
         <p>Supported platforms:</p>
         <GoogleOutlined
-          onClick={() => dispatch(setHelpModalVisisbility(true))}
+          onClick={() => dispatch(setHelpModalVisibility(true))}
         />
         <Popover content={comingSoon}>
           <AppleOutlined />

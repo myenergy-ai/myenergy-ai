@@ -17,8 +17,8 @@ const latitudeAndLongitudeKey = getLatitudeAndLongitudeKey();
 const startAndEndTimeKey = getStartAndEndTimeKey();
 
 /**
- * @description The function takes the user data and checks whether it has the main obejct key.
- * @param {Object} data User's travel data obejct
+ * @description The function takes the user data and checks whether it has the main object key.
+ * @param {Object} data User's travel data object
  * @returns {Boolean}
  */
 const checkForAvailableFieldsInObject = (data) => {
@@ -73,11 +73,11 @@ export const validateSchema = (data) => {
 
   const fileData = filterOutOnlyTravelData(data);
 
-  let isSuccessfull = true;
+  let isSuccessful = true;
 
   fileData?.map((item) => {
-    isSuccessfull =
-      isSuccessfull &&
+    isSuccessful =
+      isSuccessful &&
       validateLatAndLan(
         item[keyOfObjectHavingTravelData][
           dataFieldsKey[indexes.START_LOCATION_INDEX]
@@ -119,5 +119,5 @@ export const validateSchema = (data) => {
       );
     return item;
   });
-  return isSuccessfull;
+  return isSuccessful;
 };

@@ -35,8 +35,8 @@ const convertToCsv = (json) => {
 };
 
 /**
- * @description The function starts downloading the data in eith CSV or JSON format.
- * @param {[Object]} carbonCostFinalData The data with all reuired fields to be downloaded
+ * @description The function starts downloading the data in with CSV or JSON format.
+ * @param {[Object]} carbonCostFinalData The data with all required fields to be downloaded
  * @param {Boolean} isFormatCSV Whether to download as CSV or JSON
  */
 export const downloadData = async (carbonCostFinalData, isFormatCSV = true) => {

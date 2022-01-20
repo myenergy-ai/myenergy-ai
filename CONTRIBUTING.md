@@ -23,7 +23,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 5. Make sure your code lints.
 6. Issue that pull request!
 
-##### Note: Make sure you remove irrelavent imports and console logs. If not, it may lead to errors while performing [Github Actions](https://github.com/myenergy-ai/myenergy-ai/actions).
+##### Note: Make sure you remove irrelevant imports and console logs. If not, it may lead to errors while performing [Github Actions](https://github.com/myenergy-ai/myenergy-ai/actions).
 
 ## Any contributions you make will be under the MIT Software License
 
@@ -52,15 +52,15 @@ People _love_ thorough bug reports. I'm not even kidding.
 ## Use a Consistent Coding Style
 
 - Naming Convention
-  - File, class, variable and functions must follow camcel-case format.
+  - File, class, variable and functions must follow camel-case format.
   - CSS classnames must be according to [BEM naming](http://getbem.com/naming/).
 - 2 spaces for indentation rather than tabs
 - Use [Ant Design](https://ant.design/) principles for designing.
 - Try to put the logic outside the component.
 
-## License
+## Licence
 
-By contributing, you agree that your contributions will be licensed under its MIT License.
+By contributing, you agree that your contributions will be licensed under its MIT Licence.
 
 ## References
 

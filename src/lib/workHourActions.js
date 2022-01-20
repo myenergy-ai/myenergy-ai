@@ -171,7 +171,7 @@ function isWorkingHoursValid(workingHours) {
  * @description Validates and adds the working hours provided by the user
  * @param {[Objects]} workingHours : list of objects containing day and workingHour
  * @returns {
- *  true: if workingHours schema is valid and working hours are succesfully added,
+ *  true: if workingHours schema is valid and working hours are successfully added,
  *  INVALID_SCHEMA_ERROR: if workingHours schema is not valid
  * }
  */
@@ -188,7 +188,7 @@ export const setWorkingHours = (workingHours) => {
  * @description Updates the existing working hour
  * @param {Object} updatedWorkingHour : object containing day and workingHour
  * @returns {
- *  true: if param is valid and wokring hour is succesfully updated
+ *  true: if param is valid and working hour is successfully updated
  *  INVALID_SCHEMA_ERROR: if updatedWorkingHour schema is not valid
  * }
  */

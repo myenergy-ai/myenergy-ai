@@ -31,7 +31,7 @@ const workingHoursSlice = createSlice({
     setIncludeAllHoursAndDays: (state, action) => {
       state.includeAllHoursAndDays = action.payload;
     },
-    // For reseting to default values.
+    // For resetting to default values.
     resetWorkingHours: (state) => {
       state.workingTimes = initialState.workingTimes;
       state.includeAllHoursAndDays = initialState.includeAllHoursAndDays;
