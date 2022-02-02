@@ -114,8 +114,8 @@ const locationHistoryData = {
           longitudeE7: latitudeAndLongitudeFormat,
         },
         duration: {
-          startTimestampMs: timestampFormat,
-          endTimestampMs: timestampFormat,
+          startTimestampMs || startTimestamp: timestampFormat,
+          endTimestampMs || endTimestamp: timestampFormat,
         },
         distance: distanceFormat,
         activityType: activityFormat,
