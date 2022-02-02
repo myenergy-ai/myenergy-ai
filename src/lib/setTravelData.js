@@ -80,15 +80,19 @@ const convertLatAndLan = (value, isLatitude) => {
  * @returns {Number}
  */
 const convertTime = (value) => {
-  let tempValue = typeof value === "string" ? value.trim() : value;
-  return parseInt(tempValue).toString() === "NaN"
-    ? (tempValue = `${new Date(tempValue).getTime()}`)
-    : (tempValue =
+  if (typeof value !== "string") {
+    return value;
+  }
+  let tempValue = value.trim();
+  return parseInt(tempValue).toString() !== "NaN" &&
+    parseInt(tempValue).toString().length === tempValue.length
+    ? (tempValue =
         typeof tempValue === "string"
           ? tempValue.padEnd(13, "0")
           : `${tempValue}`.length < 13
           ? tempValue * indexes.EPOCH_TO_JSDATE
-          : tempValue);
+          : tempValue)
+    : (tempValue = `${new Date(tempValue).getTime()}`);
 };
 
 /**
@@ -157,12 +161,18 @@ export const setTravelData = (
         startTimestamp: convertTime(
           item[keyOfObjectHavingTravelData][
             dataFieldsKey[indexes.DURATION_INDEX]
-          ][startAndEndTimeKey[indexes.STARTTIME_INDEX]]
+          ][startAndEndTimeKey[indexes.STARTTIME_INDEX[0]]] ||
+            item[keyOfObjectHavingTravelData][
+              dataFieldsKey[indexes.DURATION_INDEX]
+            ][startAndEndTimeKey[indexes.STARTTIME_INDEX[1]]]
         ),
         endTimestamp: convertTime(
           item[keyOfObjectHavingTravelData][
             dataFieldsKey[indexes.DURATION_INDEX]
-          ][startAndEndTimeKey[indexes.ENDTIME_INDEX]]
+          ][startAndEndTimeKey[indexes.ENDTIME_INDEX[0]]] ||
+            item[keyOfObjectHavingTravelData][
+              dataFieldsKey[indexes.DURATION_INDEX]
+            ][startAndEndTimeKey[indexes.ENDTIME_INDEX[1]]]
         ),
         distance: distance,
         activityType: travelMode,
