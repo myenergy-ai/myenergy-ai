@@ -76,8 +76,8 @@ We will soon add support for other platforms.
           longitudeE7: latitudeAndLongitudeFormat,
         },
         duration: {
-          startTimestampMs: timestampFormat,
-          endTimestampMs: timestampFormat,
+          startTimestampMs || startTimestamp: timestampFormat,
+          endTimestampMs || endTimestamp: timestampFormat,
         },
         distance: distanceFormat,
         activityType: activityFormat,
@@ -146,4 +146,3 @@ const activityFormat = {
 - Finally, click on **Create Export** button.
 
 Read More about [application](https://myenergy-ai.github.io/myenergy-ai/).
-

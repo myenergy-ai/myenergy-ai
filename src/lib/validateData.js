@@ -35,7 +35,7 @@ const validateTime = (value) => {
   if (
     !schema[keyOfArrayOfObjectHavingData][0][keyOfObjectHavingTravelData][
       dataFieldsKey[indexes.DURATION_INDEX]
-    ][startAndEndTimeKey[indexes.STARTTIME_INDEX]].supportsDataType.includes(
+    ][startAndEndTimeKey[indexes.STARTTIME_INDEX[0]]].supportsDataType.includes(
       typeof value
     )
   ) {
@@ -105,12 +105,18 @@ export const validateSchema = (data) => {
       validateTime(
         item[keyOfObjectHavingTravelData][
           dataFieldsKey[indexes.DURATION_INDEX]
-        ][startAndEndTimeKey[indexes.STARTTIME_INDEX]]
+        ][startAndEndTimeKey[indexes.STARTTIME_INDEX[0]]] ||
+          item[keyOfObjectHavingTravelData][
+            dataFieldsKey[indexes.DURATION_INDEX]
+          ][startAndEndTimeKey[indexes.STARTTIME_INDEX[1]]]
       ) &&
       validateTime(
         item[keyOfObjectHavingTravelData][
           dataFieldsKey[indexes.DURATION_INDEX]
-        ][startAndEndTimeKey[indexes.ENDTIME_INDEX]]
+        ][startAndEndTimeKey[indexes.ENDTIME_INDEX[0]]] ||
+          item[keyOfObjectHavingTravelData][
+            dataFieldsKey[indexes.DURATION_INDEX]
+          ][startAndEndTimeKey[indexes.ENDTIME_INDEX[1]]]
       ) &&
       validateModeOfTransport(
         item[keyOfObjectHavingTravelData][
