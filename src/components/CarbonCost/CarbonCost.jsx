@@ -82,7 +82,7 @@ const CarbonCost = () => {
           columns={columnsOfTheTable}
           dataSource={carbonCosts}
           pagination={false}
-          scroll={{ y: window.innerHeight * 0.5 }}
+          scroll={{ y: window.innerHeight * 0.4 }}
         />
       </div>
       <div className="carbonCost__actions flex justify-end flex-wrap">
