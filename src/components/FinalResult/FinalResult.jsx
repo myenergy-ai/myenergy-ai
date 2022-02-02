@@ -34,7 +34,9 @@ const FinalResult = () => {
   const finalResultTableColumns = finalResultCarbonCostTableColumns;
   const costPerModeTableColumns = finalResultTravelModeTableColumns;
 
-  const carbonCostData = useSelector(selectCarbonCost);
+  const carbonCostData = useSelector(selectCarbonCost).filter(
+    (data) => data.carbonCost > 0
+  );
   const workingHours = useSelector(selectWorkingHours);
   const locationData = useSelector(selectLocationData);
   const includeAllHoursAndDays = useSelector(selectIncludeAllHoursAndDays);
