@@ -115,7 +115,7 @@ const ErrorModal = () => {
       <div className="errorModal__items flex align-center">
         <p className="errorModal__infoText">
           If you have any questions, please contact{" "}
-          <Link to="#">test@test.com</Link>
+          <Link to="#">dev@advanced-infrastructure.co.uk</Link>
         </p>
       </div>
       <a

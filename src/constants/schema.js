@@ -43,7 +43,9 @@ export const schema = {
           longitudeE7: latitudeAndLongitudeFormat,
         },
         duration: {
+          startTimestamp: timestampFormat,
           startTimestampMs: timestampFormat,
+          endTimestamp: timestampFormat,
           endTimestampMs: timestampFormat,
         },
         distance: distanceFormat,
