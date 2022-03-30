@@ -90,7 +90,11 @@ const InputModal = () => {
 
   return (
     <div className="inputModal flex flex-column align-center justify-center">
-      <h2>{!processing ? "Upload travel data" : "Processing result..."}</h2>
+      <h2>
+        {!processing
+          ? " Upload your Semantic Location History "
+          : "Processing result..."}
+      </h2>
       {!processing && (
         <Dragger {...props} fileList={files}>
           <p className="ant-upload-drag-icon">

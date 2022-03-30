@@ -66,10 +66,10 @@ export const setTravelModes = (travelModes) => {
 };
 
 /**
- * @description Updates the existing value of carbon cost
+ * @description Updates the existing value of carbon footprint
  * @param {Object} updatedTravelMode : object containing travelMode, modeName and carbonCost
  * @returns {
- *  true: if param is valid and carbon cost is successfully updated
+ *  true: if param is valid and carbon footprint is successfully updated
  *  INVALID_SCHEMA_ERROR: if updatedTravelMode schema is not valid
  * }
  */
