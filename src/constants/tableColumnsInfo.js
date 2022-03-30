@@ -91,7 +91,7 @@ export const finalResultTravelModeTableColumns = [
     width: "60%",
   },
   {
-    title: "Carbon footprint:kg/person/km",
+    title: "Carbon intensity (kgCO2/km/person)",
     dataIndex: "carbonCost",
     key: "carbonCost",
     width: "30%",
@@ -126,7 +126,7 @@ export const carbonCostTableColumns = [
     type: "text",
   },
   {
-    title: "Carbon footprint: kg/person/km",
+    title: "Carbon intensity (kgCO2/km/person)",
     dataIndex: "carbonCost",
     key: "carbonCost",
     editable: true,

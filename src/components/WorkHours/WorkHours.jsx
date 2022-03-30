@@ -73,7 +73,10 @@ const WorkHours = () => {
   return (
     <div className="workHours__container">
       <div className="workHours__top">
-        <h2 className="workHours__heading">Set work hours</h2>
+        <h2 className="workHours__heading">
+          Set work hours (if you just want to calculate the emissions of your
+          daily commute)
+        </h2>
 
         <p className="workHours__info">
           Work hours are used to set the hours for which you want to include the

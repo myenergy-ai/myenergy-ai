@@ -40,45 +40,58 @@ const GetStarted = () => {
       <div className="getStarted align-center flex justify-between">
         <div className="getStarted__content">
           <div className="getStarted__main flex justify-between align-items-top flex-column">
-            <h2>Analyse the carbon content of your travel</h2>
+            <h2>Transport Carbon Footprint Calculator</h2>
             <p>
-              myenergy.ai is a secure, open-source tool that makes it easy to
-              asses the carbon content of every journey recorded in your Google,
-              Waze or Apple location history. Giving you personalised insights
-              to better understand your carbon footprint.
+              Caluclate and compare the carbon emission of each journey you've
+              taken across various modes of your every day travel. Myenergy.ai
+              is an open source tool which uses your google location history to
+              provide you with an accurate picture of your trvavel carbon
+              footprint
             </p>
           </div>
           <div className="getStarted__userStepsInfo flex">
-            <div className="getStarted__userStepsContainer flex flex-column justify-between">
+            <div className="getStarted__userStepsContainer flex justify-between">
               <div className="getStarted__userStep flex">
                 <Button type="primary" shape="circle">
                   1
                 </Button>
 
-                <p>Upload travel data</p>
+                <p>Use Google Takeout to export your location history</p>
               </div>
-              <div className="getStarted__userStep flex">
-                <Button type="primary" shape="circle">
-                  3
-                </Button>
-
-                <p>Set work hours</p>
-              </div>
-            </div>
-            <div className="getStarted__userStepsContainer flex flex-column justify-between">
               <div className="getStarted__userStep flex">
                 <Button type="primary" shape="circle">
                   2
                 </Button>
 
-                <p>Adjust carbon footprints</p>
+                <p>Upload your Semantic Location History </p>
+              </div>
+            </div>
+            <div className="getStarted__userStepsContainer flex justify-between">
+              <div className="getStarted__userStep flex">
+                <Button type="primary" shape="circle">
+                  3
+                </Button>
+
+                <p>Adjust the carbon intensity of different modes of travel</p>
               </div>
               <div className="getStarted__userStep flex">
                 <Button type="primary" shape="circle">
                   4
                 </Button>
 
-                <p>Visualise data</p>
+                <p>
+                  Set work hours (if you just want to calculate the emissions of
+                  your daily commute)
+                </p>
+              </div>
+            </div>
+            <div className="getStarted__userStepsContainer flex justify-between">
+              <div className="getStarted__userStep flex">
+                <Button type="primary" shape="circle">
+                  5
+                </Button>
+
+                <p>Your results</p>
               </div>
             </div>
           </div>

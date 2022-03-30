@@ -111,8 +111,8 @@ const Help = () => {
         </div>
         <div className="help__steps">
           <p>
-            <span>4. Visualise data:</span> allows you to download the results
-            of the current calculation, or you can visualise it on a map.
+            <span>4. Your results:</span> allows you to download the results of
+            the current calculation, or you can visualise it on a map.
           </p>
         </div>
       </div>
