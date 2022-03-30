@@ -15,16 +15,17 @@
 .getStarted__userStepsInfo {
   align-items: flex-start;
   margin-top: 1rem;
+  flex-direction: column;
 }
 
 .getStarted__userStepsContainer {
   margin-right: 2rem;
-  flex-direction: column;
 }
 
 .getStarted__userStep {
   margin-bottom: 0.5rem;
   align-items: baseline;
+  max-width: 15rem;
 }
 
 .getStarted__userStep > p {

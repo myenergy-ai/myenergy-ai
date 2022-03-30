@@ -64,7 +64,7 @@ const FinalResult = () => {
 
   useEffect(() => {
     /**
-     * @description The function removes all the objects from the array which have less than 0 carbon cost
+     * @description The function removes all the objects from the array which have less than 0 carbon footprint
      * @param {[Object]} updatedLocationDataWithCarbonCost
      * @returns {[Object]}
      */
@@ -213,7 +213,7 @@ const FinalResult = () => {
         <div className="finalResult">
           <div className="finalResult__container">
             <div className="finalResult__header flex flex-column align-center">
-              <h2>Visualise data</h2>
+              <h2>Your results</h2>
               <p>
                 {!includeAllHoursAndDays && "Work hours set to "}
                 {includeAllHoursAndDays
@@ -246,12 +246,12 @@ const FinalResult = () => {
                 scroll={{ x: window.innerWidth * 0.6, y: 400 }}
               />
               <h3>
-                Total Carbon Footprint for this time period:{" "}
-                <span>{totalCost}kg</span>
+                In total your travel has produced <span>{totalCost}kg</span> of
+                CO2
               </h3>
             </div>
             <div className="finalResult__totalCarbon">
-              <h3>The carbon footprint used for calculations</h3>
+              <h3>The carbon intensity of your modes of travel</h3>
               <Table
                 columns={costPerModeTableColumns}
                 dataSource={carbonCostData}
@@ -262,7 +262,7 @@ const FinalResult = () => {
               <div className="finalResult__totalCarbonButtons flex justify-end">
                 {carbonCostFinalData.length >= 1 && (
                   <Button type="primary" onClick={moveToMap}>
-                    Visualise results
+                    View your data on our map
                   </Button>
                 )}
                 {carbonCostFinalData.length >= 1 && (
