@@ -45,7 +45,7 @@ const StepsSidebar = () => {
           <Step disabled title="Upload travel data" />
           <Step disabled title="Adjust carbon footprints" />
           <Step disabled title="Set work hours" />
-          <Step disabled title="Visualise data" />
+          <Step disabled title="Your results" />
         </Steps>
       </div>
     </div>

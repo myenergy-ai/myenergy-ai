@@ -50,7 +50,7 @@ export const downloadData = async (carbonCostFinalData, isFormatCSV = true) => {
         } catch (error) {
           throw error;
         }
-        const fileName = "carboncost";
+        const fileName = "carbonfootprint";
         const blob = new Blob([myData], { type: "text/csv" });
         const href = await URL.createObjectURL(blob);
         const link = document.createElement("a");
